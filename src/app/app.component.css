@@ -1,0 +1,9 @@
+#r-oulet{
+    margin-top: 120px;
+}
+
+@media(max-width: 990px){
+    #r-oulet{
+        margin-top: 50px;
+    }
+}

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "labodegabebidas": {
+      "hosting": {
+        "labodega2": [
+          "labodegabebidas"
+        ]
+      }
+    }
+  }
+}

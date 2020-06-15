@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "labodega2",
+      "public": "dist/labodega2",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

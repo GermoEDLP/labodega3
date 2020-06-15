@@ -117,8 +117,13 @@
               "devServerTarget": "labodega2:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "labodega2"
 }
