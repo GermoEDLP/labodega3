@@ -9,3 +9,22 @@
         height: 55px;
     }
 }
+
+#navbarResponsive{
+    background-image: url('../../../assets/img/bg_navbar.png') !important;
+    text-indent: 35px;
+    color:#161616;
+}
+
+#navbarResponsive ul li a{
+    
+    color:#161616 !important;
+}
+
+.dropdown-item{
+    padding: 5px 0px;
+}
+
+.dropdown-menu{
+    border-radius: 0px !important;
+}

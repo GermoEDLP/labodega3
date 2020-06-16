@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { listaCat } from '../../temps/dataProd';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  listaCat = listaCat;
+  
   constructor() { }
 
   ngOnInit(): void {

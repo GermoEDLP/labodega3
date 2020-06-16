@@ -8,25 +8,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { PagesModule } from './pages/pages.module';
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { HeaderComponent } from './components/header/header.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MayoresComponent } from './mayores/mayores.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    NavbarComponent,
-    FooterComponent,
-    SidebarComponent
+    MayoresComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     PagesModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    RouterModule
 
   ],
   providers: [],
