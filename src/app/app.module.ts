@@ -11,6 +11,12 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { MayoresComponent } from './mayores/mayores.component';
 import { RouterModule } from '@angular/router';
 
+// Firebase
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +28,9 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     PagesModule,
     SweetAlert2Module.forRoot(),
-    RouterModule
+    RouterModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
 
   ],
   providers: [],
