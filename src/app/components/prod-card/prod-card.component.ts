@@ -4,8 +4,7 @@ import { Product } from '../../interfaces/interfaces';
 @Component({
   selector: 'app-prod-card',
   templateUrl: './prod-card.component.html',
-  styles: [
-  ]
+  styleUrls: ['prod-card.component.css']
 })
 export class ProdCardComponent implements OnInit {
 

@@ -1,0 +1,22 @@
+#footer{
+    margin: 0px;
+    padding: 0px;
+    z-index: 1050;
+    bottom: 0px;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+#r-oulet{
+    margin-top: 120px;
+}
+
+@media(max-width: 990px){
+    #r-oulet{
+        margin-top: 50px;
+    }
+}

@@ -1,0 +1,17 @@
+header{
+    background-image: url('../../../assets/img/bg_navbar.png') !important;
+    color: black;
+    vertical-align: middle;
+}
+
+#logo{
+    height: 90px;
+    margin-top: -12px;
+    margin-bottom: 3px;
+}
+
+.icon-reorder{
+    margin-top: 9px;
+    font-size: 32px;
+}
+

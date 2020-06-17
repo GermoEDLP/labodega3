@@ -1,13 +1,22 @@
-  <div class="card h-100">
-    <a href="#" [routerLink]="['/product', item.id]"><img class="card-img-top" src="{{item.image}}" alt="" ></a>
-    <div class="card-body">
-      <h4 class="card-title">
-        <a href="#">{{item.name}}</a>
-      </h4>
-      <h5>${{item.price}}</h5>
-      <p class="card-text">{{item.description}}</p>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3">
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-6 mb-4 cardContainer" >
+          <div class="card-4 h-100">
+            <img src="https://picsum.photos/100/100" class="card-img-top-4" alt="...">
+            <div class="card-body-4">
+              <h5 class="card-title-4">Card title</h5>
+              <p class="card-text-4">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+            <div class="card-footer-4 text-muted">
+                <span class="badge sale">-10%</span>
+                <span class="sale_price"> <b>$300</b> </span>
+                <span class="price">$330</span>
+              </div>
+          </div>
+        </div>
+        
+    
     </div>
-    <div class="card-footer">
-      <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-    </div>
-  </div>
+</div>

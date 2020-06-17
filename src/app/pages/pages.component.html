@@ -1,21 +1,11 @@
-<app-header></app-header>
+<section id="container" class="">
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2">
-      <app-sidebar></app-sidebar>
-    </div>
+  <app-header></app-header>
 
-    <div class="col-md-10" id="r-oulet">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
+  <app-sidebar></app-sidebar>
 
-  <div class="row">
-    <div class="col" id="footer">
-      <app-footer></app-footer>
+  <router-outlet></router-outlet>
 
-    </div>
 
-  </div>
-</div>
+
+</section>

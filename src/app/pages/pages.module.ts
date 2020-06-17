@@ -10,6 +10,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { PagesComponent } from './pages.component';
 import { PAGES_ROUTES } from './pages.routes';
 import { ComponentsModule } from '../components/components.module';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -19,7 +20,8 @@ import { ComponentsModule } from '../components/components.module';
     AboutComponent,
     ProductsComponent,
     ProductComponent,
-    PagesComponent
+    PagesComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { ComponentsModule } from '../components/components.module';
     HomeComponent,
     AboutComponent,
     ProductsComponent,
-    ProductComponent
+    ProductComponent,
+    CartComponent
   ]
 })
 export class PagesModule { }

@@ -7,6 +7,11 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ProdCardComponent } from './prod-card/prod-card.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { CarrouselComponent } from './carrousel/carrousel.component';
+
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -16,19 +21,26 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     NavbarComponent,
     SidebarComponent,
-    ProdCardComponent
+    ProdCardComponent,
+    BreadcrumbsComponent,
+    CarrouselComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    CarouselModule
   ],
   exports: [
     FooterComponent,
     HeaderComponent,
     NavbarComponent,
     SidebarComponent,
-    ProdCardComponent
+    ProdCardComponent,
+    BreadcrumbsComponent,
+    CarrouselComponent,
+    LoginComponent
   ]
 })
 export class ComponentsModule { }
