@@ -7,3 +7,12 @@ export interface Product{
     image?: any,
     demand?: boolean
 }
+
+export interface User{
+    uid?: String;
+    name: String;
+    born?: String;
+    email: String;
+    role: String;
+    pass?: String;
+}

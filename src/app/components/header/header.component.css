@@ -15,3 +15,40 @@ header{
     font-size: 32px;
 }
 
+#img_avatar{
+    height: 35px;
+}
+
+#cart_notification{
+    margin-top: 8px;
+}
+
+
+.modal-content, .modal-body{
+    background-color: rgb(222, 184, 135) !important;
+    border-radius: 0px;
+    border: none;
+}
+
+.modal-header,.modal-footer{
+    background-color: rgb(211, 169, 114) !important;
+    border-radius: 0px;
+    border: none;
+}
+
+.modal-title{
+    color: black;
+    text-shadow: none;
+}
+
+#iniciarS{    
+    color: #ffffff;
+    background-color: chocolate;
+    border-color: chocolate;
+}
+
+#iniciarS:hover{    
+    color: white;
+    background-color: rgb(211, 169, 114);
+    border-color: chocolate;
+}

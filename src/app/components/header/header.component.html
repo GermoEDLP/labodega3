@@ -4,7 +4,7 @@
     </div>
 
     <!--logo start-->
-    <a href="index.html" class="logo"><img id="logo" src="assets/img/logo.png" alt=""></a>
+    <a routerLink="/home" class="logo"><img id="logo" src="assets/img/logo.png" alt=""></a>
     <!--logo end-->
 
     <div class="nav search-row" id="top_menu">
@@ -24,7 +24,7 @@
       <ul class="nav pull-right top-menu">
 
         <!-- Cart start-->
-        <li id="alert_notificatoin_bar" class="dropdown">
+        <li id="cart_notification" class="dropdown">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
                           <i class="icon_cart_alt"></i>
@@ -93,7 +93,7 @@
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="assets/img/avatar1_small.jpg">
+                                <img id="img_avatar" src="assets/img/avatar1.jpg">
                             </span>
                             <span class="username">Anonimo</span>
                             <b class="caret"></b>
@@ -104,7 +104,7 @@
                 <a href="#"><i class="icon_cart_alt"></i> Carrito</a>
               </li>
               <li>
-                <a href="login.html"><i class="icon_key_alt"></i> Iniciar sesión</a>
+                <a data-toggle="modal" data-target="#mLogin"><i class="icon_key_alt"></i> Iniciar sesión</a>
               </li>
             </ul>
           </li>
@@ -115,3 +115,87 @@
       <!-- notificatoin dropdown end-->
     </div>
   </header>
+
+  <!-- Modal Login -->
+<div class="modal fade" id="mLogin" tabindex="-1" role="dialog" aria-labelledby="mLoginLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="mLoginLabel">Inicio de sesión</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="ejemplo.ejemplo@gmail.com" name="email" [(ngModel)]="email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Contraseña</label>
+            <input type="password" class="form-control" id="pass" placeholder="Contraseña" name="pass" [(ngModel)]="pass">
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Recuerdame
+            </label>
+          </div>
+          <div class="form-group">
+            <p><a href="">Olvidaste tu contraseña?</a></p>
+            <p>Si todavía no tienes cuenta, <a data-dismiss="modal" data-toggle="modal" data-target="#mRegistro">Registrate</a></p>
+          </div>
+        </form>
+        
+
+      </div>
+      <div class="modal-footer" style="background: rgba(0,0,0,0.7); box-shadow: none !important">
+        <button type="button" class="btn btn-default pull-left"  data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="iniciarS">Iniciar Sesión</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal Registro -->
+  <div class="modal fade" id="mRegistro" tabindex="-1" role="dialog" aria-labelledby="mLoginLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="mLoginLabel">Registrarse</h4>
+        </div>
+        <div class="modal-body">
+          <form >
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nombre y Apellido</label>
+              <input type="text" class="form-control" id="name" placeholder="Juan Perez" name="name" [(ngModel)]="name">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Fecha de nacimiento</label>
+              <input type="date" class="form-control" id="born"  name="born" [(ngModel)]="born">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="ejemplo.ejemplo@gmail.com" name="email" [(ngModel)]="email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Contraseña</label>
+              <input type="password" class="form-control" id="pass" placeholder="Contraseña" name="pass" [(ngModel)]="pass">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Retipe la contraseña</label>
+              <input type="password" class="form-control" id="pass" placeholder="Contraseña" name="pass" [(ngModel)]="pass2">
+            </div>
+            <div class="form-group">
+              <p>Si ya tienes cuenta, <a data-dismiss="modal" data-toggle="modal" data-target="#mLogin">Iniciar sesion</a></p>
+            </div>
+          </form>
+          
+  
+        </div>
+        <div class="modal-footer" style="background: rgba(0,0,0,0.7); box-shadow: none !important">
+          <button type="button" class="btn btn-default pull-left"  data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="iniciarS" data-dismiss="modal" (click)="registro()" >Registrarse</button>
+        </div>
+      </div>
+    </div>
+  </div>
