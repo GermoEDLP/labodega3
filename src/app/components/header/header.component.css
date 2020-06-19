@@ -24,13 +24,13 @@ header{
 }
 
 
-.modal-content, .modal-body{
+.modal-content, .modal-body,.modal-footer{
     background-color: rgb(222, 184, 135) !important;
     border-radius: 0px;
     border: none;
 }
 
-.modal-header,.modal-footer{
+.modal-header{
     background-color: rgb(211, 169, 114) !important;
     border-radius: 0px;
     border: none;
@@ -41,7 +41,7 @@ header{
     text-shadow: none;
 }
 
-#iniciarS{    
+.iniciarS{    
     color: #ffffff;
     background-color: chocolate;
     border-color: chocolate;

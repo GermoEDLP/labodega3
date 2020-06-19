@@ -9,10 +9,12 @@ export interface Product{
 }
 
 export interface User{
-    uid?: String;
+    uid?: string;
     name: String;
     born?: String;
     email: String;
     role: String;
-    pass?: String;
+    prov?: String;
+    city?: String;
+    adress?: String;
 }

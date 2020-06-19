@@ -1,0 +1,50 @@
+<div class="modal-body">
+  <form [formGroup]="loginF" (ngSubmit)="login()">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        placeholder="ejemplo.ejemplo@gmail.com"
+        formControlName="email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Contraseña</label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Contraseña"
+        formControlName="pass"
+      />
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" formControlName="record" /> Recuerdame
+      </label>
+    </div>
+    <div class="form-group">
+      <p><a href="">Olvidaste tu contraseña?</a></p>
+      <p>
+        Si todavía no tienes cuenta,
+        <a data-dismiss="modal" data-toggle="modal" data-target="#mRegistro"
+          >Registrate</a
+        >
+      </p>
+    </div>
+ 
+<div
+  class="modal-footer"
+  style="background: rgba(0, 0, 0, 0.7); box-shadow: none !important;"
+>
+  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">
+    Cerrar
+  </button>
+  <button (click)="current()">User</button> 
+  <button (click)="logout()">LogOut</button> 
+  <button type="submit" class="btn btn-primary" id="iniciarS">
+    Iniciar Sesión
+  </button>
+</div>
+</form>
+</div>

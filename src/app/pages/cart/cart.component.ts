@@ -10,16 +10,7 @@ import * as jQuery from 'jquery';
 export class CartComponent {
   constructor(private us: UserService) {}
 
-  create() {
-    this.us
-      .createUser()
-      .then((ok) => {
-        console.log('ok', ok);
-      })
-      .catch((err) => {
-        console.log('error', err);
-      });
-  }
+  
 
   
 
