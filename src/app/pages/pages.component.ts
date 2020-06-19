@@ -12,4 +12,9 @@ export class PagesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  llego(event: any){
+    console.log('LLego el evento', event);
+    
+  }
+
 }

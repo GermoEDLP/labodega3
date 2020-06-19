@@ -10,11 +10,21 @@ export interface Product{
 
 export interface User{
     uid?: string;
-    name: String;
+    name: string;
     born?: String;
     email: String;
     role: String;
     prov?: String;
     city?: String;
     adress?: String;
+}
+
+export interface cartProduct{
+    name: string,
+    cant: number,
+    price: number,
+    desc: string,
+    sale: number,
+    img?: string;
+    id?: number;
 }

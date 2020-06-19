@@ -27,6 +27,7 @@
     "bootstrap": "^4.4.0",
     "firebase": "^7.13.2",
     "jquery": "^3.5.1",
+    "ngx-indexed-db": "^5.0.4",
     "ngx-owl-carousel-o": "^3.0.1",
     "rxjs": "~6.5.4",
     "sweetalert2": "^9.15.1",

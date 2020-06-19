@@ -12,6 +12,7 @@ import { CarrouselComponent } from './carrousel/carrousel.component';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -24,7 +25,8 @@ import { LoginComponent } from './login/login.component';
     ProdCardComponent,
     BreadcrumbsComponent,
     CarrouselComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,

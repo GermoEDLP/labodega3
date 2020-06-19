@@ -1,0 +1,102 @@
+<div class="modal-body">
+    <form [formGroup]="registerF" (ngSubmit)="guardar()">
+      <div class="form-group" [class.has-error]="campoInvalido('name')">
+        <label>Nombre y Apellido</label>
+        <input type="text" class="form-control" placeholder="Juan Perez"  formControlName="name"/>
+        <span class="help-block" *ngIf="campoInvalido('name')">Ingrese al menos 8 caracteres.</span>
+      </div>
+
+      <div class="form-group" [class.has-error]="campoInvalido('born')">
+        <label>Fecha de nacimiento</label>
+        <input type="date" class="form-control" formControlName="born" />
+        <span class="help-block" *ngIf="campoInvalido('born')">Este campo es requerido.</span>
+      </div>
+      <div class="form-group" [class.has-error]="campoInvalido('prov')">
+        <label>Provincia</label>
+        <select class="form-control" (change)="activarCiudad()" formControlName="prov">
+          <option
+            *ngFor="let provincia of provincias"
+            [value]="provincia.nombre"
+            >{{ provincia.nombre }}</option
+          >
+        </select>
+        <span class="help-block" *ngIf="campoInvalido('prov')">Este campo es requerido.</span>
+      </div>
+
+      <div class="form-group" [class.has-error]="campoInvalido('city')" [attr.disabled]="!provSelected">
+        <label>Ciudad</label>
+        <select class="form-control" formControlName="city">
+          <option *ngFor="let ciudad of ciudades" [value]="ciudad.nombre">{{
+            ciudad.nombre
+          }}</option>
+        </select>
+        <span class="help-block" *ngIf="campoInvalido('city')">Este campo es requerido.</span>
+      </div>
+
+      <div class="form-group" [class.has-error]="campoInvalido('adress')">
+        <label>Dirección</label>
+        <input type="text" class="form-control" placeholder="Dirección"  formControlName="adress"/>
+        <span class="help-block" *ngIf="campoInvalido('adress')">Este campo debe tener al menos 8 caracteres.</span>
+      </div>
+
+      <div class="form-group" [class.has-error]="campoInvalido('email')">
+        <label>Email</label>
+        <input type="email" class="form-control" placeholder="Contraseña"  formControlName="email"/>
+        <span class="help-block" *ngIf="emailValid && !aceptBtn">Debes ingresar un correo valido.</span>
+        <span class="help-block" *ngIf="emailExist && !aceptBtn">Ya existe una cuenta con este mail.</span>
+      </div>
+
+      <div class="form-group" [class.has-error]="campoInvalido('pass')">
+        <label>Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Contraseña"
+          formControlName="pass"
+        />
+        <span class="help-block" *ngIf="campoInvalido('pass')">La contraseña debe tener al menos 8 caracateres.</span>
+      </div>
+
+      <div class="form-group" [class.has-error]="repitePassInvalid()">
+        <label>Retipe la contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Contraseña"
+          formControlName="pass2"
+        />
+        <span class="help-block" *ngIf="repitePassInvalid()">Esta campo debe coincidir con el anterior.</span>
+      </div>
+
+      <div class="form-group">
+        <p>
+          Si ya tienes cuenta,
+          <a data-dismiss="modal" data-toggle="modal" data-target="#mLogin"
+            >Iniciar sesion</a
+          >
+        </p>
+      </div>
+
+      <div class="modal-footer">
+      <div class="alert alert-danger" *ngIf="errores" role="alert"><b>Oopsss!!</b> Ocurrieron algunos errores. Verifica los datos.</div>
+      <div class="alert alert-success" *ngIf="!errores && aceptBtn" role="alert"><b>Excelente!!</b> Tu cuenta ha sido creada. Verificala por medio del link que fue enviado a tu correo. SI el mail no te llega, haz <a href="" (click)="resentEmail()">click aqui</a></div>
+
+      <button
+          type="button"
+          class="btn btn-default pull-left"
+          data-dismiss="modal"
+        >
+          Cerrar
+        </button>
+        <button type="submit" class="btn btn-primary iniciarS pull-right" *ngIf="!loadingBtn && !aceptBtn">
+          Registrarse
+        </button>
+        <button type="button" class="btn btn-primary iniciarS pull-right" *ngIf="loadingBtn">
+          <i class="fa fa-spin fa-refresh"></i> Espere...
+        </button>
+        <button data-dismiss="modal" class="btn btn-primary iniciarS pull-right" *ngIf="aceptBtn && !loadingBtn">
+          Aceptar
+        </button>
+      </div>
+    </form>
+  </div>

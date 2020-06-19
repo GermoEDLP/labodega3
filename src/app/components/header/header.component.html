@@ -34,37 +34,26 @@
       <li id="cart_notification" class="dropdown">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
           <i class="icon_cart_alt"></i>
-          <span class="badge bg-important">7</span>
+          <span class="badge bg-important">{{cartCount}}</span>
         </a>
         <ul class="dropdown-menu extended notification">
           <div class="notify-arrow notify-arrow-blue"></div>
           <li>
             <p class="blue">Carrito</p>
           </li>
-          <li>
+
+          <li *ngFor="let prod of cart">
             <a href="#">
-              <span class="label label-primary">2</span>
-              Alma mora
-              <span class="small italic pull-right">350$ c/u</span>
+              <span class="label label-primary">{{prod.cant}}</span>
+              {{prod.name}}
+              <span class="small italic pull-right" [ngClass]="{sale: prod.sale !==0}">{{prod.price * (1-(prod.sale/100))}}$ c/u</span>
             </a>
           </li>
+
+         
           <li>
-            <a href="#">
-              <span class="label label-primary">1</span>
-              Smirnoff
-              <span class="small italic pull-right">270$ c/u</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="label label-danger">1</span>
-              Chivas Regal
-              <span class="small italic pull-right">1500$ c/u</span>
-            </a>
-          </li>
-          <li>
-            <a href="#"
-              >Total<span class="italic pull-right"> <b>2800$</b> </span></a
+            <a href="#" routerLink='/cart'
+              >Total<span class="italic pull-right"> <b>{{subtotal}}$</b> </span></a
             >
           </li>
         </ul>
@@ -72,12 +61,12 @@
       <!-- Cart end-->
 
       <!-- user login dropdown start-->
-      <li class="dropdown" *ngIf="sesion; else noSession">
+      <li class="dropdown" *ngIf="user$ | async  as user; else noSession">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
           <span class="profile-ava">
             <img alt="" src="assets/img/avatar1_small.jpg" />
           </span>
-          <span class="username">Jenifer Smith</span>
+          <span class="username">{{user.displayName}}</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu extended logout">
@@ -89,10 +78,10 @@
             <a href="#"><i class="icon_clock_alt"></i> Historial de pedidos</a>
           </li>
           <li>
-            <a href="#"><i class="icon_cart_alt"></i> Carrito</a>
+            <a href="#" routerLink="/cart"><i class="icon_cart_alt"></i> Carrito</a>
           </li>
           <li>
-            <a href="login.html"><i class="icon_key_alt"></i> Cerrar sesión</a>
+            <a (click)="logout()" href="#"><i class="icon_key_alt"></i> Cerrar sesión</a>
           </li>
         </ul>
       </li>
@@ -109,10 +98,10 @@
           <ul class="dropdown-menu extended logout">
             <div class="log-arrow-up"></div>
             <li>
-              <a href="#"><i class="icon_cart_alt"></i> Carrito</a>
+              <a href="#"  routerLink="/cart"><i class="icon_cart_alt"></i> Carrito</a>
             </li>
             <li>
-              <a data-toggle="modal" data-target="#mLogin"
+              <a data-toggle="modal" data-target="#mLogin" href="#"
                 ><i class="icon_key_alt"></i> Iniciar sesión</a
               >
             </li>
@@ -173,111 +162,9 @@
         </button>
         <h4 class="modal-title" id="mLoginLabel">Registrarse</h4>
       </div>
-      <div class="modal-body">
-        <form [formGroup]="registerF" (ngSubmit)="guardar()">
-          <div class="form-group" [class.has-error]="campoInvalido('name')">
-            <label>Nombre y Apellido</label>
-            <input type="text" class="form-control" placeholder="Juan Perez"  formControlName="name"/>
-            <span class="help-block" *ngIf="campoInvalido('name')">Ingrese al menos 8 caracteres.</span>
-          </div>
 
-          <div class="form-group" [class.has-error]="campoInvalido('born')">
-            <label>Fecha de nacimiento</label>
-            <input type="date" class="form-control" formControlName="born" />
-            <span class="help-block" *ngIf="campoInvalido('born')">Este campo es requerido.</span>
-          </div>
-          <div class="form-group" [class.has-error]="campoInvalido('prov')">
-            <label>Provincia</label>
-            <select class="form-control" (change)="activarCiudad()" formControlName="prov">
-              <option
-                *ngFor="let provincia of provincias"
-                [value]="provincia.nombre"
-                >{{ provincia.nombre }}</option
-              >
-            </select>
-            <span class="help-block" *ngIf="campoInvalido('prov')">Este campo es requerido.</span>
-          </div>
+      <app-register></app-register>
 
-          <div class="form-group" [class.has-error]="campoInvalido('city')" [attr.disabled]="!provSelected">
-            <label>Ciudad</label>
-            <select class="form-control" formControlName="city">
-              <option *ngFor="let ciudad of ciudades" [value]="ciudad.nombre">{{
-                ciudad.nombre
-              }}</option>
-            </select>
-            <span class="help-block" *ngIf="campoInvalido('city')">Este campo es requerido.</span>
-          </div>
-
-          <div class="form-group" [class.has-error]="campoInvalido('adress')">
-            <label>Dirección</label>
-            <input type="text" class="form-control" placeholder="Dirección"  formControlName="adress"/>
-            <span class="help-block" *ngIf="campoInvalido('adress')">Este campo debe tener al menos 8 caracteres.</span>
-          </div>
-
-          <div class="form-group" [class.has-error]="campoInvalido('email')">
-            <label>Email</label>
-            <input type="email" class="form-control" placeholder="Contraseña"  formControlName="email"/>
-            <span class="help-block" *ngIf="emailValid">Debes ingresar un correo valido.</span>
-            <span class="help-block" *ngIf="emailExist">Ya existe una cuenta con este mail.</span>
-          </div>
-
-          <div class="form-group" [class.has-error]="campoInvalido('pass')">
-            <label>Contraseña</label>
-            <input
-              type="password"
-              class="form-control"
-              placeholder="Contraseña"
-              formControlName="pass"
-            />
-            <span class="help-block" *ngIf="campoInvalido('pass')">La contraseña debe tener al menos 8 caracateres.</span>
-          </div>
-
-          <div class="form-group" [class.has-error]="repitePassInvalid()">
-            <label>Retipe la contraseña</label>
-            <input
-              type="password"
-              class="form-control"
-              placeholder="Contraseña"
-              formControlName="pass2"
-            />
-            <span class="help-block" *ngIf="repitePassInvalid()">Esta campo debe coincidir con el anterior.</span>
-          </div>
-
-          <div class="form-group">
-            <p>
-              Si ya tienes cuenta,
-              <a data-dismiss="modal" data-toggle="modal" data-target="#mLogin"
-                >Iniciar sesion</a
-              >
-            </p>
-          </div>
-
-          <div
-            class="modal-footer"
-            style="background: rgba(0, 0, 0, 0.7); box-shadow: none !important;"
-          >
-          <div class="alert alert-danger" *ngIf="errores" role="alert"><b>Oopsss!!</b> Ocurrieron algunos errores. Verifica los datos.</div>
-          <div class="alert alert-success" *ngIf="!errores && aceptBtn" role="alert"><b>Excelente!!</b> Tu cuenta ha sido creada. Verificala por medio del link que fue enviado a tu correo. SI el mail no te llega, haz <a href="" (click)="reenviarLinkVerificacion()">click aqui</a></div>
- 
-          <button
-              type="button"
-              class="btn btn-default pull-left"
-              data-dismiss="modal"
-            >
-              Cerrar
-            </button>
-            <button type="submit" class="btn btn-primary iniciarS" *ngIf="!loadingBtn && !aceptBtn">
-              Registrarse
-            </button>
-            <button type="button" class="btn btn-primary iniciarS" *ngIf="loadingBtn">
-              <i class="fa fa-spin fa-refresh"></i> Espere...
-            </button>
-            <button data-dismiss="modal" class="btn btn-primary iniciarS" *ngIf="aceptBtn && !loadingBtn">
-              Aceptar
-            </button>
-          </div>
-        </form>
-      </div>
     </div>
   </div>
 </div>

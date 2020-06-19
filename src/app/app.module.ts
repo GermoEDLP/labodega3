@@ -16,6 +16,10 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
+// IndexDB
+import { NgxIndexedDBModule } from 'ngx-indexed-db';
+
+
 
 @NgModule({
   declarations: [
@@ -30,7 +34,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     SweetAlert2Module.forRoot(),
     RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    NgxIndexedDBModule.forRoot(environment.dbConfig)
 
   ],
   providers: [],

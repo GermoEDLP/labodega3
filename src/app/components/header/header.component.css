@@ -40,15 +40,3 @@ header{
     color: black;
     text-shadow: none;
 }
-
-.iniciarS{    
-    color: #ffffff;
-    background-color: chocolate;
-    border-color: chocolate;
-}
-
-#iniciarS:hover{    
-    color: white;
-    background-color: rgb(211, 169, 114);
-    border-color: chocolate;
-}

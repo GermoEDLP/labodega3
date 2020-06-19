@@ -1,7 +1,8 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
+import { DBConfig } from 'ngx-indexed-db';
+ 
 export const environment = {
   production: false,
   firebase: {
@@ -12,6 +13,21 @@ export const environment = {
     storageBucket: "labodegabebidas.appspot.com",
     messagingSenderId: "564588185513",
     appId: "1:564588185513:web:54d525fb3d0a35df7b66b8"
+  },
+  dbConfig : {
+    name: 'LaBodega',
+    version: 1,
+    objectStoresMeta: [{
+      store: 'cart',
+      storeConfig: { keyPath: 'id', autoIncrement: true },
+      storeSchema: [
+        { name: 'name', keypath: 'name', options: { unique: false } },
+        { name: 'cant', keypath: 'cant', options: { unique: false } },
+        { name: 'price', keypath: 'price', options: { unique: false } },
+        { name: 'desc', keypath: 'desc', options: { unique: false } },
+        { name: 'sale', keypath: 'sale', options: { unique: false } }       
+      ]
+    }]
   }
 };
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,10 @@ export class LoginComponent {
   loginF: FormGroup;
   emailSave: string;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  user$: Observable<any> = this.userService.auth.user;
+
+  constructor(private fb: FormBuilder, public userService: UserService) {
     this.emailSave = localStorage.getItem('email') || '';
-    console.log(this.emailSave);
     this.createFormLogin();    
   }
 
@@ -53,10 +55,10 @@ export class LoginComponent {
 
 
   current(){
-    this.userService.cuurentUser()
+    this.userService.currentUser()
     .then(resp=>{
       console.log(resp);
-      this.userService.cuurentUser().then(resp => console.log(resp)
+      this.userService.currentUser().then(resp => console.log(resp)
       );
     }).catch(err=>
       {console.log(err)}

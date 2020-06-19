@@ -2,30 +2,31 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../interfaces/interfaces';
+import { Observable } from 'rxjs';
+import { auth } from 'firebase';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+
+ public user: User;
+
   constructor(public auth: AngularFireAuth, private db: AngularFirestore) {}
 
   createUserAuth(email: string, pass: string) {
     return this.auth.createUserWithEmailAndPassword(email, pass);
   }
 
-  createUserDB(user: User) {
+  async createUserDB(user: User) {
+    (await this.auth.currentUser).updateProfile({
+      displayName: user.name,
+    });
     return this.db.collection('user').doc(user.uid).set(user);
   }
 
-  sentEmailVerification(email: string) {
-    var actionCodeSettings = {
-      // URL you want to redirect back to. The domain (www.example.com) for this
-      // URL must be whitelisted in the Firebase Console.
-      url: 'http://labodegabebidas.web.app',
-      // This must be true.
-      handleCodeInApp: true,
-    };
-    return this.auth.sendSignInLinkToEmail(email, actionCodeSettings);
+  async sentEmailVerification() {
+    return  (await this.auth.currentUser).sendEmailVerification()
   }
 
   loginWithEmailAndPass(email: string, pass: string) {
@@ -33,9 +34,16 @@ export class UserService {
     return this.auth.signInWithEmailAndPassword(email, pass);
   }
 
-  cuurentUser(){
-    return this.auth.currentUser;
+  async currentUser(){
+    // let currUser = (await this.auth.currentUser).updateProfile();
+
+    // console.log(currUser);
+    
+
+    // let userDB = await this.db.collection('user').doc(currUser).get()
+    // return userDB;
   }
+
 
   logout(){
     return this.auth.signOut();
