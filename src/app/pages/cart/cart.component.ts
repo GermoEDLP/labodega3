@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import * as jQuery from 'jquery';
 import { CartService } from '../../services/cart.service';
 import { cartProduct } from '../../interfaces/interfaces';
+import { ShareInfoService } from '../../services/share-info.service';
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +11,7 @@ import { cartProduct } from '../../interfaces/interfaces';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  @Output('reset') resetCart: EventEmitter<any> = new EventEmitter();
+
 
   product: cartProduct = {
     name: 'Alma mora',
@@ -34,7 +35,7 @@ export class CartComponent implements OnInit {
     this.scrWidth = window.innerWidth;
   }
 
-  constructor(private us: UserService, private cartService: CartService) {
+  constructor(private us: UserService, private cartService: CartService, private shareService: ShareInfoService) {
     this.getScreenSize();
   }
 
@@ -64,7 +65,7 @@ export class CartComponent implements OnInit {
   }
 
   cargarTodos() {
-    this.resetCart.emit('Hola mundo');    
+    this.shareService.emitChange('Hola mundo');   
     this.cartService.getAll().then((resp: cartProduct[]) => {
       this.productos = resp;
       this.cartService.calcTotal().then((tot) => {

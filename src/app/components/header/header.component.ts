@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
 import { CartService } from '../../services/cart.service';
 import { cartProduct } from '../../interfaces/interfaces';
+import { ShareInfoService } from '../../services/share-info.service';
 
 @Component({
   selector: 'app-header',
@@ -20,9 +21,14 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private cartService: CartService
+    private cartService: CartService,
+    private shareService: ShareInfoService
   ) {
-    this.sesion = false;    
+    this.sesion = false;
+    shareService.changeEmitted$.subscribe(text=>{
+      this.cargarTodos();
+      
+    })    
     this.cargarTodos();
   }
 

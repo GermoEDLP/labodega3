@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShareInfoService } from '../services/share-info.service';
 
 @Component({
   selector: 'app-pages',
@@ -7,14 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagesComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() { 
+    
   }
 
-  llego(event: any){
-    console.log('LLego el evento', event);
-    
+  ngOnInit(): void {
   }
 
 }
