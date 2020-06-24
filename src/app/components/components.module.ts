@@ -13,6 +13,7 @@ import { CarrouselComponent } from './carrousel/carrousel.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 
@@ -26,7 +27,8 @@ import { RegisterComponent } from './register/register.component';
     BreadcrumbsComponent,
     CarrouselComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ import { RegisterComponent } from './register/register.component';
     ProdCardComponent,
     BreadcrumbsComponent,
     CarrouselComponent,
-    LoginComponent
+    LoginComponent,
+    LoadingComponent
   ]
 })
 export class ComponentsModule { }

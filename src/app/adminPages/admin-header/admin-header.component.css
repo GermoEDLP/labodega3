@@ -1,0 +1,18 @@
+header{
+    height: 30px;
+}
+
+#top_menu{
+    margin-top: 13px !important;
+}
+
+#user{
+    margin-top: 4px !important;
+}
+.top-nav .username{
+    color: white !important;
+  }
+
+  .dropdown-menu.extended.logout > li:last-child > a, .dropdown-menu.extended.logout > li:last-child > a:hover{
+      background-color: #1a2732 !important;
+  }

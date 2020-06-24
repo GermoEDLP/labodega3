@@ -15,9 +15,12 @@ import { RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/storage';
 
 // IndexDB
 import { NgxIndexedDBModule } from 'ngx-indexed-db';
+import { AdminComponent } from './adminPages/admin.component';
+import { AdminModule } from './adminPages/admin.module';
 
 
 
@@ -31,10 +34,12 @@ import { NgxIndexedDBModule } from 'ngx-indexed-db';
     AppRoutingModule,
     HttpClientModule,
     PagesModule,
+    AdminModule,
     SweetAlert2Module.forRoot(),
     RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireStorageModule,
     NgxIndexedDBModule.forRoot(environment.dbConfig)
 
   ],

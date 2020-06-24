@@ -1,11 +1,15 @@
 export interface Product{
-    id: String,
+    id?: string,
     name: string,
-    description: string,
-    stock?: number,
-    price?: number,
+    desc: string,
+    stock: number,
+    price: number[],
     image?: any,
-    demand?: boolean
+    sale: number[],
+    order: boolean,
+    cat: string[],
+    show: boolean
+
 }
 
 export interface User{

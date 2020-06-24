@@ -1,0 +1,24 @@
+.form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline{
+    padding-left: 0px;
+}
+
+#catBtn{
+    margin-bottom: 8px;
+    margin-left: 10px;
+}
+
+.sub_cat{    
+    text-indent: 35px;
+    cursor: pointer;
+}
+
+.sub_cat:hover{    
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #007aff;
+}
+
+.img_prod{
+    width: 60%;
+}
+

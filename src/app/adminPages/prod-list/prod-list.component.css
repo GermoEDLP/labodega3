@@ -1,0 +1,17 @@
+.panel .panel-heading i{
+    border: none;
+}
+.panel .panel-heading{
+    padding: 6px 12px !important;
+}
+
+.label-primary{
+    margin-right: 2px;
+}
+
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td{
+    text-align: center;
+}
+img{
+    height: 40px;
+}

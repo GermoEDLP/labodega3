@@ -10,7 +10,7 @@ import { ProductosService } from '../../services/productos.service';
 })
 export class HomeComponent implements OnInit {
 
-  lista: Product[] = listaProductos;
+  lista: any[] = listaProductos;
 
   constructor(private _prodService: ProductosService) { }
 

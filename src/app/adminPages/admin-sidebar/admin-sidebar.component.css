@@ -1,0 +1,16 @@
+.sidebar-admin {
+  background: #1a2732 !important;
+  color: white !important;
+}
+
+ul.sidebar-menu li ul.sub li {
+  background: #1a2732 !important;
+}
+
+ul.sidebar-menu li a{
+    color: white !important;
+}
+
+ul.sidebar-menu li a span{
+  cursor: pointer;
+}
