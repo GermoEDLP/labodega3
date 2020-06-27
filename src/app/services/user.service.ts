@@ -9,8 +9,7 @@ import { auth } from 'firebase';
   providedIn: 'root',
 })
 export class UserService {
-
- public user: User;
+  public user: User;
 
   constructor(public auth: AngularFireAuth, private db: AngularFirestore) {}
 
@@ -26,7 +25,7 @@ export class UserService {
   }
 
   async sentEmailVerification() {
-    return  (await this.auth.currentUser).sendEmailVerification()
+    return (await this.auth.currentUser).sendEmailVerification();
   }
 
   loginWithEmailAndPass(email: string, pass: string) {
@@ -34,18 +33,7 @@ export class UserService {
     return this.auth.signInWithEmailAndPassword(email, pass);
   }
 
-  async currentUser(){
-    // let currUser = (await this.auth.currentUser).updateProfile();
-
-    // console.log(currUser);
-    
-
-    // let userDB = await this.db.collection('user').doc(currUser).get()
-    // return userDB;
-  }
-
-
-  logout(){
+  logout() {
     return this.auth.signOut();
   }
 }

@@ -8,6 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { StadisticsComponent } from './adminPages/stadistics/stadistics.component';
 import { NewProductComponent } from './adminPages/new-product/new-product.component';
 import { SettingsComponent } from './adminPages/settings/settings.component';
+import { CategoriesComponent } from './adminPages/categories/categories.component';
 
 const routes: Routes = [
   { path: 'mayores', component: MayoresComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
     children: [
       {path: 'list', component: ProdListComponent},
       {path: 'stadistics', component: StadisticsComponent},
-      {path: 'newProd/:cod', component: NewProductComponent},
+      {path: 'newProd/:cod', component: NewProductComponent},      
+      {path: 'categories', component: CategoriesComponent},
       {path: 'settings', component: SettingsComponent},
       {path: '', component:StadisticsComponent}
     ]

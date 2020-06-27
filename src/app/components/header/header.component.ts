@@ -25,16 +25,13 @@ export class HeaderComponent implements OnInit {
     private shareService: ShareInfoService
   ) {
     this.sesion = false;
-    shareService.changeEmitted$.subscribe(text=>{
+    shareService.changeEmitted$.subscribe((text) => {
       this.cargarTodos();
-      
-    })    
+    });
     this.cargarTodos();
   }
 
-  async ngOnInit() {
-    await this.userService.currentUser();
-  }
+  ngOnInit() {}
 
   search() {
     // TODO hacer el buscador
@@ -47,12 +44,12 @@ export class HeaderComponent implements OnInit {
   cargarTodos() {
     this.cartService.getAll().then((resp: cartProduct[]) => {
       this.cart = resp;
-      this.cartService.calcTotal().then(tot=>{
+      this.cartService.calcTotal().then((tot) => {
         this.total = tot.total;
         this.subtotal = tot.subtotal;
-        this.cartService.countAll().then(count=>{
+        this.cartService.countAll().then((count) => {
           this.cartCount = count;
-        })              
+        });
       });
     });
   }

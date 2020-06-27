@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { listaCat } from '../../temps/dataProd';
+import { Category } from '../../interfaces/interfaces';
+import { CatsService } from '../../services/cats.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,12 +10,14 @@ import { listaCat } from '../../temps/dataProd';
 })
 export class SidebarComponent implements OnInit {
 
-  listaCat = listaCat;
+  listaCat = listaCat
 
-  constructor() { }
+  constructor(private catsSvc: CatsService) { }
 
   ngOnInit(): void {
-    
+    // this.catsSvc.getCats().subscribe((cats: Category[]) => {
+    //   this.listaCat = cats;
+    // })
   }
 
 }

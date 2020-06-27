@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Product } from '../interfaces/interfaces';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
-import { async } from '@angular/core/testing';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,18 +12,27 @@ import { async } from '@angular/core/testing';
 export class ProductosService {
   filePath: any;
   downloadURL: Observable<any>;
+  collRef = this.db.collection('products');
 
   constructor(
     private db: AngularFirestore,
-    private storage: AngularFireStorage
-  ) {}
+    private storage: AngularFireStorage,
+    private userSvc: UserService
+  ) {  
+  }
 
   getProducts() {
-    return this.db.collection('products').valueChanges();
+    return this.collRef.valueChanges();
   }
 
   getProductById(id: string) {
-    return this.db.collection('products').doc(id).valueChanges();
+    return this.collRef.doc(id).valueChanges();
+  }
+
+  getProductsByDate(){
+    return this.db.collection('products', ref => 
+      ref.orderBy('date').limit(2)
+    ).valueChanges();
   }
 
   creaProductoYSubeImagen(prod: Product, image: any, noFoto: boolean){
@@ -55,25 +63,27 @@ export class ProductosService {
 
   actualizaProducto(prod: Product){    
     prod.image = this.downloadURL;
-    return this.db.collection('products').doc(prod.id).update(prod);
+    return this.collRef.doc(prod.id).update(prod);
   }
 
   private newProduct(prod: Product) {
     const id = this.db.createId();
     prod.id = id;
+    prod.date = new Date();
+    prod.user = "A6T2rB8zfFZ4zMElt0JijMXGkFb2";
     prod.image = this.downloadURL;
-    return this.db.collection('products').doc(id).set(prod);
+    return this.collRef.doc(id).set(prod);
   }
 
   private uploadImage(image: any, prod?: Product, actualiza?: boolean) {
-    this.filePath = `images/${image.name}`;
+    const time = new Date().getTime();
+    this.filePath = `images/${time}${image.name}`;
     const fileRef = this.storage.ref(this.filePath);
     const task = this.storage.upload(this.filePath, image);
     return task.snapshotChanges().pipe(
       finalize(() => {
         fileRef.getDownloadURL().subscribe(async(urlImage) => {
           this.downloadURL = await urlImage;
-          console.log('URL_IMAGE', urlImage);
           if(actualiza){
             this.actualizaProducto(prod);
           }else{
@@ -85,7 +95,7 @@ export class ProductosService {
   }
 
   borrarProductoPorId(id: string){
-    return this.db.collection('products').doc(id).delete();
+    return this.collRef.doc(id).delete();
   }
 
 

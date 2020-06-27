@@ -8,8 +8,9 @@ export interface Product{
     sale: number[],
     order: boolean,
     cat: string[],
-    show: boolean
-
+    show: boolean,
+    date?: any,
+    user?: string
 }
 
 export interface User{
@@ -31,4 +32,10 @@ export interface cartProduct{
     sale: number,
     img?: string;
     id?: number;
+}
+
+export interface Category{
+    id?: string,
+    name: string,
+    subs: string[]
 }

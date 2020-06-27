@@ -12,6 +12,7 @@ import { StadisticsComponent } from './stadistics/stadistics.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CategoriesComponent } from './categories/categories.component';
 
 
 
@@ -23,7 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminSidebarComponent,
     StadisticsComponent,
     NewProductComponent,
-    SettingsComponent
+    SettingsComponent,
+    CategoriesComponent
   ],
   imports: [
     AppRoutingModule,

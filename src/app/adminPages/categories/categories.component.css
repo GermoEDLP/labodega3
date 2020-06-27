@@ -1,0 +1,16 @@
+.panel.panel-default{
+    margin: 10px 0px
+}
+
+.add_sub_cat{    
+    padding: 10px;
+    color: #999;
+}    
+    
+.pencil_sub_cat{
+    margin-right: 26px;
+}
+
+.trash_sub_cat{
+    color: red;
+}
