@@ -55,14 +55,14 @@ export class LoginComponent {
 
 
   current(){
-    this.userService.currentUser()
-    .then(resp=>{
-      console.log(resp);
-      this.userService.currentUser().then(resp => console.log(resp)
-      );
-    }).catch(err=>
-      {console.log(err)}
-      )
+    // this.userService.currentUser()
+    // .then(resp=>{
+    //   console.log(resp);
+    //   this.userService.currentUser().then(resp => console.log(resp)
+    //   );
+    // }).catch(err=>
+    //   {console.log(err)}
+    //   )
   }
 
   logout(){
