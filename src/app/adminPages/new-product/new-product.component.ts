@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProductosService } from '../../services/productos.service';
 import { CatsService } from '../../services/cats.service';
 import Swal from 'sweetalert2';
-import { Product } from '../../interfaces/interfaces';
+import { Product, Category } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-new-product',
@@ -18,7 +18,7 @@ export class NewProductComponent implements OnInit {
   producto: any;
   categoriasDelProd: string[] = [];
   charge = false;
-  cats: any[];
+  cats: Category[];
   image: any;
   imageSaved: any;
 
@@ -30,17 +30,17 @@ export class NewProductComponent implements OnInit {
     private catsService: CatsService
   ) {
     this.code = this.route.snapshot.paramMap.get('cod');
-    catsService.getCats().subscribe((cats) => {
-      this.cats = cats;      
+    catsService.getCats().subscribe((cats: Category[]) => {
+      this.cats = cats;
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.createProdLogin();
     if (this.code !== 'nuevo') {
-      this.prodService.getProductById(this.code).subscribe((prod: any) => {
+      this.prodService.getProductById(this.code).subscribe(async (prod: Product) => {
         this.producto = prod;
-        this.categoriasDelProd = prod.cat;
+        this.categoriasDelProd = await this.categoriasPorId(prod.cat);
         this.prodForm.controls['name'].setValue(prod.name);
         this.prodForm.controls['desc'].setValue(prod.desc);
         this.prodForm.controls['stock'].setValue(prod.stock);
@@ -75,10 +75,27 @@ export class NewProductComponent implements OnInit {
     });
   }
 
+  categoriasPorId(ids: string[]): string[] {
+    /* Función que se encarga de devolver un array con los nombres de las categorias en base
+    a los id ingresados. Tener en cuenta que si posee la palabra 'subs' Es que pertenece a una
+    subcategoria y despues de este termino se encuentra la posición de la misma en el array de 
+    subcategorias.    */
+    let categoriasDelProducto = [];
+    ids.forEach((id: string) => {
+      if (id.includes('subs')) {
+        let ides = id.split('subs');
+        console.log(ides);        
+        categoriasDelProducto.push(
+          this.cats.find((cat) => cat.id == ides[0]).subs[ides[1]]
+        );
+      } else {
+        categoriasDelProducto.push(this.cats.find((cat) => cat.id == id).name);
+      }
+    });
+    return categoriasDelProducto;
+  }
+
   guardar() {
-
-    
-
     let prodSave: Product = {
       name: this.prodForm.controls['name'].value,
       desc: this.prodForm.controls['desc'].value,
@@ -94,7 +111,7 @@ export class NewProductComponent implements OnInit {
       order: this.prodForm.controls['order'].value,
       cat: this.categoriasDelProd,
       show: true,
-    }
+    };
 
     if (this.code == 'nuevo') {
       let noFoto = false;
@@ -105,8 +122,9 @@ export class NewProductComponent implements OnInit {
         showConfirmButton: false,
         icon: 'info',
       });
-      if(this.image == undefined){
-        this.image = 'https://firebasestorage.googleapis.com/v0/b/labodegabebidas.appspot.com/o/images%2Fproducto-sin-imagen.png?alt=media&token=9dd41300-5fd1-4a80-ae72-a07582db312b';
+      if (this.image == undefined) {
+        this.image =
+          'https://firebasestorage.googleapis.com/v0/b/labodegabebidas.appspot.com/o/images%2Fproducto-sin-imagen.png?alt=media&token=9dd41300-5fd1-4a80-ae72-a07582db312b';
         noFoto = true;
       }
       this.prodService
@@ -132,29 +150,28 @@ export class NewProductComponent implements OnInit {
         showConfirmButton: false,
         icon: 'info',
       });
-      if(this.image == undefined){
+      if (this.image == undefined) {
         this.image = this.imageSaved;
         noFoto = true;
       }
       prodSave.id = this.producto.id;
 
-      this.prodService.actualizaProductoYSubeImagen(prodSave, this.image, noFoto)
-      .then((resp) => {
-        Swal.close();
-        Swal.fire({
-          icon: 'success',
-          title: 'Excelente',
-          html: `Tu producto <b>${this.prodForm.controls['name'].value} fue actualizado exitosamente</b>`,
-          timer: 2000,
+      this.prodService
+        .actualizaProductoYSubeImagen(prodSave, this.image, noFoto)
+        .then((resp) => {
+          Swal.close();
+          Swal.fire({
+            icon: 'success',
+            title: 'Excelente',
+            html: `Tu producto <b>${this.prodForm.controls['name'].value} fue actualizado exitosamente</b>`,
+            timer: 2000,
+          });
+        })
+        .then(() => {
+          this.navigate.navigate(['/admin/list']);
         });
-      })
-      .then(() => {
-        this.navigate.navigate(['/admin/list']);
-      });
     }
   }
-
-
 
   borrarCategoria(i: number) {
     this.categoriasDelProd.splice(i, 1);
@@ -162,7 +179,7 @@ export class NewProductComponent implements OnInit {
   agregarCategoria(name: string) {
     this.categoriasDelProd.push(name);
   }
-  handleImage(event){
+  handleImage(event) {
     this.image = event.target.files[0];
   }
 }

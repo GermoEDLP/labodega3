@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../interfaces/interfaces';
+import { Product, Category } from '../interfaces/interfaces';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { UserService } from './user.service';
+import { CatsService } from './cats.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,12 +14,17 @@ export class ProductosService {
   filePath: any;
   downloadURL: Observable<any>;
   collRef = this.db.collection('products');
+  categorias: Category[];
 
   constructor(
     private db: AngularFirestore,
     private storage: AngularFireStorage,
-    private userSvc: UserService
+    private userSvc: UserService,
+    private catsSvc: CatsService
   ) {  
+    catsSvc.getCats().subscribe(async(cats: Category[]) => {
+      this.categorias = await cats;
+    })
   }
 
   getProducts() {
@@ -66,9 +72,10 @@ export class ProductosService {
     return this.collRef.doc(prod.id).update(prod);
   }
 
-  private newProduct(prod: Product) {
+  private async newProduct(prod: Product) {
     const id = this.db.createId();
     prod.id = id;
+    prod.cat = await this.categoriasPorNombre(prod.cat);
     prod.date = new Date();
     prod.user = "A6T2rB8zfFZ4zMElt0JijMXGkFb2";
     prod.image = this.downloadURL;
@@ -96,6 +103,26 @@ export class ProductosService {
 
   borrarProductoPorId(id: string){
     return this.collRef.doc(id).delete();
+  }
+
+  categoriasPorNombre(names: string[]): string[]{
+    let catsFinal: string[] = [];
+    names.forEach(name =>{
+      if(this.categorias.find(cat => cat.name == name) !== undefined){
+        catsFinal.push(this.categorias.find(cat => cat.name == name).id);
+      }else{
+        let subcat;
+        this.categorias.forEach(cat => {
+          cat.subs.forEach((sub, index)=>{
+            if(sub == name){
+              subcat = cat.id + 'subs' + index;
+            }
+          })
+        })
+        catsFinal.push(subcat);
+      }
+    })
+    return catsFinal;
   }
 
 

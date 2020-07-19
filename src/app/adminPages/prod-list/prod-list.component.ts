@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductosService } from '../../services/productos.service';
-import { Product } from '../../interfaces/interfaces';
+import { Product, Category } from '../../interfaces/interfaces';
 import Swal from 'sweetalert2';
+import { CatsService } from '../../services/cats.service';
 
 @Component({
   selector: 'app-prod-list',
@@ -11,10 +12,14 @@ import Swal from 'sweetalert2';
 export class ProdListComponent implements OnInit {
   productos: Product[]; //TODO crear interface de producto correctamente
   charge = false;
+  categorias: Category[];
 
-  constructor(private prodService: ProductosService) {}
+  constructor(private prodService: ProductosService, private cats: CatsService) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.cats.getCats().subscribe(async(cats: Category[]) => {
+      this.categorias = await cats;
+    })
     this.prodService.getProducts().subscribe((prods:Product[]) => {
       this.productos = prods;
       this.charge = true;

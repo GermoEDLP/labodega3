@@ -15,6 +15,14 @@ export class CatsService {
     return this.collRef.valueChanges();
   }
 
+  getCatsListo(){
+    let categories;
+    this.collRef.valueChanges().subscribe(async(cats) => {
+      categories = await cats;
+    });
+    return categories;
+  }
+
   getCatById(id: string){
     return this.collRef.doc(id).valueChanges();
   }
