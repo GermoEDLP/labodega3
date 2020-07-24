@@ -39,3 +39,10 @@ export interface Category{
     name: string,
     subs: string[]
 }
+
+export interface Slider{
+    id?: string,
+    title: string,
+    subtitle: string,
+    url: string
+}

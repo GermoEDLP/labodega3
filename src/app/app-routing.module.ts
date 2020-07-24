@@ -9,6 +9,7 @@ import { StadisticsComponent } from './adminPages/stadistics/stadistics.componen
 import { NewProductComponent } from './adminPages/new-product/new-product.component';
 import { SettingsComponent } from './adminPages/settings/settings.component';
 import { CategoriesComponent } from './adminPages/categories/categories.component';
+import { SliderComponent } from './adminPages/slider/slider.component';
 
 const routes: Routes = [
   { path: 'mayores', component: MayoresComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
       {path: 'newProd/:cod', component: NewProductComponent},      
       {path: 'categories', component: CategoriesComponent},
       {path: 'settings', component: SettingsComponent},
+      {path: 'slider', component: SliderComponent},
       {path: '', component:StadisticsComponent}
     ]
   },

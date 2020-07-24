@@ -13,7 +13,8 @@ import { NewProductComponent } from './new-product/new-product.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CategoriesComponent } from './categories/categories.component';
-import { CatListaProdPipe } from '../pipes/cat-lista-prod.pipe'
+import { CatListaProdPipe } from '../pipes/cat-lista-prod.pipe';
+import { SliderComponent } from './slider/slider.component'
 
 
 
@@ -27,7 +28,8 @@ import { CatListaProdPipe } from '../pipes/cat-lista-prod.pipe'
     NewProductComponent,
     SettingsComponent,
     CategoriesComponent,
-    CatListaProdPipe
+    CatListaProdPipe,
+    SliderComponent
   ],
   imports: [
     AppRoutingModule,
