@@ -4,16 +4,27 @@
           <!-- sidebar menu start-->
           <ul class="sidebar-menu">
            
-            <li class="sub-menu" *ngFor="let cat of listaCat">
-              <a href="#" class="">
+            <!-- <li class="sub-menu" *ngFor="let cat of listaCat">
+              <a href="javascript:;" class="">
                             <i class="icon_document_alt"></i>
                             <span>{{cat.name}}</span>
                             <span *ngIf="cat.subs && cat.subs.length > 0" class="menu-arrow arrow_carrot-right"></span>
                         </a>
               <ul class="sub">
-                <li *ngFor="let item of cat.subs">
-                  <a class="active" href="#">{{item.name}}</a>
+                <li *ngFor="let item of cat.subs; let i = index">
+                  <a  href="#">hola</a>
                 </li>
+              </ul>
+            </li> -->
+
+            <li class="sub-menu" *ngFor="let cat of catsSvc.menu">
+              <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span>{{cat.name}}</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+              <ul class="sub">
+                <li *ngFor="let sub of cat.subs"><a class="" href="form_component.html">{{sub}}</a></li>
               </ul>
             </li>
             

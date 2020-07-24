@@ -5,6 +5,7 @@ import { ProductosService } from '../../services/productos.service';
 import { CatsService } from '../../services/cats.service';
 import Swal from 'sweetalert2';
 import { Product, Category } from '../../interfaces/interfaces';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-new-product',
@@ -16,7 +17,10 @@ export class NewProductComponent implements OnInit {
 
   code: string;
   producto: any;
-  categoriasDelProd: string[] = [];
+  categoriasDelProd: {
+    id: string;
+    name?: string;
+  }[] = [];
   charge = false;
   cats: Category[];
   image: any;
@@ -75,24 +79,21 @@ export class NewProductComponent implements OnInit {
     });
   }
 
-  categoriasPorId(ids: string[]): string[] {
+  categoriasPorId(ids: string[]): {id: string, name: string}[] {
     /* Función que se encarga de devolver un array con los nombres de las categorias en base
     a los id ingresados. Tener en cuenta que si posee la palabra 'subs' Es que pertenece a una
     subcategoria y despues de este termino se encuentra la posición de la misma en el array de 
     subcategorias.    */
-    let categoriasDelProducto = [];
-    ids.forEach((id: string) => {
+    let categoriasOriginales = [];
+    ids.forEach((id: string) => {      
       if (id.includes('subs')) {
-        let ides = id.split('subs');
-        console.log(ides);        
-        categoriasDelProducto.push(
-          this.cats.find((cat) => cat.id == ides[0]).subs[ides[1]]
-        );
+        let ides = id.split('subs');  
+        categoriasOriginales.push({id: id, name:  this.cats.find((cat) => cat.id == ides[0]).subs[ides[1]]});
       } else {
-        categoriasDelProducto.push(this.cats.find((cat) => cat.id == id).name);
+        categoriasOriginales.push({id: id, name: this.cats.find((cat) => cat.id == id).name}); 
       }
     });
-    return categoriasDelProducto;
+    return categoriasOriginales;
   }
 
   guardar() {
@@ -109,7 +110,7 @@ export class NewProductComponent implements OnInit {
         this.prodForm.controls['sale-box'].value,
       ],
       order: this.prodForm.controls['order'].value,
-      cat: this.categoriasDelProd,
+      cat: this.condensarCategorias(this.categoriasDelProd),
       show: true,
     };
 
@@ -173,12 +174,28 @@ export class NewProductComponent implements OnInit {
     }
   }
 
-  borrarCategoria(i: number) {
+  borrarSubCategoria(i: number) {
     this.categoriasDelProd.splice(i, 1);
+    console.log(this.categoriasDelProd);
+    
   }
-  agregarCategoria(name: string) {
-    this.categoriasDelProd.push(name);
+
+  //TODO Hacer Borrar y modificar categoria
+
+  agregarCategoria(name: string, id: string) {
+    this.categoriasDelProd.push({id: id, name: name});
+    console.log(this.categoriasDelProd);    
   }
+
+  condensarCategorias(cats: {id: string, name?: string}[] ){
+    let catsCond: string[] = [];
+    cats.forEach((cat: any) => {
+      catsCond.push(cat.id);
+    })
+    return catsCond;
+  }
+
+
   handleImage(event) {
     this.image = event.target.files[0];
   }

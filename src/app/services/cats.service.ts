@@ -7,6 +7,18 @@ import { Category } from '../interfaces/interfaces';
 })
 export class CatsService {
 
+  public menu = [];
+
+  guardarMenu(){
+    this.getCats().subscribe(cats=>{
+      localStorage.setItem('menu', JSON.stringify(cats));
+    });
+  }
+
+  cargarMenu(){
+    this.menu = JSON.parse(localStorage.getItem('menu'));
+  }
+
   collRef = this.db.collection('categories');
 
   constructor(private db: AngularFirestore) { }

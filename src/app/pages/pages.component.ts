@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShareInfoService } from '../services/share-info.service';
+import { CatsService } from '../services/cats.service';
 
 @Component({
   selector: 'app-pages',
@@ -8,8 +9,8 @@ import { ShareInfoService } from '../services/share-info.service';
 })
 export class PagesComponent implements OnInit {
 
-  constructor() { 
-    
+  constructor(private sideBar: CatsService) { 
+    sideBar.cargarMenu();
   }
 
   ngOnInit(): void {

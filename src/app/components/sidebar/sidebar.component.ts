@@ -10,14 +10,13 @@ import { CatsService } from '../../services/cats.service';
 })
 export class SidebarComponent implements OnInit {
 
-  listaCat = listaCat
 
-  constructor(private catsSvc: CatsService) { }
+  constructor(public catsSvc: CatsService) { 
+    
+  }
 
   ngOnInit(): void {
-    // this.catsSvc.getCats().subscribe((cats: Category[]) => {
-    //   this.listaCat = cats;
-    // })
+    
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CatsService } from './services/cats.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'labodega2';
+  title = 'La Bodega';
+
+  constructor(private sideBar: CatsService){
+    sideBar.guardarMenu();
+  }
 }

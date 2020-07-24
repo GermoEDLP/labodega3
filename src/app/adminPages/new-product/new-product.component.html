@@ -171,10 +171,10 @@
                   ></a>
                   <ul class="dropdown-menu">
                     <li *ngFor="let cat of cats">
-                      <a (click)="agregarCategoria(cat.name)">
+                      <a (click)="agregarCategoria(cat.name, cat.id)">
                         {{ cat.name }}
                       </a>
-                      <p (click)="agregarCategoria(sub)" *ngFor="let sub of cat.subs" class="sub_cat">
+                      <p (click)="agregarCategoria(sub, cat.id+'subs'+i)" *ngFor="let sub of cat.subs; let i = index" class="sub_cat">
                         {{sub}}
                       </p>
                     </li>
@@ -190,10 +190,10 @@
                     class="tag"
                     *ngFor="let item of categoriasDelProd; let i = index"
                   >
-                    <span> {{ item }}&nbsp;&nbsp; </span>
+                    <span> {{ item.name }}&nbsp;&nbsp; </span>
                     <a
                       class="tagsinput-remove-link"
-                      (click)="borrarCategoria(i)"
+                      (click)="borrarSubCategoria(i)"
                     ></a>
                   </span>
                 </div>
