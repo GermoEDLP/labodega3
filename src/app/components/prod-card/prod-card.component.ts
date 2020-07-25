@@ -8,7 +8,7 @@ import { Product } from '../../interfaces/interfaces';
 })
 export class ProdCardComponent implements OnInit {
 
-  url = "https://picsum.photos/100/100";
+  url = "https://picsum.photos/300/300";
   carga = false;
 
   @Input() item: Product;

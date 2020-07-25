@@ -1,23 +1,32 @@
-
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-3">
-
-        <div class="col-md-4 col-lg-3 col-sm-6 col-6 mb-4 cardContainer" >
-          <div class="card-4 h-100">
-            <!-- <img [src]="url" alt="" onload="console.log('ok')" [hidden]='false'> -->
-            <app-loading-image [url]=url></app-loading-image>
-            <div class="card-body-4">
-              <h5 class="card-title-4">Card title</h5>
-              <p class="card-text-4">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer-4 text-muted">
-                <span class="badge sale">-10%</span>
-                <span class="sale_price"> <b>$300</b> </span>
-                <span class="price">$330</span>
-              </div>
+  <div class="row row-cols-1 row-cols-md-3">
+    <div class="col-md-4 col-lg-3 col-sm-6 col-6 mb-4 cardContainer">
+      <div class="card-4 h-100">
+        <!-- <img [src]="url" alt="" onload="console.log('ok')" [hidden]='false'> -->
+        <app-loading-image [url]="url"></app-loading-image>
+        <div class="card-body-4" style="text-align: center;">
+          <h5 class="card-title-4">Card title</h5>
+          <p class="card-text-4">
+            This is a longer card with supporting text below as a natural
+            lead-in to additional content. This content is a little bit longer.
+          </p>
+          <div class="promo-link promoted text-center">
+            <strong>COMPRÁ 6 Y PAGÁS</strong><br />
+            <span class="product-price">$604,00</span> c/u.
+            <span class="discount-arrow arrow-left"><p>%15.00 OFF</p></span
+            ><br />
           </div>
         </div>
-        
-    
+        <div class="card-footer-4 text-muted">
+          <div class="discount">
+            <p class="sale-unit"> 30% OFF</p>
+            <p class="sale-unit" style="font-size: 10px;">En tu compra unitaria</p>
+
+          </div>
+          <span class="sale_price"> <b>$300</b> </span>
+          <span class="price">$330</span>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
