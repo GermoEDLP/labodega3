@@ -1,0 +1,22 @@
+.card-img-4,
+.card-img-top-4,
+.card-img-bottom-4 {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.card-img-4,
+.card-img-top-4 {
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+
+.card-group-4 > .card-4:not(:last-child) .card-img-top-4,
+.card-group-4 > .card-4:not(:last-child) .card-header-4 {
+  border-top-right-radius: 0;
+}
+.card-group-4 > .card-4:not(:first-child) .card-img-top-4,
+.card-group-4 > .card-4:not(:first-child) .card-header-4 {
+  border-top-left-radius: 0;
+}

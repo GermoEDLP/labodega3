@@ -10,20 +10,14 @@ import { Slider } from '../../interfaces/interfaces';
 export class CarrouselComponent implements OnInit {
 
   sliders: Slider[];
-
-
-
+  carga = false;
 
   constructor(private sliderScv: SliderService, private render: Renderer2) { }
 
   ngOnInit(): void {
     this.sliderScv.getSliders().subscribe((sliders: Slider[])=>{
       this.sliders = sliders;
-      console.log(sliders);
-    })
-    
+      this.carga = true;
+    })    
   }
-
-
-
 }

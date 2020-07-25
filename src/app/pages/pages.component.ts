@@ -9,6 +9,8 @@ import { CatsService } from '../services/cats.service';
 })
 export class PagesComponent implements OnInit {
 
+  carga = false;
+
   constructor(private sideBar: CatsService) { 
     sideBar.cargarMenu();
   }

@@ -1,0 +1,9 @@
+
+<div class="content-image">
+    <!-- // animación que se muestra hasta que la imagen complete de cargar -->
+    <div class="thumb-overlay" [hidden]="viewImage">
+        <img src="assets/img/botella.jpg" class="card-img-top-4" alt="...">
+    </div>  
+    <!-- // imagen que se mostrara al completar la carga -->
+    <img [src]="url" #image [hidden]="!viewImage" class="card-img-top-4">
+</div>

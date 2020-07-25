@@ -5,7 +5,7 @@
       <li data-target="#carousel-fixed-height" data-slide-to="1" class=""></li>
       <li data-target="#carousel-fixed-height" data-slide-to="2" class="active"></li>
     </ol>
-    <div class="carousel-inner" role="listbox">
+    <div class="carousel-inner" role="listbox" *ngIf="carga;else loading">
       <!-- NOTE: Bootstrap v4 changes class name to carousel-item -->
 
       <div class="item" *ngFor="let slider of sliders; let pos = index"  [ngClass]="{'active': pos == 0}">
@@ -18,6 +18,12 @@
         </div>
       </div>
     </div>
+
+    <ng-template class="carousel-inner" role="listbox" #loading>
+      <div class="spiner">
+        <app-loading></app-loading>
+      </div>
+    </ng-template>
     <a class="left carousel-control" href="#carousel-fixed-height" role="button" data-slide="prev">
       <i class="arrow_left_alt"></i>
     </a>

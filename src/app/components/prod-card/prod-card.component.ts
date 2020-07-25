@@ -8,6 +8,9 @@ import { Product } from '../../interfaces/interfaces';
 })
 export class ProdCardComponent implements OnInit {
 
+  url = "https://picsum.photos/100/100";
+  carga = false;
+
   @Input() item: Product;
 
   constructor() { }
