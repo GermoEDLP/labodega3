@@ -20,3 +20,22 @@
 .card-group-4 > .card-4:not(:first-child) .card-header-4 {
   border-top-left-radius: 0;
 }
+
+.discount, #product .discount {
+  text-align: center;
+  display: inline-table;
+  color: #FFF;
+  background: #fbbd19;
+  padding: 7px;
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 10px;
+  position: absolute;
+  right: 0px;
+  top: 26px;
+}
+
+.sale-unit{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}

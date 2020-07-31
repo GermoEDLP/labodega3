@@ -3,14 +3,23 @@ export interface Product{
     name: string,
     desc: string,
     stock: number,
-    price: number[],
+    price: number,
     image?: any,
-    sale: number[],
+    sale: Sale[],
+    sales?: string,
     order: boolean,
     cat: string[],
     show: boolean,
     date?: any,
     user?: string
+}
+
+export interface Sale{
+    show: boolean | string,
+    name: string | boolean,
+    cant: number | boolean,
+    off: number,
+    desc: string
 }
 
 export interface User{
@@ -28,10 +37,10 @@ export interface cartProduct{
     name: string,
     cant: number,
     price: number,
+    sale?: number,
     desc: string,
-    sale: number,
     img?: string;
-    id?: number;
+    idF?: string;
 }
 
 export interface Category{

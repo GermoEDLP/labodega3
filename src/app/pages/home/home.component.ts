@@ -10,15 +10,14 @@ import { ProductosService } from '../../services/productos.service';
 })
 export class HomeComponent implements OnInit {
 
-  lista: any[] = listaProductos;
+  lista: Product[] = [];
 
   constructor(private _prodService: ProductosService) { }
 
   ngOnInit(): void {
-    //TODO getOfertas en el servicio de productos
-    // this._prodService.getOfertas().subscribe((lista: Product[]) => {
-    //   this.lista = lista;
-    // })
+    this._prodService.getProducts().subscribe((lista: Product[]) => {
+      this.lista = lista;
+    })
   }
 
 }

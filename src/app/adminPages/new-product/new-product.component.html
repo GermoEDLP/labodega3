@@ -5,7 +5,7 @@
         Nuevo producto
       </header>
       <header class="panel-heading" *ngIf="!nuevo">
-        {{ producto.name }} 
+        {{ producto.name }}
       </header>
       <div class="panel-body">
         <div class="form">
@@ -13,18 +13,20 @@
             class="form-validate form-horizontal"
             id="feedback_form"
             [formGroup]="prodForm"
-            (ngSubmit)="guardar()"
+            (ngSubmit)="checkear()"
           >
             <div class="form-group">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <label for="cname" class="control-label"
                   >Nombre <span class="required">*</span></label
                 >
-                <input type="text" class="form-control" formControlName="name"  />
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                />
               </div>
-            </div>
-            <div class="form-group">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <label for="cemail" class="control-label"
                   >Descripción <span class="required">*</span></label
                 >
@@ -48,92 +50,11 @@
                   <input
                     class="form-control"
                     type="number"
-                    formControlName="price-u"
+                    formControlName="price"
                     required
                   />
                 </div>
               </div>
-              <div class="col-md-6">
-                <label for="curl" class="control-label"
-                  >Precio por caja <span class="required">*</span></label
-                >
-                <div class="input-group">
-                  <span class="input-group-addon">$</span>
-                  <input
-                    class="form-control"
-                    type="number"
-                    formControlName="price-box"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="col-md-6">
-                <label class="control-label"
-                  >Descuento por unidad <span class="required">*</span></label
-                >
-                <div class="input-group">
-                  <span class="input-group-addon">%</span>
-                  <input
-                    class="form-control"
-                    type="number"
-                    formControlName="sale-u"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="col-md-6">
-                <label class="control-label"
-                  >Descuento por caja <span class="required">*</span></label
-                >
-                <div class="input-group">
-                  <span class="input-group-addon">%</span>
-                  <input
-                    class="form-control"
-                    type="number"
-                    formControlName="sale-box"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="col-md-12">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                  <div class="info-box blue-bg text-center">
-                    <div class="count">$ {{prodForm.controls['price-u'].value | number:'1.0-2'}}</div>
-                    <div class="title">Precio por unidad sin descuento</div>                   
-                  </div>
-                  <!--/.info-box-->
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                  <div class="info-box green-bg text-center">
-                    <div class="count">$ {{prodForm.controls['price-u'].value*(1-(prodForm.controls['sale-u'].value/100)) | number:'1.0-2'}}</div>
-                    <div class="title">Precio por unidad CON descuento</div>                   
-                  </div>
-                  <!--/.info-box-->
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                  <div class="info-box blue-bg text-center">
-                    <div class="count">$ {{prodForm.controls['price-box'].value | number:'1.0-2' }}</div>
-                    <div class="title">Precio por caja sin descuento</div>                   
-                  </div>
-                  <!--/.info-box-->
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                  <div class="info-box green-bg text-center">
-                    <div class="count">$ {{prodForm.controls['price-box'].value*(1-(prodForm.controls['sale-box'].value/100)) | number:'1.0-2'}}</div>
-                    <div class="title">Precio por caja con descuento</div>                   
-                  </div>
-                  <!--/.info-box-->
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
               <div class="col-md-6">
                 <label class="control-label">Stock </label>
                 <input
@@ -142,6 +63,69 @@
                   formControlName="stock"
                 />
               </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-12">
+                <label class="control-label" style="margin-bottom: 12px;"
+                  >Promociones 
+                </label>
+                <span  class="pull-right" title="Agregar nueva"><a (click)="agregarPromo()" class="btn btn-success"><i class="fa fa-plus"></i></a></span>
+                <div *ngIf="sales.length>0; else vacio">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <section class="panel">
+                        <div class="table-responsive">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Ver</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                                <th>Descuento</th>
+                                <th>Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item of sales; let i = index">
+                                <td><i class="fa fa-check" *ngIf="item.show"></i></td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.desc}}</td>
+                                <td>{{item.cant}}</td>
+                                <td>{{item.off}}</td>
+                                <td *ngIf="precio">{{ (1-(item.off /this.prodForm.controls['price'].value))*100 | number:'1.0-0'}}%</td>
+                                <td *ngIf="!precio">-</td >                          
+                                <td><span>
+                                  <i
+                                    class="fa fa-pencil pencil_sub_cat"
+                                    (click)="updatePromo(i, item)"
+                                  ></i>
+                                  <i
+                                    class="fa fa-trash-o trash_sub_cat"
+                                    (click)="borrarPromo(i, item)"
+                                  ></i>
+                                </span></td>
+                              </tr>
+                             
+                            </tbody>
+                          </table>
+                        </div>
+          
+                      </section>
+                    </div>
+                  </div>
+                </div>
+                <ng-template #vacio>
+                  <div class="alert alert-info">
+                    Todavia no ingresaste ninguna promoción
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+
+            <div class="form-group">
               <div class="col-md-6">
                 <label for="agree" class="control-label">Por pedido</label>
                 <input
@@ -155,9 +139,7 @@
             </div>
             <div class="form-group">
               <div class="col-md-12">
-                <label for="ccomment" class="control-label"
-                  >Categorias</label
-                >
+                <label for="ccomment" class="control-label">Categorias</label>
                 <div class="btn-group dropup" id="catBtn">
                   <a class="btn btn-default" title="Seleccione una categoria"
                     >Categorias</a
@@ -174,8 +156,12 @@
                       <a (click)="agregarCategoria(cat.name, cat.id)">
                         {{ cat.name }}
                       </a>
-                      <p (click)="agregarCategoria(sub, cat.id+'subs'+i)" *ngFor="let sub of cat.subs; let i = index" class="sub_cat">
-                        {{sub}}
+                      <p
+                        (click)="agregarCategoria(sub, cat.id + 'subs' + i)"
+                        *ngFor="let sub of cat.subs; let i = index"
+                        class="sub_cat"
+                      >
+                        {{ sub }}
                       </p>
                     </li>
                   </ul>
@@ -202,23 +188,36 @@
 
             <div class="form-group">
               <div class="col-md-6">
-                <label  class="control-label"
+                <label class="control-label"
                   >Imagen <span class="required">*</span></label
                 >
-                <input class="form-control" type="file" formControlName="image" (change)="handleImage($event)"/>
-                <div class="text-mutted" *ngIf="nuevo">Si no se selecciona una imagen, se guardará una por defecto</div>
-                <div class="text-mutted" *ngIf="!nuevo">Si no se selecciona una imagen, permanecerá la existente. Si selecciona una nueva, se borrará la anterior para ocupar su lugar</div>
-
+                <input
+                  class="form-control"
+                  type="file"
+                  formControlName="image"
+                  (change)="handleImage($event)"
+                />
+                <div class="text-mutted" *ngIf="nuevo">
+                  Si no se selecciona una imagen, se guardará una por defecto
+                </div>
+                <div class="text-mutted" *ngIf="!nuevo">
+                  Si no se selecciona una imagen, permanecerá la existente. Si
+                  selecciona una nueva, se borrará la anterior para ocupar su
+                  lugar
+                </div>
               </div>
               <div class="col-md-6 text-center">
                 <div *ngIf="producto">
-                  <img  [src]="producto.image" class="img_prod">
-
+                  <img [src]="producto.image" class="img_prod" />
                 </div>
-                <img *ngIf="!producto" src="assets/img/producto-sin-imagen.png" class="img_prod">
+                <img
+                  *ngIf="!producto"
+                  src="assets/img/producto-sin-imagen.png"
+                  class="img_prod"
+                />
               </div>
             </div>
-            
+
             <div class="form-group">
               <div class="col-md-12">
                 <button class="btn btn-default" type="button">Cancelar</button>
@@ -227,7 +226,6 @@
                 </button>
               </div>
             </div>
-
           </form>
         </div>
       </div>
@@ -238,3 +236,6 @@
 <ng-template #loading>
   <app-loading></app-loading>
 </ng-template>
+
+
+

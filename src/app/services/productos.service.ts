@@ -75,10 +75,11 @@ export class ProductosService {
   private async newProduct(prod: Product) {
     const id = this.db.createId();
     prod.id = id;
-    prod.cat = await this.categoriasPorNombre(prod.cat);
     prod.date = new Date();
     prod.user = "A6T2rB8zfFZ4zMElt0JijMXGkFb2";
     prod.image = this.downloadURL;
+    console.log(prod);
+    
     return this.collRef.doc(id).set(prod);
   }
 

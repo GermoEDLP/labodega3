@@ -14,14 +14,17 @@
     text-decoration: line-through;
     float: right;
     font-size: 15px;
-    color: rgb(158, 158, 158);
+    color: rgb(238, 53, 53);
 }
 
-@media(min-width: 1200px){
-  .price {
-    margin: -30px 15px;
-  }
+.price_only{
+  margin: 8px 15px;
+  float: right;
+  font-size: 22px;
+  color: black;
 }
+
+
 
 .sale{
     margin: 15px;
@@ -350,11 +353,19 @@ p {
   text-align: center;
   display: inline-table;
   color: #FFF;
-  background: #fbbd19;
+  background: #d3a972;
   padding: 10px;
   font-weight: bold;
   font-size: 20px;
   margin-bottom: 10px;
+  cursor: pointer;
+}
+.discount p {
+  margin: 1px;
+}
+
+.discount:hover{
+  background: #eac99c;
 }
 
 .sale-unit{

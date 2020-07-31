@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
-import { cartProduct } from '../interfaces/interfaces';
+import { cartProduct, Product } from '../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +14,19 @@ export class CartService {
 
   getAll() {    
     return this.dbService.getAll('cart');
+  }
+
+  searchSame(idF: string){
+    let encontro: any = false;
+    return this.getAll().then((cart: cartProduct[])=>{
+      cart.forEach(element => {
+        if(element.idF == idF){
+          encontro = element;
+        }       
+      });
+    }).then(()=>{
+      return encontro;
+    })
   }
 
   addOne(id: number){
@@ -49,7 +62,7 @@ export class CartService {
         subtotal: 0,
         total: 0
       };
-      prods.forEach(prod=>{
+      prods.forEach((prod: cartProduct)=>{
         totals.total += (prod.cant * prod.price);
         totals.subtotal += (prod.cant * (prod.price * (1 - (prod.sale/100))));
       });      

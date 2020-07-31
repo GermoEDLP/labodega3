@@ -25,7 +25,7 @@ export const environment = {
         { name: 'cant', keypath: 'cant', options: { unique: false } },
         { name: 'price', keypath: 'price', options: { unique: false } },
         { name: 'desc', keypath: 'desc', options: { unique: false } },
-        { name: 'sale', keypath: 'sale', options: { unique: false } }       
+        { name: 'idF', keypath: 'idF', options: { unique: false } }       
       ]
     }]
   }
