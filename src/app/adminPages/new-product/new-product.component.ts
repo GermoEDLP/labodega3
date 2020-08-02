@@ -26,6 +26,7 @@ export class NewProductComponent implements OnInit {
   cats: Category[];
   image: any;
   imageSaved: any;
+  imgPreview: any = null;
 
   sales: Sale[] = [];
 
@@ -220,6 +221,21 @@ export class NewProductComponent implements OnInit {
 
   handleImage(event) {
     this.image = event.target.files[0];
+    this.previewImage();
+  }
+
+  previewImage(){
+    // Show preview 
+    var mimeType = this.image.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+ 
+    var reader = new FileReader();      
+    reader.readAsDataURL(this.image); 
+    reader.onload = (_event) => { 
+      this.imgPreview = reader.result; 
+    }
   }
 
   async agregarPromo(){

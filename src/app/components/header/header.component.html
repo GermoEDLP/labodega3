@@ -1,4 +1,4 @@
-<header class="header dark-bg">
+<header class="header">
   <div class="toggle-nav">
     <div
       class="icon-reorder tooltips"
@@ -42,18 +42,18 @@
             <p class="blue">Carrito</p>
           </li>
 
-          <li *ngFor="let prod of cart">
+          <li *ngFor="let prod of cart; let i = index">
             <a href="#">
               <span class="label label-primary">{{prod.cant}}</span>
               {{prod.name}}
-              <span class="small italic pull-right" [ngClass]="{sale: prod.sale !==0}">{{prod.price * (1-(prod.sale/100))}}$ c/u</span>
+              <span class="small italic pull-right">$ {{total.promo[i].subtotal | number: '1.2-2'}}</span>
             </a>
           </li>
 
          
           <li>
             <a href="#" routerLink='/cart'
-              >Total<span class="italic pull-right"> <b>{{subtotal}}$</b> </span></a
+              >Total<span class="italic pull-right"> <b>{{total.subtotal | number: '1.2-2'}}$</b> </span></a
             >
           </li>
         </ul>

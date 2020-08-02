@@ -1,9 +1,13 @@
-import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  HostListener
+} from '@angular/core';
 import { UserService } from '../../services/user.service';
-import * as jQuery from 'jquery';
 import { CartService } from '../../services/cart.service';
-import { cartProduct } from '../../interfaces/interfaces';
+import { cartProduct, TotalCart, subTotalCart, Promo } from '../../interfaces/interfaces';
 import { ShareInfoService } from '../../services/share-info.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
@@ -11,23 +15,11 @@ import { ShareInfoService } from '../../services/share-info.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-
-
-  product: cartProduct = {
-    name: 'Alma mora',
-    desc: 'Vino. 750ml',
-    cant: 2,
-    price: 100,
-    sale: 15,
-  };
-
   productos: cartProduct[];
-  total: number;
-  subtotal: number;
+  total: TotalCart;
 
   scrHeight: any;
   scrWidth: any;
-
 
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
@@ -35,7 +27,11 @@ export class CartComponent implements OnInit {
     this.scrWidth = window.innerWidth;
   }
 
-  constructor(private us: UserService, private cartService: CartService, private shareService: ShareInfoService) {
+  constructor(
+    private us: UserService,
+    private cartService: CartService,
+    private shareService: ShareInfoService
+  ) {
     this.getScreenSize();
   }
 
@@ -65,13 +61,61 @@ export class CartComponent implements OnInit {
   }
 
   cargarTodos() {
-    this.shareService.emitChange('Hola mundo');   
+    this.shareService.emitChange('Hola mundo');
     this.cartService.getAll().then((resp: cartProduct[]) => {
       this.productos = resp;
       this.cartService.calcTotal().then((tot) => {
-        this.total = tot.total;
-        this.subtotal = tot.subtotal;
+        this.total = tot;
+        console.log(tot);        
       });
     });
   }
+
+  hayPromo(idF: string){
+    let index = null;
+    this.total.promo.forEach((promo: Promo, i)=>{
+      if(promo.prod.idF == idF && promo.sale){
+        index = i;
+      }
+    });    
+    return index;
+  }
+
+
+  mostrarInfoSale(promo: Promo, cant: number){
+    Swal.fire({
+      title: 'Descripción cargo',
+      width: '50%',
+      html: `
+      <table class="table table-striped">
+              <tr>
+                <th style="text-align: left">Concepto</th>
+                <th style="text-align: left">Precio U.</th>
+                <th style="text-align: left">Cant</th>
+                <th style="text-align: left">Subtotal</th>
+              </tr>
+              <tr>
+                <td style="text-align: left">Promo ${promo.sale.name}-${promo.sale.desc}</td>
+                <td style="text-align: left">$ ${promo.sale.off}</td>
+                <td style="text-align: left">${Math.trunc(cant/promo.sale.cant)*promo.sale.cant}</td>
+                <td style="text-align: left">$ ${Math.trunc(cant/promo.sale.cant)*promo.sale.off*promo.sale.cant}</td>
+              </tr>
+              <tr>
+                <td style="text-align: left">${promo.prod.name}</td>
+                <td style="text-align: left">$ ${promo.prod.price}</td>
+                <td style="text-align: left">${(cant%promo.sale.cant)}</td>
+                <td style="text-align: left">$ ${(cant%promo.sale.cant)*promo.prod.price}</td>
+              </tr>
+              <tr>
+                <th>Total</th>
+                <th></th>
+                <th></th>
+                <th style="text-align: left">$ ${Math.trunc(cant/promo.sale.cant)*promo.sale.off*promo.sale.cant + (cant%promo.sale.cant)*promo.prod.price}</th>
+              </tr>
+            </table>
+      `
+    })
+  }
+
+
 }

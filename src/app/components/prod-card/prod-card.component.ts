@@ -50,7 +50,9 @@ export class ProdCardComponent implements OnInit {
           let itemCart: cartProduct = {
             name: item.name,
             cant: 1,
-            price: item.price[0],
+            price: item.price,
+            img: item.image,
+            sale: item.sale,
             desc: item.desc,
             idF: item.id,
           };

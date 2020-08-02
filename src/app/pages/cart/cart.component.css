@@ -6,6 +6,14 @@
     height: 45px;
 }
 
+.btn-info-sale{
+    height: 15px;
+    width: 14px;
+    font-size: 8px;
+    padding: 2px;
+    margin: 3px;
+}
+
 .price{
     font-size: 11px;
     text-decoration: line-through;

@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
 import { CartService } from '../../services/cart.service';
-import { cartProduct } from '../../interfaces/interfaces';
+import { cartProduct, TotalCart } from '../../interfaces/interfaces';
 import { ShareInfoService } from '../../services/share-info.service';
 
 @Component({
@@ -15,8 +15,7 @@ export class HeaderComponent implements OnInit {
   sesion: boolean;
   user$: Observable<any> = this.userService.auth.user;
   cart: cartProduct[];
-  total: number;
-  subtotal: number;
+  total: TotalCart;
   cartCount: number;
 
   constructor(
@@ -45,8 +44,7 @@ export class HeaderComponent implements OnInit {
     this.cartService.getAll().then((resp: cartProduct[]) => {
       this.cart = resp;
       this.cartService.calcTotal().then((tot) => {
-        this.total = tot.total;
-        this.subtotal = tot.subtotal;
+        this.total = tot;
         this.cartService.countAll().then((count) => {
           this.cartCount = count;
         });

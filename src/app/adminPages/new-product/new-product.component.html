@@ -211,8 +211,13 @@
                   <img [src]="producto.image" class="img_prod" />
                 </div>
                 <img
-                  *ngIf="!producto"
+                  *ngIf="!producto && !imgPreview"
                   src="assets/img/producto-sin-imagen.png"
+                  class="img_prod"
+                />
+                <img
+                  *ngIf="!producto && imgPreview"
+                  [src]="imgPreview"
                   class="img_prod"
                 />
               </div>

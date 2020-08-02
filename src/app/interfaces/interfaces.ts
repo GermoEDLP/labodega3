@@ -16,8 +16,8 @@ export interface Product{
 
 export interface Sale{
     show: boolean | string,
-    name: string | boolean,
-    cant: number | boolean,
+    name: string,
+    cant: number,
     off: number,
     desc: string
 }
@@ -37,10 +37,11 @@ export interface cartProduct{
     name: string,
     cant: number,
     price: number,
-    sale?: number,
+    sale?: Sale[],
     desc: string,
     img?: string;
     idF?: string;
+    id?: string 
 }
 
 export interface Category{
@@ -54,4 +55,21 @@ export interface Slider{
     title: string,
     subtitle: string,
     url: string
+}
+
+export interface TotalCart{
+    total: number,
+    subtotal: number,
+    promo?: Promo[]
+}
+
+export interface subTotalCart{
+    pesos: number, 
+    promo?: Sale
+}
+
+export interface Promo{    
+    subtotal: number,
+    prod: cartProduct,
+    sale?: Sale
 }
