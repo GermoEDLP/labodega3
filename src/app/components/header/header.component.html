@@ -36,7 +36,7 @@
           <i class="icon_cart_alt"></i>
           <span class="badge bg-important">{{cartCount}}</span>
         </a>
-        <ul class="dropdown-menu extended notification">
+        <ul class="dropdown-menu extended notification" *ngIf="total">
           <div class="notify-arrow notify-arrow-blue"></div>
           <li>
             <p class="blue">Carrito</p>
