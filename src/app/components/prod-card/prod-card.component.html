@@ -5,7 +5,7 @@
         <!-- <img [src]="url" alt="" onload="console.log('ok')" [hidden]='false'> -->
         <app-loading-image [url]="item.image" [unitSale]="ofertaProducto(item.sale)" [price]="item.price"></app-loading-image>
         <div class="card-body-4" style="text-align: center;">
-          <h5 class="card-title-4">{{item.name}}</h5>
+          <h5 class="card-title-4"><a href="" [routerLink]="['/product', item.id]">{{item.name}}</a></h5>
           <p class="card-text-4">
             {{item.desc}}
           </p>

@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProductosService } from '../../services/productos.service';
 import { CatsService } from '../../services/cats.service';
 import Swal from 'sweetalert2';
 import { Product, Category, Sale } from '../../interfaces/interfaces';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-new-product',
@@ -15,6 +13,13 @@ import { stringify } from 'querystring';
 })
 export class NewProductComponent implements OnInit {
   prodForm: FormGroup;
+
+  @HostListener('keydown', ['$event'])
+  handleKeyDown(e: KeyboardEvent) {   
+    if(e.keyCode==32){
+      e.stopPropagation();
+    }   
+  }
 
   code: string;
   producto: any;
@@ -129,6 +134,7 @@ export class NewProductComponent implements OnInit {
     let prodSave: Product = await{
       name: this.prodForm.controls['name'].value,
       desc: this.prodForm.controls['desc'].value,
+      longDesc: (<HTMLElement>document.getElementById('editor')).innerHTML,
       stock: this.prodForm.controls['stock'].value,
       price: this.prodForm.controls['price'].value,
       sale: this.sales,
@@ -323,6 +329,14 @@ export class NewProductComponent implements OnInit {
     }
     this.sales[pos]=sale;
   }
+
+  mostrarCont(){
+    let contenido = (<HTMLElement>document.getElementById('editor')).innerHTML;
+    console.log(contenido);
+    
+  }
+
+
 
 
 

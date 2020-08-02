@@ -28,7 +28,7 @@
               </div>
               <div class="col-md-6">
                 <label for="cemail" class="control-label"
-                  >Descripción <span class="required">*</span></label
+                  >Descripción corta<span class="required">*</span></label
                 >
                 <input
                   class="form-control"
@@ -38,6 +38,18 @@
                   required
                 />
               </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-12">
+                <label for="editor" class="control-label"
+                  >Descripción larga <span class="required">*</span></label
+                >
+                  <div class="panel-body">
+                    <div id="editor" class="btn-toolbar" data-role="editor-toolbar" data-target="#editor"></div>
+                  </div>
+                  <a class="btn btn-info" (click)="mostrarCont()">Hola</a>
+                </div>
             </div>
 
             <div class="form-group">
@@ -222,6 +234,7 @@
                 />
               </div>
             </div>
+            
 
             <div class="form-group">
               <div class="col-md-12">

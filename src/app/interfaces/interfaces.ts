@@ -2,6 +2,7 @@ export interface Product{
     id?: string,
     name: string,
     desc: string,
+    longDesc?: string,
     stock: number,
     price: number,
     image?: any,
