@@ -40,3 +40,43 @@ header{
     color: black;
     text-shadow: none;
 }
+
+.previewSearch{
+    background: white;
+    margin-top: 3px;
+    border-radius: 4px;
+    position: absolute;
+    width: 100%;
+}
+
+.previewSearch ul{
+    padding-inline-start: 26px;
+}
+
+.previewSearch ul li{
+    padding: 4px 0px;
+    cursor: pointer;
+    border-bottom: 1px solid lightgray;
+}
+
+.previewSearch ul li:hover{
+    background: #e8e8e8
+}
+
+.previewSearch ul li a{
+    color: black;
+}
+
+.searchDesc{
+    margin: 0px;
+    color: lightsteelblue;
+    font-size: 12px;
+}
+
+.searchName{
+    margin-bottom: 5px;
+}
+
+.searchName span{
+    margin-right: 8px;
+}

@@ -74,3 +74,4 @@ export interface Promo{
     prod: cartProduct,
     sale?: Sale
 }
+

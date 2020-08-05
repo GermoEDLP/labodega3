@@ -20,8 +20,18 @@
     <ul class="nav top-menu">
       <li>
         <form class="navbar-form">
-          <input class="form-control" placeholder="Buscar" type="text" />
+          <input class="form-control" placeholder="Buscar" name="searchTerm" autocomplete="off" [(ngModel)]="searchTerm"/>
         </form>
+        <div class="previewSearch" *ngIf="searchTerm.length > 3">
+          <ul>
+            <li *ngFor="let item of productos | search: searchTerm">
+              <a href="" [routerLink]="['/product', item.id]" (click)="searchTerm = ''">
+                <p class="searchName">{{item.name}}<span class="pull-right"><b>$ {{item.price}}</b></span></p>
+                <p class="searchDesc">{{item.desc}}</p>
+              </a>
+            </li>
+          </ul>
+        </div>
       </li>
     </ul>
     <!--  search form end -->
@@ -46,7 +56,7 @@
             <a [routerLink]="['/product', prod.idF]">
               <span class="label label-primary">{{prod.cant}}</span>
               {{prod.name}}
-              <span class="small italic pull-right" *ngIf="total">$ {{total.promo[i].subtotal | number: '1.2-2'}}</span>
+              <span class="small italic pull-right" *ngIf="total && total.subtotal">$ {{total.promo[i].subtotal | number: '1.2-2'}}</span>
             </a>
           </li>
 

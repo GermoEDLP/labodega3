@@ -16,6 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingMainComponent } from './loading-main/loading-main.component';
 import { LoadingImageComponent } from './loading-image/loading-image.component';
+import { SearchPipe } from '../pipes/search.pipe';
 
 
 
@@ -32,7 +33,8 @@ import { LoadingImageComponent } from './loading-image/loading-image.component';
     RegisterComponent,
     LoadingComponent,
     LoadingMainComponent,
-    LoadingImageComponent
+    LoadingImageComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,

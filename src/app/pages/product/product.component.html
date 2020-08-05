@@ -31,7 +31,7 @@
 								  </div>
 								<span>3 Reviews</span>
 							</div>
-		        			<div class="product-price-discount"><span>$ {{product.price}}</span><span class="line-through">$29.00</span></div>
+		        			<div class="product-price-discount"><span>$ {{product.price}}</span></div>
 		        		</div>
                         <p>{{product.desc}}</p>
                         <div class="row" *ngIf="product.sale" style="margin-left: 0px; margin-right: 5px;">
@@ -39,7 +39,7 @@
                                 <div class="promo-link promoted text-center" *ngIf="sale.show" title="Agrega {{sale.cant}} a tu carrito" (click)="agregar(sale.cant)">
                                     <strong>COMPRÁ {{sale.cant}} Y PAGÁS</strong><br />
                                     <span class="product-price">$ {{sale.off}}</span> c/u.
-                                    <span class="discount-arrow arrow-left"><p>%{{(1-(sale.off/product.price))*100 | number: '1.0-0'}} OFF</p></span
+                                    <span class="discount-arrow arrow-left"><p>% {{(1-(sale.off/product.price))*100 | number: '1.0-0'}} OFF</p></span
                                     ><br />
                                   </div>
                             </div>

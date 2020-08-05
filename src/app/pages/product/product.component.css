@@ -11,8 +11,16 @@
   color: #fff;
   padding: 7px 45px;
   display: inline-block;
+  border: 1.5px solid #d3a972;
   margin-top: 5px;
   transition: all 0.5s ease-in-out 0s;
+  cursor: pointer;
+}
+
+.round-black-btn-2:hover {
+  background: white;
+  border: 1.5px solid #d3a972;
+  color: #d3a972;;
 }
 
 .pd-wrap {
