@@ -75,3 +75,7 @@ export interface Promo{
     sale?: Sale
 }
 
+export interface FilterCat{
+    cat: string,
+    id: string
+}

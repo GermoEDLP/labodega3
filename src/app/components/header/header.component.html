@@ -20,14 +20,51 @@
     <ul class="nav top-menu">
       <li>
         <form class="navbar-form">
-          <input class="form-control" placeholder="Buscar" name="searchTerm" autocomplete="off" [(ngModel)]="searchTerm"/>
+          <input
+            class="form-control"
+            placeholder="Buscar"
+            name="searchTerm"
+            autocomplete="off"
+            [(ngModel)]="searchTerm"
+            (focus)="focus()"
+            (blur)="blur($event)"
+            (keyup.enter)="search(searchTerm)"
+          />
         </form>
-        <div class="previewSearch" *ngIf="searchTerm.length > 3">
+        <div
+          id="searchP"
+          class="previewSearch"
+          *ngIf="searchTerm.length > 2 && viewSearchPreview"
+          (mouseenter)="onSearchPreview = true"
+          (mouseleave)="onSearchPreview = false"
+        >
+          <p><b>PRODUCTOS</b></p>
           <ul>
             <li *ngFor="let item of productos | search: searchTerm">
-              <a href="" [routerLink]="['/product', item.id]" (click)="searchTerm = ''">
-                <p class="searchName">{{item.name}}<span class="pull-right"><b>$ {{item.price}}</b></span></p>
-                <p class="searchDesc">{{item.desc}}</p>
+              <a
+                href=""
+                [routerLink]="['/product', item.id]"
+                (click)="searchTerm = ''"
+              >
+                <p class="searchName">
+                  {{ item.name
+                  }}<span class="pull-right"
+                    ><b>$ {{ item.price }}</b></span
+                  >
+                </p>
+                <p class="searchDesc">{{ item.desc }}</p>
+              </a>
+            </li>
+          </ul>
+          <p><b>CATEGORIAS</b></p>
+          <ul>
+            <li *ngFor="let item of categorias | searchCat: searchTerm">
+              <a
+                href=""
+                [routerLink]="['/search', item.id]"
+                (click)="searchTerm = ''"
+              >
+                <p class="searchName">{{ item.cat }}</p>
               </a>
             </li>
           </ul>
@@ -44,26 +81,31 @@
       <li id="cart_notification" class="dropdown">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
           <i class="icon_cart_alt"></i>
-          <span class="badge bg-important">{{cartCount}}</span>
+          <span class="badge bg-important">{{ cartCount }}</span>
         </a>
         <ul class="dropdown-menu extended notification" *ngIf="total">
           <div class="notify-arrow notify-arrow-blue"></div>
           <li>
-            <p class="blue" routerLink='/cart'>Carrito</p>
+            <p class="blue" routerLink="/cart">Carrito</p>
           </li>
 
           <li *ngFor="let prod of cart; let i = index">
             <a [routerLink]="['/product', prod.idF]">
-              <span class="label label-primary">{{prod.cant}}</span>
-              {{prod.name}}
-              <span class="small italic pull-right" *ngIf="total && total.subtotal">$ {{total.promo[i].subtotal | number: '1.2-2'}}</span>
+              <span class="label label-primary">{{ prod.cant }}</span>
+              {{ prod.name }}
+              <span
+                class="small italic pull-right"
+                *ngIf="total && total.subtotal"
+                >$ {{ total.promo[i].subtotal | number: "1.2-2" }}</span
+              >
             </a>
           </li>
 
-         
           <li>
-            <a href="#" routerLink='/cart'
-              >Total<span class="italic pull-right"> <b>{{total.subtotal | number: '1.2-2'}}$</b> </span></a
+            <a href="#" routerLink="/cart"
+              >Total<span class="italic pull-right">
+                <b>{{ total.subtotal | number: "1.2-2" }}$</b>
+              </span></a
             >
           </li>
         </ul>
@@ -71,12 +113,12 @@
       <!-- Cart end-->
 
       <!-- user login dropdown start-->
-      <li class="dropdown" *ngIf="user$ | async  as user; else noSession">
+      <li class="dropdown" *ngIf="user$ | async as user; else noSession">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
           <span class="profile-ava">
             <img alt="" src="assets/img/avatar1_small.jpg" />
           </span>
-          <span class="username">{{user.displayName}}</span>
+          <span class="username">{{ user.displayName }}</span>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu extended logout">
@@ -88,10 +130,14 @@
             <a href="#"><i class="icon_clock_alt"></i> Historial de pedidos</a>
           </li>
           <li>
-            <a href="#" routerLink="/cart"><i class="icon_cart_alt"></i> Carrito</a>
+            <a href="#" routerLink="/cart"
+              ><i class="icon_cart_alt"></i> Carrito</a
+            >
           </li>
           <li>
-            <a (click)="logout()" href="#"><i class="icon_key_alt"></i> Cerrar sesión</a>
+            <a (click)="logout()" href="#"
+              ><i class="icon_key_alt"></i> Cerrar sesión</a
+            >
           </li>
         </ul>
       </li>
@@ -108,7 +154,9 @@
           <ul class="dropdown-menu extended logout">
             <div class="log-arrow-up"></div>
             <li>
-              <a href="#"  routerLink="/cart"><i class="icon_cart_alt"></i> Carrito</a>
+              <a href="#" routerLink="/cart"
+                ><i class="icon_cart_alt"></i> Carrito</a
+              >
             </li>
             <li>
               <a data-toggle="modal" data-target="#mLogin" href="#"
@@ -146,7 +194,6 @@
         <h4 class="modal-title" id="mLoginLabel">Inicio de sesión</h4>
       </div>
       <app-login></app-login>
-      
     </div>
   </div>
 </div>
@@ -174,7 +221,6 @@
       </div>
 
       <app-register></app-register>
-
     </div>
   </div>
 </div>

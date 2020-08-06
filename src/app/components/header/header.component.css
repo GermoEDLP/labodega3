@@ -49,6 +49,10 @@ header{
     width: 100%;
 }
 
+.previewSearch p{
+    margin: 5px 10px;
+}
+
 .previewSearch ul{
     padding-inline-start: 26px;
 }

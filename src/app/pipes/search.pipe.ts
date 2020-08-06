@@ -7,7 +7,7 @@ import { Product } from '../interfaces/interfaces';
 export class SearchPipe implements PipeTransform {
 
   transform(value: Product[], termino: string, ): Product[] | boolean{
-    if(termino.length<3){      
+    if(termino.length<2){      
       return false;
     }else{
       termino = termino.toLocaleLowerCase();

@@ -1,11 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import Swal from 'sweetalert2';
 import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
 import { CartService } from '../../services/cart.service';
-import { cartProduct, TotalCart, Product } from '../../interfaces/interfaces';
+import {
+  cartProduct,
+  TotalCart,
+  Product,
+  Category,
+} from '../../interfaces/interfaces';
 import { ShareInfoService } from '../../services/share-info.service';
 import { ProductosService } from '../../services/productos.service';
+import { CatsService } from '../../services/cats.service';
 
 @Component({
   selector: 'app-header',
@@ -20,12 +26,16 @@ export class HeaderComponent implements OnInit {
   cartCount: number;
   searchTerm: string = '';
   productos: Product[];
+  categorias: Category[];
+  viewSearchPreview: boolean = false;
+  onSearchPreview: boolean = false;
 
   constructor(
     private userService: UserService,
     private cartService: CartService,
     private shareService: ShareInfoService,
-    private prodSvc: ProductosService
+    private prodSvc: ProductosService,
+    private catsSvc: CatsService
   ) {
     this.sesion = false;
     shareService.changeEmitted$.subscribe((text) => {
@@ -38,10 +48,13 @@ export class HeaderComponent implements OnInit {
     this.prodSvc.getProducts().subscribe((prods: Product[]) => {
       this.productos = prods;
     });
+    this.catsSvc.getCats().subscribe((cats: Category[]) => {
+      this.categorias = cats;
+    });
   }
 
-  search() {
-    // TODO hacer el buscador
+  search(searchTerm) {
+    console.log(searchTerm);
   }
 
   logout() {
@@ -60,8 +73,12 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  ver(){
-    console.log(this.searchTerm);
-    
+  focus() {
+    this.viewSearchPreview = true;
+  }
+  blur(event) {
+    if(!this.onSearchPreview){
+      this.viewSearchPreview = false;
+    }
   }
 }

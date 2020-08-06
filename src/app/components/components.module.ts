@@ -17,6 +17,7 @@ import { LoadingComponent } from './loading/loading.component';
 import { LoadingMainComponent } from './loading-main/loading-main.component';
 import { LoadingImageComponent } from './loading-image/loading-image.component';
 import { SearchPipe } from '../pipes/search.pipe';
+import { SearchCatPipe } from '../pipes/search-cat.pipe';
 
 
 
@@ -34,7 +35,8 @@ import { SearchPipe } from '../pipes/search.pipe';
     LoadingComponent,
     LoadingMainComponent,
     LoadingImageComponent,
-    SearchPipe
+    SearchPipe,
+    SearchCatPipe
   ],
   imports: [
     CommonModule,

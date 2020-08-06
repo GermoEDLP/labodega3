@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './product/product.component';
 
 import { FormsModule } from '@angular/forms';
@@ -18,7 +17,6 @@ import { CartComponent } from './cart/cart.component';
   declarations: [
     HomeComponent,
     AboutComponent,
-    ProductsComponent,
     ProductComponent,
     PagesComponent,
     CartComponent
@@ -33,7 +31,6 @@ import { CartComponent } from './cart/cart.component';
   exports: [
     HomeComponent,
     AboutComponent,
-    ProductsComponent,
     ProductComponent,
     CartComponent
   ]
