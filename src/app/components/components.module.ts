@@ -18,6 +18,7 @@ import { LoadingMainComponent } from './loading-main/loading-main.component';
 import { LoadingImageComponent } from './loading-image/loading-image.component';
 import { SearchPipe } from '../pipes/search.pipe';
 import { SearchCatPipe } from '../pipes/search-cat.pipe';
+import { CatListaProdPipe } from '../pipes/cat-lista-prod.pipe';
 
 
 
@@ -36,7 +37,8 @@ import { SearchCatPipe } from '../pipes/search-cat.pipe';
     LoadingMainComponent,
     LoadingImageComponent,
     SearchPipe,
-    SearchCatPipe
+    SearchCatPipe,
+    CatListaProdPipe
   ],
   imports: [
     CommonModule,
@@ -56,7 +58,9 @@ import { SearchCatPipe } from '../pipes/search-cat.pipe';
     LoginComponent,
     LoadingComponent,
     LoadingMainComponent,
-    LoadingImageComponent
+    LoadingImageComponent,
+    SearchCatPipe,
+    CatListaProdPipe
   ]
 })
 export class ComponentsModule { }

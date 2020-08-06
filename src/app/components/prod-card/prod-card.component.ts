@@ -14,6 +14,7 @@ export class ProdCardComponent implements OnInit {
   carga = false;
 
   @Input() items: Product[];
+  @Input() termino: string = null;
 
   constructor(
     private cartSvc: CartService,

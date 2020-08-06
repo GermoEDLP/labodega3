@@ -13,7 +13,6 @@ import { NewProductComponent } from './new-product/new-product.component';
 import { SettingsComponent } from './settings/settings.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CategoriesComponent } from './categories/categories.component';
-import { CatListaProdPipe } from '../pipes/cat-lista-prod.pipe';
 import { SliderComponent } from './slider/slider.component'
 
 
@@ -28,7 +27,6 @@ import { SliderComponent } from './slider/slider.component'
     NewProductComponent,
     SettingsComponent,
     CategoriesComponent,
-    CatListaProdPipe,
     SliderComponent
   ],
   imports: [
@@ -45,7 +43,7 @@ import { SliderComponent } from './slider/slider.component'
     AdminSidebarComponent,
     StadisticsComponent,
     NewProductComponent,
-    SettingsComponent
+    SettingsComponent,
   ]
 })
 export class AdminModule { }

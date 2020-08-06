@@ -12,6 +12,7 @@ import {
 import { ShareInfoService } from '../../services/share-info.service';
 import { ProductosService } from '../../services/productos.service';
 import { CatsService } from '../../services/cats.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -35,7 +36,8 @@ export class HeaderComponent implements OnInit {
     private cartService: CartService,
     private shareService: ShareInfoService,
     private prodSvc: ProductosService,
-    private catsSvc: CatsService
+    private catsSvc: CatsService,
+    private router: Router
   ) {
     this.sesion = false;
     shareService.changeEmitted$.subscribe((text) => {
@@ -53,8 +55,24 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  search(searchTerm) {
-    console.log(searchTerm);
+  search(searchTerm: string) {
+    if(searchTerm.length > 2){
+      this.router.navigateByUrl(`/search/${searchTerm}`);
+      this.viewSearchPreview = false;
+    }else{
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-start',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true
+      })
+      
+      Toast.fire({
+        icon: 'error',
+        title: 'Termino demasiado corto'
+      })
+    }
   }
 
   logout() {

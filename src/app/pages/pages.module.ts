@@ -10,7 +10,7 @@ import { PagesComponent } from './pages.component';
 import { PAGES_ROUTES } from './pages.routes';
 import { ComponentsModule } from '../components/components.module';
 import { CartComponent } from './cart/cart.component';
-
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -19,7 +19,8 @@ import { CartComponent } from './cart/cart.component';
     AboutComponent,
     ProductComponent,
     PagesComponent,
-    CartComponent
+    CartComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +33,8 @@ import { CartComponent } from './cart/cart.component';
     HomeComponent,
     AboutComponent,
     ProductComponent,
-    CartComponent
+    CartComponent,
+    SearchComponent
   ]
 })
 export class PagesModule { }

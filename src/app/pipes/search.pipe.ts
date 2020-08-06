@@ -6,7 +6,10 @@ import { Product } from '../interfaces/interfaces';
 })
 export class SearchPipe implements PipeTransform {
 
-  transform(value: Product[], termino: string, ): Product[] | boolean{
+  transform(value: Product[], termino?: string, ): Product[] | boolean{
+    if(termino == null){
+      return value;
+    }
     if(termino.length<2){      
       return false;
     }else{

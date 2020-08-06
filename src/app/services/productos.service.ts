@@ -106,6 +106,10 @@ export class ProductosService {
     return this.collRef.doc(id).delete();
   }
 
+  getProductByCat(cat: string){
+    return this.db.collection('products', ref => ref.where('cat', 'array-contains', cat)).valueChanges();
+  }
+
   categoriasPorNombre(names: string[]): string[]{
     let catsFinal: string[] = [];
     names.forEach(name =>{
