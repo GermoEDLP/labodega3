@@ -13,6 +13,7 @@ import { ShareInfoService } from '../../services/share-info.service';
 import { ProductosService } from '../../services/productos.service';
 import { CatsService } from '../../services/cats.service';
 import { Router } from '@angular/router';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -58,6 +59,9 @@ export class HeaderComponent implements OnInit {
   search(searchTerm: string) {
     if(searchTerm.length > 2){
       this.router.navigateByUrl(`/search/${searchTerm}`);
+      // let ls: {term: string}[] = JSON.parse(localStorage.getItem('search')) || [];  
+      // ls.push({term: searchTerm});
+      // localStorage.setItem('search', JSON.stringify(ls));
       this.viewSearchPreview = false;
     }else{
       const Toast = Swal.mixin({

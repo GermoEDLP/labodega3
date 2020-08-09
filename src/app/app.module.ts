@@ -24,8 +24,6 @@ import { AdminModule } from './adminPages/admin.module';
 
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +41,7 @@ import { AdminModule } from './adminPages/admin.module';
     AngularFirestoreModule,
     AngularFireStorageModule,
     NgxIndexedDBModule.forRoot(environment.dbConfig),
-    
+  
 
   ],
   providers: [],

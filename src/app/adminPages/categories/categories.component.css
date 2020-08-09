@@ -14,3 +14,7 @@
 .trash_sub_cat{
     color: red;
 }
+
+.disabled{
+    display: none;
+}

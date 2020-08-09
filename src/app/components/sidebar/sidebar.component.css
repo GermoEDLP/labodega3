@@ -8,3 +8,7 @@
         margin-top: 37px
     }
 } */
+
+.disabled{
+    display: none;
+}

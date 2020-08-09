@@ -15,6 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CategoriesComponent } from './categories/categories.component';
 import { SliderComponent } from './slider/slider.component'
 
+//CK Editor
+import { CKEditorModule, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+
 
 
 @NgModule({
@@ -34,7 +37,8 @@ import { SliderComponent } from './slider/slider.component'
     CommonModule,
     RouterModule,
     ComponentsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CKEditorModule
   ],
   exports:[
     AdminComponent,

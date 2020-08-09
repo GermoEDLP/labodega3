@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 })
 export class CategoriesComponent implements OnInit {
   categories: Category[];
+  disabled: string = "SubcategoriaDesabilitadaPorAdmin";
 
   constructor(private catSvc: CatsService) {
     
@@ -54,6 +55,36 @@ export class CategoriesComponent implements OnInit {
       },
     });
   }
+  editarCat(cat: number) {
+    Swal.fire({
+      title: 'Editar Categoria',
+      input: 'text',
+      inputValue: this.categories[cat].name,
+      inputAttributes: {
+        autocapitalize: 'off',
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Modificar',
+      showLoaderOnConfirm: true,
+      preConfirm: (updatedSub) => {
+        this.categories[cat].name = updatedSub;
+      },
+    });
+  }
+
+  borrarCat(cat: number) {
+    Swal.fire({
+      title: 'Borrar categoria',
+      html: `Esta seguro de borrar esta Categoria: <b>${this.categories[cat].name}</b>`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Borrar',
+    }).then((result) => {
+      this.categories[cat].id = 'borrar' + this.categories[cat].id;
+    });
+  }
 
   borrarSubCat(cat: number, sub: number) {
     Swal.fire({
@@ -65,7 +96,7 @@ export class CategoriesComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Borrar',
     }).then((result) => {
-      this.categories[cat].subs.splice(sub, 1);
+      this.categories[cat].subs[sub] = this.disabled;
     });
   }
 

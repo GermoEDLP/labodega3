@@ -5,12 +5,22 @@ import { Category } from '../interfaces/interfaces';
   name: 'cats',
 })
 export class CatListaProdPipe implements PipeTransform {
-  transform(value: string, arg: Category[]) {
-    if (value.includes('subs')) {
-      let parts = value.split('subs');
-      return arg.find((cat) => cat.id == parts[0]).subs[parts[1]];
-    } else {
-      return arg.find((cat) => cat.id == value).name;
-    }
+  transform(value: string[], arg: Category[]) {
+    let respuesta: any[] = [];
+    value.forEach((cat: string) => {
+      if (cat.includes('subs')) {
+        let parts = cat.split('subs');
+        let name = arg.find((categorie) => categorie.id == parts[0]).subs[parts[1]];
+        if(name && name !== "SubcategoriaDesabilitadaPorAdmin"){
+          respuesta.push(name);
+        }
+      } else {
+        let name = arg.find((categorie) => categorie.id == cat).name;
+        if(name){
+          respuesta.push(name);
+        }
+      }
+    });
+    return respuesta;
   }
 }

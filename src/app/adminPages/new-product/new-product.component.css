@@ -52,3 +52,6 @@ i.fa-pencil {
     font-size: 1.125em;
 }
 
+.disabled{
+    display: none;
+}

@@ -45,10 +45,8 @@
                 <label for="editor" class="control-label"
                   >Descripción larga <span class="required">*</span></label
                 >
-                  <div class="panel-body">
-                    <div id="editor" class="btn-toolbar" data-role="editor-toolbar" data-target="#editor"></div>
-                  </div>
-                  <a class="btn btn-info" (click)="mostrarCont()">Hola</a>
+                <ckeditor formControlName='longDesc' [editor]="Editor" (change)="onChange($event)"></ckeditor>
+                  
                 </div>
             </div>
 
@@ -187,6 +185,7 @@
                   <span
                     class="tag"
                     *ngFor="let item of categoriasDelProd; let i = index"
+                    [ngClass]="{disabled: item.name == disabled}"
                   >
                     <span> {{ item.name }}&nbsp;&nbsp; </span>
                     <a

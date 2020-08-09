@@ -21,7 +21,7 @@
               <td>{{prod.price | number:'1.2-2'}}</td>
               <td>{{prod.stock}}</td>
               <td>
-                  <span *ngFor="let cat of prod.cat" class="label label-primary">{{cat | cats:categorias}} </span>
+                  <span *ngFor="let cat of prod.cat | cats: categorias" class="label label-primary">{{cat}}</span>
               </td>
               <td>
                 <div class="btn-group">

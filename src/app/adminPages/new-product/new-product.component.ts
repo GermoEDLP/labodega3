@@ -6,6 +6,10 @@ import { CatsService } from '../../services/cats.service';
 import Swal from 'sweetalert2';
 import { Product, Category, Sale } from '../../interfaces/interfaces';
 
+// CK Editor
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component'
+
 @Component({
   selector: 'app-new-product',
   templateUrl: './new-product.component.html',
@@ -32,6 +36,13 @@ export class NewProductComponent implements OnInit {
   image: any;
   imageSaved: any;
   imgPreview: any = null;
+  disabled: string = "SubcategoriaDesabilitadaPorAdmin";
+
+  public model = {
+    editorData: '<p>Hello, world!</p>'
+};
+
+  Editor = ClassicEditor;
 
   sales: Sale[] = [];
 
@@ -56,7 +67,8 @@ export class NewProductComponent implements OnInit {
         this.producto = prod;
         this.categoriasDelProd = await this.categoriasPorId(prod.cat);
         this.prodForm.controls['name'].setValue(prod.name);
-        this.prodForm.controls['desc'].setValue(prod.desc);
+        this.prodForm.controls['desc'].setValue(prod.desc);        
+        this.prodForm.controls['longDesc'].setValue(prod.longDesc);
         this.prodForm.controls['stock'].setValue(prod.stock);
         this.prodForm.controls['price'].setValue(prod.price);
         this.prodForm.controls['order'].setValue(prod.order);
@@ -80,6 +92,7 @@ export class NewProductComponent implements OnInit {
     this.prodForm = this.fb.group({
       name: ['', [Validators.required]],
       desc: ['', [Validators.required]],
+      longDesc: ['', [Validators.required]],
       price: ['', [Validators.required]],
       stock: [''],
       image: ['', [Validators.required]],
@@ -134,7 +147,7 @@ export class NewProductComponent implements OnInit {
     let prodSave: Product = await{
       name: this.prodForm.controls['name'].value,
       desc: this.prodForm.controls['desc'].value,
-      longDesc: (<HTMLElement>document.getElementById('editor')).innerHTML,
+      longDesc: this.prodForm.controls['longDesc'].value,
       stock: this.prodForm.controls['stock'].value,
       price: this.prodForm.controls['price'].value,
       sale: this.sales,
@@ -330,11 +343,11 @@ export class NewProductComponent implements OnInit {
     this.sales[pos]=sale;
   }
 
-  mostrarCont(){
-    let contenido = (<HTMLElement>document.getElementById('editor')).innerHTML;
-    console.log(contenido);
-    
-  }
+  public onChange( { editor }: ChangeEvent ) {
+    const data = editor.getData();
+
+    console.log( data, this.prodForm.controls['longDesc'].value);
+}
 
 
 

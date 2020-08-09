@@ -46,11 +46,15 @@ export class CatsService {
   }
 
   updateCategories(cats: Category[]){
+    console.log(cats);
+    
     cats.forEach(cat=>{
       if(cat.id.includes('provisorio')){
         const id = this.db.createId();
         cat.id = id;
         this.collRef.doc(cat.id).set(cat);
+      }else if(cat.id.includes('borrar')){
+        this.collRef.doc(cat.id.slice(6)).delete();        
       }else{
         this.collRef.doc(cat.id).update(cat);
       }

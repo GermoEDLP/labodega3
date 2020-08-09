@@ -10,6 +10,7 @@ import { CatsService } from '../../services/cats.service';
 })
 export class SidebarComponent implements OnInit {
 
+  disabled: string = "SubcategoriaDesabilitadaPorAdmin";
 
   constructor(public catsSvc: CatsService) { 
     

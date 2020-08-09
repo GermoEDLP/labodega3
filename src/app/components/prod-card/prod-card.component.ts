@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class ProdCardComponent implements OnInit {
   carga = false;
   p: any;
-  itemPerPage: number = 12
+  itemPerPage: number = 2
 
   @Input() items: Product[];
   @Input() termino: string = null;
