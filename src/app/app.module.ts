@@ -24,6 +24,8 @@ import { AdminModule } from './adminPages/admin.module';
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,8 @@ import { AdminModule } from './adminPages/admin.module';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    NgxIndexedDBModule.forRoot(environment.dbConfig)
+    NgxIndexedDBModule.forRoot(environment.dbConfig),
+    
 
   ],
   providers: [],

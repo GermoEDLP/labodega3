@@ -1,41 +1,101 @@
 <div class="container">
+  <div *ngIf="items; else loading">
+  <div class="text-center row" *ngIf="items.length>0">
+    <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)" previousLabel="Anterior"
+    nextLabel="Siguiente" maxSize="5"></pagination-controls>
+  </div>
   <div class="row row-cols-1 row-cols-md-3">
-    <div class="col-md-4 col-lg-3 col-sm-6 col-6 mb-4 cardContainer" *ngFor="let item of items | search: termino">
-      <div class="card-4 h-100" >
+    <div
+      class="col-md-4 col-lg-3 col-sm-6 col-6 mb-4 cardContainer"
+      *ngFor="let item of items | paginate: { itemsPerPage: itemPerPage, currentPage: p }"
+    >
+      <div class="card-4 h-100">
         <!-- <img [src]="url" alt="" onload="console.log('ok')" [hidden]='false'> -->
-        <app-loading-image [url]="item.image" [unitSale]="ofertaProducto(item.sale)" [price]="item.price"></app-loading-image>
+        <app-loading-image
+          [url]="item.image"
+          [unitSale]="ofertaProducto(item.sale)"
+          [price]="item.price"
+        ></app-loading-image>
         <div class="card-body-4" style="text-align: center;">
-          <h5 class="card-title-4"><a href="" [routerLink]="['/product', item.id]">{{item.name}}</a></h5>
+          <h5 class="card-title-4">
+            <a href="" [routerLink]="['/product', item.id]">{{ item.name }}</a>
+          </h5>
           <p class="card-text-4">
-            {{item.desc}}
+            {{ item.desc }}
           </p>
-          <div class="promo-link promoted text-center" *ngIf="ofertaCaja(item.sale)">
-            <strong>COMPRÁ {{ofertaCaja(item.sale).cant}} Y PAGÁS</strong><br />
-            <span class="product-price">${{ofertaCaja(item.sale).off}}</span> c/u.
-            <span class="discount-arrow arrow-left"><p>%{{(1-(ofertaCaja(item.sale).off/item.price))*100 | number: '1.0-0'}} OFF</p></span
+          <div
+            class="promo-link promoted text-center"
+            *ngIf="ofertaCaja(item.sale)"
+          >
+            <strong>COMPRÁ {{ ofertaCaja(item.sale).cant }} Y PAGÁS</strong
+            ><br />
+            <span class="product-price">${{ ofertaCaja(item.sale).off }}</span>
+            c/u.
+            <span class="discount-arrow arrow-left"
+              ><p>
+                %{{
+                  (1 - ofertaCaja(item.sale).off / item.price) * 100
+                    | number: "1.0-0"
+                }}
+                OFF
+              </p></span
             ><br />
           </div>
-          <div class="promo-link promoted text-center" *ngIf="ofertaCaja(item.sale) == undefined && ofertaProducto(item.sale)">
-            <strong>COMPRÁ {{ofertaProducto(item.sale).cant}} Y PAGÁS</strong><br />
-            <span class="product-price">${{ofertaProducto(item.sale).off}}</span> c/u.
-            <span class="discount-arrow arrow-left"><p>%{{(1-(ofertaProducto(item.sale).off/item.price))*100 | number: '1.0-0'}} OFF</p></span
+          <div
+            class="promo-link promoted text-center"
+            *ngIf="
+              ofertaCaja(item.sale) == undefined && ofertaProducto(item.sale)
+            "
+          >
+            <strong>COMPRÁ {{ ofertaProducto(item.sale).cant }} Y PAGÁS</strong
+            ><br />
+            <span class="product-price"
+              >${{ ofertaProducto(item.sale).off }}</span
+            >
+            c/u.
+            <span class="discount-arrow arrow-left"
+              ><p>
+                %{{
+                  (1 - ofertaProducto(item.sale).off / item.price) * 100
+                    | number: "1.0-0"
+                }}
+                OFF
+              </p></span
             ><br />
           </div>
         </div>
-        <div class="card-footer-4 text-muted">          
-          <div class="oferta" *ngIf="ofertaProducto(item.sale);else noOferta">
-            <span class="sale_price" title="Precio unitario con oferta"> <b>${{ofertaProducto(item.sale).off}}</b> </span>
-            <span class="price" title="Precio unitario de lista">${{item.price}}</span>
+        <div class="card-footer-4 text-muted">
+          <div class="oferta" *ngIf="ofertaProducto(item.sale); else noOferta">
+            <span class="sale_price" title="Precio unitario con oferta">
+              <b>${{ ofertaProducto(item.sale).off }}</b>
+            </span>
+            <span class="price" title="Precio unitario de lista"
+              >${{ item.price }}</span
+            >
           </div>
           <ng-template #noOferta>
-            <span class="price_only" title="Precio unitario de lista"><b>${{item.price}}</b></span>
+            <span class="price_only" title="Precio unitario de lista"
+              ><b>${{ item.price }}</b></span
+            >
           </ng-template>
           <div class="discount btn-block" (click)="agregarACarrito(item)">
             <p>Comprar</p>
           </div>
-          
         </div>
       </div>
     </div>
   </div>
+  <div class="text-center row"  *ngIf="items.length>0">
+    <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)" previousLabel="Anterior"
+    nextLabel="Siguiente" maxSize="5"></pagination-controls>
+  </div>
+  <div class="alert alert-danger fade in" role="alert" *ngIf="items.length==0">
+    <b>Lo sentimos</b>, pero su busqueda no arroja resultados. <a href="" routerLink="/home">Volver al inicio</a>
+  </div>
+
 </div>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>
+</div>
+

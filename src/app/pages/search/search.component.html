@@ -4,13 +4,13 @@
     <div class="row">
       <div class="col-lg-12" *ngIf="termino && cats">
         <h3 class="page-header">Busqueda: {{ termino }}</h3>
-        <h4 class="title-info"><b>CATEGORIAS</b></h4>
-        <a class="btn btn-default" *ngFor="let item of cats | searchCat: termino" routerLink="/search/{{item.id}}">
+        <h4 class="title-info" *ngIf="cats.length!=0"><b>CATEGORIAS</b></h4>
+        <a class="btn btn-default" *ngFor="let item of categoriasFiltradas" routerLink="/search/{{item.id}}">
             {{item.cat}}
         </a>
         <br />
-        <h4 class="title-info"><b>PRODUCTOS</b></h4>
-        <app-prod-card [items]="lista" [termino]="termino"></app-prod-card>
+        <h4 class="title-info" *ngIf="lista.length!=0"><b>PRODUCTOS</b></h4>
+        <app-prod-card [items]="lista"></app-prod-card>
       </div>
       <div class="col-lg-12" *ngIf="categoria && cats">
         <h4 class="title-info"><b>CATEGORIA: {{categoria | cats: cats}}</b></h4>

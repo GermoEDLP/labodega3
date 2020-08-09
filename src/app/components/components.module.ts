@@ -20,7 +20,8 @@ import { SearchPipe } from '../pipes/search.pipe';
 import { SearchCatPipe } from '../pipes/search-cat.pipe';
 import { CatListaProdPipe } from '../pipes/cat-lista-prod.pipe';
 
-
+// Pagination
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CatListaProdPipe } from '../pipes/cat-lista-prod.pipe';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    CarouselModule
+    CarouselModule,
+    NgxPaginationModule
   ],
   exports: [
     FooterComponent,

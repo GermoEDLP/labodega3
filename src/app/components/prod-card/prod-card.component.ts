@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import { CartService } from '../../services/cart.service';
 import { ShareInfoService } from '../../services/share-info.service';
 import { element } from 'protractor';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prod-card',
@@ -12,13 +13,16 @@ import { element } from 'protractor';
 })
 export class ProdCardComponent implements OnInit {
   carga = false;
+  p: any;
+  itemPerPage: number = 12
 
   @Input() items: Product[];
   @Input() termino: string = null;
 
   constructor(
     private cartSvc: CartService,
-    private shareService: ShareInfoService
+    private shareService: ShareInfoService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -94,6 +98,18 @@ export class ProdCardComponent implements OnInit {
       }
     })
     return saleProd;
+  }
+
+  pageChanged(event: number){
+    this.p = event;
+    let top: number = 0;
+    if(this.router.url.includes('home')){
+      top = 380
+
+    }
+    window.scroll({
+      top: top
+    })
   }
 
 }
