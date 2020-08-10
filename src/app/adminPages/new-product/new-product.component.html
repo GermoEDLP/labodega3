@@ -218,7 +218,7 @@
                 </div>
               </div>
               <div class="col-md-6 text-center">
-                <div *ngIf="producto">
+                <div *ngIf="producto && !imgPreview">
                   <img [src]="producto.image" class="img_prod" />
                 </div>
                 <img
@@ -227,7 +227,7 @@
                   class="img_prod"
                 />
                 <img
-                  *ngIf="!producto && imgPreview"
+                  *ngIf="imgPreview"
                   [src]="imgPreview"
                   class="img_prod"
                 />
@@ -237,7 +237,7 @@
 
             <div class="form-group">
               <div class="col-md-12">
-                <button class="btn btn-default" type="button">Cancelar</button>
+                <a class="btn btn-default" type="button" routerLink="/admin/list">Cancelar</a>
                 <button class="btn btn-primary pull-right" type="submit">
                   Guardar
                 </button>

@@ -11,7 +11,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { StadisticsComponent } from './stadistics/stadistics.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { SettingsComponent } from './settings/settings.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CategoriesComponent } from './categories/categories.component';
 import { SliderComponent } from './slider/slider.component'
 
@@ -37,6 +37,7 @@ import { CKEditorModule, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
     CommonModule,
     RouterModule,
     ComponentsModule,
+    FormsModule,
     ReactiveFormsModule,
     CKEditorModule
   ],

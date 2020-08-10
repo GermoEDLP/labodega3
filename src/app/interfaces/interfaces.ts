@@ -55,7 +55,14 @@ export interface Slider{
     id?: string,
     title: string,
     subtitle: string,
-    url: string
+    url?: UrlSlider,
+    img?: string,
+    show?: boolean 
+}
+
+export interface UrlSlider{
+    url?: string,
+    name?: string
 }
 
 export interface TotalCart{

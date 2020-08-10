@@ -10,7 +10,7 @@
 
       <div class="item" *ngFor="let slider of sliders; let pos = index"  [ngClass]="{'active': pos == 0}">
         <!-- The only change from the original bootstrap carousel is the "item" divs. I am using this in a CMS so I use inline styles for the background divs so I can set the background image files within the loop.  Just easier for my purposes.  Change the img tag to a div as follows: -->
-        <div [ngStyle]="{'background': 'url(' + slider.url + ') center center'}" style="background-size:cover;" class="slider-size">
+        <div [ngStyle]="{'background': 'url(' + slider.img + ') center center'}" style="background-size:cover;" class="slider-size">
           <div class="carousel-caption">
             <h3>{{slider.title}}</h3>
             <p>{{slider.subtitle}}</p>

@@ -62,7 +62,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     LoadingMainComponent,
     LoadingImageComponent,
     SearchCatPipe,
-    CatListaProdPipe
+    CatListaProdPipe,
+    SearchPipe,
   ]
 })
 export class ComponentsModule { }
