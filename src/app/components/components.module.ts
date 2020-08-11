@@ -22,6 +22,7 @@ import { CatListaProdPipe } from '../pipes/cat-lista-prod.pipe';
 
 // Pagination
 import {NgxPaginationModule} from 'ngx-pagination';
+import { SliderShowPipe } from '../pipes/slider-show.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     LoadingImageComponent,
     SearchPipe,
     SearchCatPipe,
-    CatListaProdPipe
+    CatListaProdPipe,
+    SliderShowPipe
   ],
   imports: [
     CommonModule,
@@ -64,6 +66,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     SearchCatPipe,
     CatListaProdPipe,
     SearchPipe,
+    SliderShowPipe
   ]
 })
 export class ComponentsModule { }

@@ -20,6 +20,15 @@ export class SliderService {
     return this.collRef.valueChanges();
   }
 
+  getSliderById(id: string){
+    return this.collRef.doc(id).valueChanges();
+  }
+
+  showOrHideById(slider: Slider){
+    slider.show = !slider.show;
+    this.actualizarSliderById(slider.id, slider);
+  }
+
   deleteSliderById(id: string){
     return this.collRef.doc(id).delete();
   }
@@ -36,7 +45,7 @@ export class SliderService {
 
   private uploadImage(image: any, slider?: Slider, actualiza?: boolean) {
     const time = new Date().getTime();
-    this.filePath = `images/${time}${image.name}`;
+    this.filePath = `sliders/${time}${image.name}`;
     const fileRef = this.storage.ref(this.filePath);
     const task = this.storage.upload(this.filePath, image);
     return task.snapshotChanges().pipe(
@@ -57,6 +66,7 @@ export class SliderService {
     const id = this.db.createId();
     slider.id = id;
     slider.img = this.downloadURL;
+    slider.show = false;
     console.log(slider);
     
     return this.collRef.doc(id).set(slider);

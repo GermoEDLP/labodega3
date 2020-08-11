@@ -1,10 +1,5 @@
 <h3 class="page-header">
   Sliders
-  <span class="pull-right"
-    ><button class="btn btn-info" (click)="saveAll()">
-      Guardar todo
-    </button></span
-  >
 </h3>
 <div class="panel-group m-bot20" id="accordion" *ngIf="sliders; else loading">
   <div
@@ -22,6 +17,9 @@
           <a class="accordion-toggle">
             {{ slider.title }}
           </a>
+          <span class="pull-right">
+            <i class="fa fa-circle" [ngClass]="{green: slider.show, red: !slider.show}" style="border: none;" ></i>
+          </span>
         </h4>
       </div>
     </a>
@@ -29,7 +27,7 @@
       <section class="panel">
         <div class="panel-body">
           <div class="row info">
-            <div class="col-md-4">
+            <div class="col-md-6">
               <span class="title">
                 <b>Titulo:</b>
               </span>
@@ -37,7 +35,7 @@
                 {{ slider.title }}
               </span>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
               <span class="title">
                 <b>Subtitulo:</b>
               </span>
@@ -47,23 +45,50 @@
             </div>
           </div>
           <div class="row info">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <span class="title">
                 <b>URL:</b>
               </span>
               <span class="title_info">
-                {{ slider.url.name }}
+                <a routerLink="{{ slider.url.url }}"> {{ slider.url.name }}</a>
               </span>
+            </div>
+            <div class="col-md-6">
+              <div class="material-switch">
+                <span class="title" style="margin-right: 5px;">
+                  <b>Mostrar Slider: </b>
+                </span>
+                <input
+                  id="{{slider.id}}"
+                  name="{{slider.id}}"
+                  [checked]= slider.show
+                  type="checkbox"
+                  
+                />
+                <label
+                  for="{{slider.id}}"
+                  class="label-success"
+                  (click)="cambiarState(slider)"
+                ></label>
+              </div>
             </div>
           </div>
           <div class="row">
-            <div
-              [ngStyle]="{
-                background: 'url(' + slider.img + ') center center'
-              }"
-              style="background-size: cover;"
-              class="slider-size"
-            ></div>
+            <div class="col-md-12">
+              <div
+                [ngStyle]="{
+                  background: 'url(' + slider.img + ') center center',
+                  'text-align': 'center'
+                }"
+                style="background-size: cover;"
+                class="slider-size"
+              >
+                <div class="preview">
+                  <h3>{{ slider.title }}</h3>
+                  <p>{{ slider.subtitle }}</p>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-12 footer">
@@ -72,7 +97,7 @@
               >
               <a
                 class="btn btn-info pull-right"
-                (click)="actualizarSlider(slider.id)"
+                (click)="actualizarSlider(slider)"
                 >Actualizar</a
               >
             </div>
@@ -112,10 +137,12 @@
           class="close"
           data-dismiss="modal"
           aria-hidden="true"
+          (click)="cerrarModal()"
         >
           &times;
         </button>
-        <h4 class="modal-title">Nuevo Slider</h4>
+        <h4 class="modal-title" *ngIf="!actualizar">Nuevo Slider</h4>
+        <h4 class="modal-title" *ngIf="actualizar">Actualizar Slider</h4>
       </div>
       <div class="modal-body">
         <form [formGroup]="newSliderForm" (ngSubmit)="saveNewSlider()">
@@ -151,7 +178,7 @@
                 id="searchP"
                 class="previewSearch"
                 *ngIf="
-                newSliderForm.controls['search'].value &&
+                  newSliderForm.controls['search'].value &&
                   newSliderForm.controls['search'].value.length > 2 &&
                   viewSearchPreview
                 "
@@ -193,11 +220,13 @@
               </div>
             </div>
             <div class="col-md-6">
-                <label for="cname" class="control-label">Definición de la URL</label>
-                <input
+              <label for="cname" class="control-label"
+                >Definición de la URL</label
+              >
+              <input
                 type="text"
                 class="form-control"
-                [value] = "url.name"
+                [value]="url.name"
                 disabled
               />
             </div>
@@ -224,8 +253,11 @@
         >
           Cerrar
         </button>
-        <button class="btn btn-success" type="button" (click)="saveNewSlider()">
+        <button class="btn btn-success" type="button" (click)="saveNewSlider()" *ngIf="!actualizar">
           Crear
+        </button>
+        <button class="btn btn-success" type="button" (click)="actualizarSliderDeLaDB()" *ngIf="actualizar">
+          Actualizar
         </button>
       </div>
     </div>

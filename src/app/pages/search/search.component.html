@@ -16,7 +16,7 @@
         <h4 class="title-info"><b>CATEGORIA: {{categoria | cats: cats}}</b></h4>
         <app-prod-card [items]="prodsCat"></app-prod-card>
       </div>  
-      <div *ngIf="!categoria && !termino">
+      <div *ngIf="!categoria && !termino"> 
           <app-loading></app-loading>
       </div>
     </div>

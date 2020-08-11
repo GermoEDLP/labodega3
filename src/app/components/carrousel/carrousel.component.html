@@ -1,21 +1,21 @@
 <section class="carousel-fixed-height">
-  <div id="carousel-fixed-height" class="carousel slide" data-ride="carousel">
+  <div id="carousel-fixed-height" class="carousel slide" data-ride="carousel" *ngIf="carga;else loading">
     <ol class="carousel-indicators">
-      <li data-target="#carousel-fixed-height" data-slide-to="0" class=""></li>
-      <li data-target="#carousel-fixed-height" data-slide-to="1" class=""></li>
-      <li data-target="#carousel-fixed-height" data-slide-to="2" class="active"></li>
+      <li data-target="#carousel-fixed-height" data-slide-to='0' [ngClass]="{'active': i == 0}" *ngFor="let item of sliders | sliderShow; let i = index"></li>
     </ol>
-    <div class="carousel-inner" role="listbox" *ngIf="carga;else loading">
+    <div class="carousel-inner" role="listbox">
       <!-- NOTE: Bootstrap v4 changes class name to carousel-item -->
 
-      <div class="item" *ngFor="let slider of sliders; let pos = index"  [ngClass]="{'active': pos == 0}">
+      <div class="item" *ngFor="let slider of sliders | sliderShow; let pos = index"  [ngClass]="{'active': pos == 0 }">
         <!-- The only change from the original bootstrap carousel is the "item" divs. I am using this in a CMS so I use inline styles for the background divs so I can set the background image files within the loop.  Just easier for my purposes.  Change the img tag to a div as follows: -->
-        <div [ngStyle]="{'background': 'url(' + slider.img + ') center center'}" style="background-size:cover;" class="slider-size">
-          <div class="carousel-caption">
-            <h3>{{slider.title}}</h3>
-            <p>{{slider.subtitle}}</p>
+        <a [routerLink]="[slider.url.url]" >
+          <div [ngStyle]="{'background': 'url(' + slider.img + ') center center'}" style="background-size:cover;" class="slider-size">
+            <div class="carousel-caption">
+              <h3>{{slider.title}}</h3>
+              <p>{{slider.subtitle}}</p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
 
@@ -31,4 +31,9 @@
       <i class="arrow_right_alt"></i>
     </a>
   </div>
+  <ng-template class="carousel-inner" role="listbox" #loading>
+    <div class="spiner">
+      <app-loading></app-loading>
+    </div>
+  </ng-template>
 </section>

@@ -13,7 +13,7 @@ export class SearchComponent implements OnInit {
   lista: Product[] = [];
   cats: Category[];
   termino: string;
-  categoria: string;
+  categoria: string[];
   categoriasFiltradas: FilterCat[];
   prodsCat: Product[];
 
@@ -32,13 +32,13 @@ export class SearchComponent implements OnInit {
 
   async arranque() {
     this.termino = null;
-    this.categoria = null;
+    this.categoria = [];
     let cod: any = this.route.snapshot.paramMap.get('cod');
     if (cod.includes('categorie')) {
       cod = cod.slice(9);
-      this.categoria = cod;
+      this.categoria[0] = cod;
       this._prodService
-        .getProductByCat(this.categoria)
+        .getProductByCat(this.categoria[0])
         .subscribe((prodsCat: Product[]) => {
           this.prodsCat = prodsCat;
         });

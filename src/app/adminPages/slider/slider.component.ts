@@ -25,6 +25,7 @@ export class SliderComponent implements OnInit {
   productos: Product[];
   categorias: Category[];
   onSearchPreview: boolean = false;
+  actualizar: Slider;
 
   constructor(
     private sliderSvc: SliderService,
@@ -57,7 +58,7 @@ export class SliderComponent implements OnInit {
     });
   }
 
-  async nuevoSlider() {
+  nuevoSlider() {
     this.newModalDisplay = true;
     this.prodsSvc.getProducts().subscribe((prods: Product[]) => {
       this.productos = prods;
@@ -65,6 +66,13 @@ export class SliderComponent implements OnInit {
     this.catsSvc.getCats().subscribe((cats: Category[])=>{
       this.categorias = cats;
     })
+  }
+
+  cargarSliderParaActualizar(slider: Slider){
+    this.newSliderForm.controls['title'].setValue(slider.title);
+    this.newSliderForm.controls['subtitle'].setValue(slider.subtitle);
+    this.imgPreview = slider.img;
+    this.url = slider.url;
   }
 
   saveNewSlider() {  
@@ -121,15 +129,80 @@ export class SliderComponent implements OnInit {
 
   cerrarModal() {
     this.newModalDisplay = false;
+    this.actualizar = null;
     this.imgPreview = null;
     this.newSliderForm.reset();
   }
 
   borrarSlider(id: string) {
-    console.log(id);
+    Swal.fire({
+      title: 'Borrar este Slider',
+      text: "Estas seguro de borrar este Slider? No podrás recuperar los datos y tus usuarios no podran verlo mas en sus pantallas principales",
+      icon: 'error',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar'      
+    }).then((result) => {
+      if (result.value) {
+        this.sliderSvc.deleteSliderById(id);
+        Swal.fire(
+          'Borrado!',
+          'El estado ha sido borrado correctamente.',
+          'success'
+        )
+      }
+    });
   }
-  actualizarSlider(id: string) {
-    console.log(id);
+
+  actualizarSlider(slider: Slider) {
+    this.actualizar = slider;
+    this.cargarSliderParaActualizar(slider);
+    this.nuevoSlider();
+  }
+
+  actualizarSliderDeLaDB(){
+    Swal.fire(
+      {title: 'Actualizar este Slider',
+      text: "Estas seguro de actualizar este Slider? Los cambios no podrán revertirse",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar'}      
+    ).then((result) => {
+      if (result.value) {
+        if(this.newImage){
+          this.sliderSvc.actualizaSliderYSubeImagen({
+            title: this.newSliderForm.controls['title'].value,
+            subtitle: this.newSliderForm.controls['subtitle'].value,
+            url: this.url,
+            show: this.actualizar.show,
+            id: this.actualizar.id
+          }, this.newImage, false).then(()=>{
+            Swal.fire(
+              'Actualizado!',
+              'El Slider se modifico correctamente.',
+              'success'
+            )
+            this.cerrarModal()
+          })
+        }else{
+          this.sliderSvc.actualizaSliderYSubeImagen({
+            title: this.newSliderForm.controls['title'].value,
+            subtitle: this.newSliderForm.controls['subtitle'].value,
+            url: this.url,
+            show: this.actualizar.show,
+            id: this.actualizar.id
+          }, this.imgPreview, true).then(()=>{
+            Swal.fire(
+              'Actualizado!',
+              'El Slider se modifico correctamente.',
+              'success'
+            )
+            this.cerrarModal()
+          })
+        }
+        
+      }
+    })
+   
   }
 
   focus() {
@@ -141,10 +214,10 @@ export class SliderComponent implements OnInit {
       this.viewSearchPreview = false;
     }
   }
+
   searchChange(){
     this.searchTerm = (<HTMLInputElement>document.getElementById('search')).value;
-    console.log(this.searchTerm);
-    
+    console.log(this.searchTerm);    
   }
 
   urlProd(prod: Product){
@@ -161,5 +234,43 @@ export class SliderComponent implements OnInit {
       name: cat.cat 
     }
     this.newSliderForm.controls['search'].setValue('');
+  }
+
+  cambiarState(slider: Slider){
+    let cartel;
+    if(slider.show){
+      cartel = {
+        title: 'Deshabilitar este Slider',
+        text: "Estas seguro de desabilitar este Slider? Tus usuarios no podran verlo en sus pantallas principales hasta que vuelvas a habilitarlo",
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar'
+      }
+    }else{
+      cartel = {
+        title: 'Habilitar este Slider',
+        text: "Estas seguro de habilitar este Slider? Tus usuarios verán este Slider tal y como puedes verlo en la vista previa.",
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'Cancelar'
+      }
+    }
+
+    Swal.fire(
+      cartel      
+    ).then((result) => {
+      if (result.value) {
+        this.sliderSvc.showOrHideById(slider);
+        Swal.fire(
+          'Cambiado!',
+          'El estado ha sido cambiado correctamente.',
+          'success'
+        )
+      }
+    })
+
+
+
+    
   }
 }
