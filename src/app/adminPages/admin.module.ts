@@ -17,6 +17,7 @@ import { SliderComponent } from './slider/slider.component'
 
 //CK Editor
 import { CKEditorModule, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+import { CommentsComponent } from './comments/comments.component';
 
 
 
@@ -30,7 +31,8 @@ import { CKEditorModule, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
     NewProductComponent,
     SettingsComponent,
     CategoriesComponent,
-    SliderComponent
+    SliderComponent,
+    CommentsComponent
   ],
   imports: [
     AppRoutingModule,

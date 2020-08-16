@@ -16,3 +16,8 @@ header{
   .dropdown-menu.extended.logout > li:last-child > a, .dropdown-menu.extended.logout > li:last-child > a:hover{
       background-color: #1a2732 !important;
   }
+
+  .loading{
+    margin: 16px 13px;
+    font-size: 20px;
+  }

@@ -23,6 +23,8 @@ import { CatListaProdPipe } from '../pipes/cat-lista-prod.pipe';
 // Pagination
 import {NgxPaginationModule} from 'ngx-pagination';
 import { SliderShowPipe } from '../pipes/slider-show.pipe';
+import { CommentShowPipe } from '../pipes/comment-show.pipe';
+import { FirestoreDatePipe } from '../pipes/firestore-date.pipe';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { SliderShowPipe } from '../pipes/slider-show.pipe';
     SearchPipe,
     SearchCatPipe,
     CatListaProdPipe,
-    SliderShowPipe
+    SliderShowPipe,
+    CommentShowPipe,
+    FirestoreDatePipe
   ],
   imports: [
     CommonModule,
@@ -66,7 +70,9 @@ import { SliderShowPipe } from '../pipes/slider-show.pipe';
     SearchCatPipe,
     CatListaProdPipe,
     SearchPipe,
-    SliderShowPipe
+    SliderShowPipe,
+    CommentShowPipe,
+    FirestoreDatePipe
   ]
 })
 export class ComponentsModule { }

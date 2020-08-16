@@ -14,6 +14,7 @@ import { ProductosService } from '../../services/productos.service';
 import { CatsService } from '../../services/cats.service';
 import { Router } from '@angular/router';
 import { JsonPipe } from '@angular/common';
+import { User } from '../../interfaces/interfaces';
 
 @Component({
   selector: 'app-header',
@@ -23,6 +24,7 @@ import { JsonPipe } from '@angular/common';
 export class HeaderComponent implements OnInit {
   sesion: boolean;
   user$: Observable<any> = this.userService.auth.user;
+  userComplete: User;
   cart: cartProduct[];
   total: TotalCart;
   cartCount: number;
@@ -54,28 +56,35 @@ export class HeaderComponent implements OnInit {
     this.catsSvc.getCats().subscribe((cats: Category[]) => {
       this.categorias = cats;
     });
+    this.user$.subscribe((data) => {
+      if (data) {
+        this.userService.getUserData(data.uid).subscribe((data: User) => {
+          this.userComplete = data;
+        });
+      }
+    });
   }
 
   search(searchTerm: string) {
-    if(searchTerm.length > 2){
+    if (searchTerm.length > 2) {
       this.router.navigateByUrl(`/search/${searchTerm}`);
-      // let ls: {term: string}[] = JSON.parse(localStorage.getItem('search')) || [];  
+      // let ls: {term: string}[] = JSON.parse(localStorage.getItem('search')) || [];
       // ls.push({term: searchTerm});
       // localStorage.setItem('search', JSON.stringify(ls));
       this.viewSearchPreview = false;
-    }else{
+    } else {
       const Toast = Swal.mixin({
         toast: true,
         position: 'top-start',
         showConfirmButton: false,
         timer: 1500,
-        timerProgressBar: true
-      })
-      
+        timerProgressBar: true,
+      });
+
       Toast.fire({
         icon: 'error',
-        title: 'Termino demasiado corto'
-      })
+        title: 'Termino demasiado corto',
+      });
     }
   }
 
@@ -99,7 +108,7 @@ export class HeaderComponent implements OnInit {
     this.viewSearchPreview = true;
   }
   blur(event) {
-    if(!this.onSearchPreview){
+    if (!this.onSearchPreview) {
       this.viewSearchPreview = false;
     }
   }

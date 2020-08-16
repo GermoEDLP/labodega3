@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ProductComponent } from './product/product.component';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
 import { PagesComponent } from './pages.component';
 import { PAGES_ROUTES } from './pages.routes';
@@ -27,6 +27,7 @@ import { SearchComponent } from './search/search.component';
     CommonModule,
     PAGES_ROUTES,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     ComponentsModule
   ],

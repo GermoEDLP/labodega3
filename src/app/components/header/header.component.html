@@ -113,7 +113,7 @@
       <!-- Cart end-->
 
       <!-- user login dropdown start-->
-      <li class="dropdown" *ngIf="user$ | async as user; else noSession">
+      <li class="dropdown" *ngIf="userComplete && user$ | async as user; else noSession">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
           <span class="profile-ava">
             <img alt="" src="assets/img/avatar1_small.jpg" />
@@ -132,6 +132,11 @@
           <li>
             <a href="#" routerLink="/cart"
               ><i class="icon_cart_alt"></i> Carrito</a
+            >
+          </li>
+          <li *ngIf="userComplete.role == 'ADMIN_ROLE'">
+            <a href="#" routerLink="/admin"
+              ><i class="fa fa-gears"></i> Opciones de ADMIN</a
             >
           </li>
           <li>

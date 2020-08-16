@@ -1,89 +1,145 @@
-    <!--main content start-->
-    <section id="main-content" *ngIf="product">
-        <section class="wrapper">
-          <div class="row" [hidden]='!view'>
-            <div class="col-lg-12">
-              <div class="row">
-	        	<div class="col-md-5">
-	        		<div id="slider" class="owl-carousel product-slider">
-						<div class="item">
-						  	<img #image [src]="product.image" (load)="change()"/>
-						</div>
-					</div>
-					
-	        	</div>
-	        	<div class="col-md-7">
-	        		<div class="product-dtl">
-        				<div class="product-info">
-		        			<div class="product-name">{{product.name}}</div>
-		        			<div class="reviews-counter">
-								<div class="rate">
-								    <input type="radio" id="star5" name="rate" value="5" checked />
-								    <label for="star5" title="text">5 stars</label>
-								    <input type="radio" id="star4" name="rate" value="4" checked />
-								    <label for="star4" title="text">4 stars</label>
-								    <input type="radio" id="star3" name="rate" value="3" checked />
-								    <label for="star3" title="text">3 stars</label>
-								    <input type="radio" id="star2" name="rate" value="2" />
-								    <label for="star2" title="text">2 stars</label>
-								    <input type="radio" id="star1" name="rate" value="1" />
-								    <label for="star1" title="text">1 star</label>
-								  </div>
-								<span>3 Reviews</span>
-							</div>
-		        			<div class="product-price-discount"><span>$ {{product.price}}</span></div>
-		        		</div>
-                        <p>{{product.desc}}</p>
-                        <div class="row" *ngIf="product.sale" style="margin-left: 0px; margin-right: 5px;">
-                            <div  *ngFor="let sale of product.sale">
-                                <div class="promo-link promoted text-center" *ngIf="sale.show" title="Agrega {{sale.cant}} a tu carrito" (click)="agregar(sale.cant)">
-                                    <strong>COMPRÁ {{sale.cant}} Y PAGÁS</strong><br />
-                                    <span class="product-price">$ {{sale.off}}</span> c/u.
-                                    <span class="discount-arrow arrow-left"><p>% {{(1-(sale.off/product.price))*100 | number: '1.0-0'}} OFF</p></span
-                                    ><br />
-                                  </div>
-                            </div>
-                            
-                        </div>
-	        			<div class="product-count">
-	        				<label for="size">Cantidad</label>
-	        				<form action="#" class="display-flex">
-                                <select id="cant" class="form-control m-bot15">
-                                    <option *ngFor="let item of list">{{item}}</option>
-                                </select>
-							</form>
-							<a (click)="agregar()" class="round-black-btn-2">Comprar</a>
-	        			</div>
-	        		</div>
-	        	</div>
-	        </div>
-	        <section class="panel">
-                <header class="panel-heading tab-bg-primary-2 ">
-                  <ul class="nav nav-tabs">
-                    <li class="active">
-                      <a data-toggle="tab" href="#home">Descripción</a>
-                    </li>
-                    <li class="">
-                      <a data-toggle="tab" href="#about">Comentarios</a>
-                    </li>                    
-                  </ul>
-                </header>
-                <div class="panel-body">
-                  <div class="tab-content">
-                    <div id="home" class="tab-pane active" [innerHTML]="product.longDesc">
-                      
-                    </div>
-                    <div id="about" class="tab-pane">Comentarios</div>
-                  </div>
-                </div>
-              </section>
-
+<!--main content start-->
+<section id="main-content" *ngIf="product">
+  <section class="wrapper">
+    <div class="row" [hidden]="!view">
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-md-5">
+            <div id="slider" class="owl-carousel product-slider">
+              <div class="item">
+                <img #image [src]="product.image" (load)="change()" />
+              </div>
             </div>
           </div>
-          <!-- page start-->
-          <div class="row" [hidden]='view'>
-              <app-loading></app-loading>
+          <div class="col-md-7">
+            <div class="product-dtl">
+              <div class="product-info">
+                <div class="product-name">{{ product.name }}</div>
+                <div class="reviews-counter">
+                  <div class="stars" *ngIf="rate">
+                    <span *ngFor="let star of stars">
+                      <i
+                        class="fa fa-star-o"
+                        [ngClass]="{
+                          'fa-star': star <= rate,
+                          'fa-star-o': star > rate,
+                          amarilla: star <= rate
+                        }"
+                      ></i>
+                    </span>
+                  </div>
+                  <span *ngIf="comments"
+                    >{{ comments.length }} Comentarios</span
+                  >
+                </div>
+                <div class="product-price-discount">
+                  <span>$ {{ product.price }}</span>
+                </div>
+              </div>
+              <p>{{ product.desc }}</p>
+              <div
+                class="row"
+                *ngIf="product.sale"
+                style="margin-left: 0px; margin-right: 5px;"
+              >
+                <div *ngFor="let sale of product.sale">
+                  <div
+                    class="promo-link promoted text-center"
+                    *ngIf="sale.show"
+                    title="Agrega {{ sale.cant }} a tu carrito"
+                    (click)="agregar(sale.cant)"
+                  >
+                    <strong>COMPRÁ {{ sale.cant }} Y PAGÁS</strong><br />
+                    <span class="product-price">$ {{ sale.off }}</span> c/u.
+                    <span class="discount-arrow arrow-left"
+                      ><p>
+                        %
+                        {{
+                          (1 - sale.off / product.price) * 100 | number: "1.0-0"
+                        }}
+                        OFF
+                      </p></span
+                    ><br />
+                  </div>
+                </div>
+              </div>
+              <div class="product-count">
+                <label for="size">Cantidad</label>
+                <form action="#" class="display-flex">
+                  <select id="cant" class="form-control m-bot15">
+                    <option *ngFor="let item of list">{{ item }}</option>
+                  </select>
+                </form>
+                <a (click)="agregar()" class="round-black-btn-2">Comprar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section class="panel">
+          <header class="panel-heading tab-bg-primary-2">
+            <ul class="nav nav-tabs">
+              <li class="active">
+                <a data-toggle="tab" href="#home">Descripción</a>
+              </li>
+              <li class="">
+                <a data-toggle="tab" href="#about">Comentarios</a>
+              </li>
+            </ul>
+          </header>
+          <div class="panel-body">
+            <div class="tab-content">
+              <div
+                id="home"
+                class="tab-pane active"
+                [innerHTML]="product.longDesc"
+              ></div>
+              <div id="about" class="tab-pane">
+                <form
+                  [formGroup]="commentForm"
+                  class="form-validate form-horizontal"
+                  (ngSubmit)="checkear()"
+                >
+                  <div class="form-group">
+                    <div class="col-md-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="content"
+                        placeholder="Deje aqui su comentario..."
+                      />
+                    </div>
+                    <div class="col-md-3">
+                      <button type="submit" class="btn btn-default btn-block">
+                        Comentar
+                      </button>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="profile-activity">
+                  <div class="act-time" *ngFor="let comm of comments">
+                    <div class="activity-body act-in">
+                      <span class="arrow"></span>
+                      <div class="text">
+                        <p class="attribution">
+                          <a href="#">{{ comm.user.name }}</a
+                          >{{ comm.date | firestoreDate: "dd/MM/yy - HH:mm" }}
+                        </p>
+                        <p>{{ comm.content }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
-      </section>
-      <!--main content end-->
+      </div>
+    </div>
+    <!-- page start-->
+    <div class="row" [hidden]="view">
+      <app-loading></app-loading>
+    </div>
+  </section>
+</section>
+<!--main content end-->

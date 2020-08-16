@@ -23,7 +23,6 @@ import { AdminComponent } from './adminPages/admin.component';
 import { AdminModule } from './adminPages/admin.module';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

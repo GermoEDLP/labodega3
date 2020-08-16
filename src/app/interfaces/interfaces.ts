@@ -26,12 +26,12 @@ export interface Sale{
 export interface User{
     uid?: string;
     name: string;
-    born?: String;
-    email: String;
-    role: String;
-    prov?: String;
-    city?: String;
-    adress?: String;
+    born?: string;
+    email: string;
+    role: string;
+    prov?: string;
+    city?: string;
+    adress?: string;
 }
 
 export interface cartProduct{
@@ -85,4 +85,24 @@ export interface Promo{
 export interface FilterCat{
     cat: string,
     id: string
+}
+
+export interface Comment{
+    id?: string,
+    user: CommentUser,
+    date?: Date,
+    content: string,
+    show: boolean,
+    product: CommentProd,
+    rate: number
+}
+
+interface CommentUser{
+    id: string,
+    name: string
+}
+
+interface CommentProd{
+    id: string,
+    name: string
 }

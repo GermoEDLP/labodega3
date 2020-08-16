@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../interfaces/interfaces';
 import { Observable } from 'rxjs';
-import { auth } from 'firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +34,9 @@ export class UserService {
 
   logout() {
     return this.auth.signOut();
+  }
+
+  getUserData(uid: string){
+    return this.db.collection('user').doc(uid).valueChanges();
   }
 }

@@ -20,7 +20,7 @@
 .round-black-btn-2:hover {
   background: white;
   border: 1.5px solid #d3a972;
-  color: #d3a972;;
+  color: #d3a972;
 }
 
 .pd-wrap {
@@ -323,61 +323,75 @@
   font-size: 11px;
 }
 .discount-arrow.arrow-left {
-	margin-left: 7px;
-	font-size: 11px;
-  }
-  
-  .small-buy .discount-arrow {
-	font-size: 11px;
-  }
-  .discount-arrow {
-	position: relative;
-	display: inline-block;
-	top: -1px;
-	padding: 0 3px;
-	vertical-align: middle;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: 1px;
-	color: #fff;
-	background: #900;
-	border-radius: 3px;
-  }
-  
-  .discount, #product .discount {
-	text-align: center;
-	display: inline-table;
-	color: #FFF;
-	background: #d3a972;
-	padding: 10px;
-	font-weight: bold;
-	font-size: 20px;
-	margin-bottom: 10px;
-	cursor: pointer;
-  }
-  .discount-arrow p {
-	margin: 1px;
-  }
-  
-  .discount:hover{
-	background: #eac99c;
-  }
-  
-  .sale-unit{
-	margin-top: 0px;
-	margin-bottom: 0px;
-  }
+  margin-left: 7px;
+  font-size: 11px;
+}
 
-  .panel{
-    margin-top: 40px;
-  }
+.small-buy .discount-arrow {
+  font-size: 11px;
+}
+.discount-arrow {
+  position: relative;
+  display: inline-block;
+  top: -1px;
+  padding: 0 3px;
+  vertical-align: middle;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1px;
+  color: #fff;
+  background: #900;
+  border-radius: 3px;
+}
 
-  .tab-bg-primary-2{    
-    background: #d3a972;
-    border-bottom: none;
-  }
+.discount,
+#product .discount {
+  text-align: center;
+  display: inline-table;
+  color: #fff;
+  background: #d3a972;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.discount-arrow p {
+  margin: 1px;
+}
 
-  .panel-heading .nav > li.active > a, .panel-heading .nav > li > a:hover {
-    color: black;
-    background: #fff;
+.discount:hover {
+  background: #eac99c;
+}
+
+.sale-unit {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.panel {
+  margin-top: 40px;
+}
+
+.tab-bg-primary-2 {
+  background: #d3a972;
+  border-bottom: none;
+}
+
+.panel-heading .nav > li.active > a,
+.panel-heading .nav > li > a:hover {
+  color: black;
+  background: #fff;
+}
+
+.profile-activity {
+  margin-top: 15px;
+}
+
+.amarilla {
+  color: #e6db74;
+}
+
+.stars span {
+  margin-right: 4px;
 }

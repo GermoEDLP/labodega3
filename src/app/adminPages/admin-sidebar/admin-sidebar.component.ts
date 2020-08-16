@@ -1,71 +1,100 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd, ChildActivationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-admin-sidebar',
   templateUrl: './admin-sidebar.component.html',
   styleUrls: ['./admin-sidebar.component.css']
 })
-export class AdminSidebarComponent implements OnInit {
+export class AdminSidebarComponent implements OnInit, OnDestroy {
 
-  menu = [
-    {
-      name: "Estadisticas",
-      id: '001',
-      subs: [
-        {
-          name: 'Generales',
-          url: ['list']
-        },
-      ]
-    },
-    {
-      name: "Productos",
-      id: '002',
-      subs: [
-        {
-          name: 'Lista',
-          url: ['list']
-        },
-        {
-          name: 'Nuevo Producto',
-          url: ['newProd', 'nuevo']
-        }
-      ]
-    },
-    {
-      name: "Ventas",
-      id: '003',
-      subs: [
-        {
-          name: 'Recientes',
-          url: ['list']
-        },
-        {
-          name: 'Configuración',
-          url: ['']
-        }
-      ]
-    },
-    {
-      name: "Configuración",
-      id: '004',
-      subs: [
-        {
-          name: 'Slider',
-          url: ['slider']
-        },
-        {
-          name: 'Categorias',
-          url: ['categories']
-        }
-      ]
-    }
-  ]
+  menu: any[];
   //TODO traer el menu de manera dinamica
 
-  constructor() { }
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      
+      if (event instanceof ChildActivationEnd) {
+        this.arranque();
+      }
+    });
+  }
 
   ngOnInit(): void {
   }
 
+  arranque(){
+    this.menu = [
+      {
+        name: "Estadisticas",
+        id: '001',
+        subs: [
+          {
+            name: 'Generales',
+            url: ['list']
+          },
+        ]
+      },
+      {
+        name: "Productos",
+        id: '002',
+        subs: [
+          {
+            name: 'Lista',
+            url: ['list']
+          },
+          {
+            name: 'Nuevo Producto',
+            url: ['newProd', 'nuevo']
+          }
+        ]
+      },
+      {
+        name: "Ventas",
+        id: '003',
+        subs: [
+          {
+            name: 'Recientes',
+            url: ['list']
+          },
+          {
+            name: 'Configuración',
+            url: ['']
+          }
+        ]
+      },
+      {
+        name: "Comentarios",
+        id: '004',
+        subs: [
+          {
+            name: 'Moderar',
+            url: ['comment']
+          }
+        ]
+      },
+      {
+        name: "Configuración",
+        id: '005',
+        subs: [
+          {
+            name: 'Slider',
+            url: ['slider']
+          },
+          {
+            name: 'Categorias',
+            url: ['categories']
+          }
+        ]
+      }
+    ]
+  }
+
+  ngOnDestroy(){
+    this.menu = null;    
+  }
+
 }
+
+
+

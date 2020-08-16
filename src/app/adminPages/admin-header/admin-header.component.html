@@ -4,7 +4,7 @@
     </div>
 
     <!--logo start-->
-    <a href="index.html" class="logo">La bodega <span class="lite"> <small>Admin</small> </span></a>
+    <a routerLink="/home" class="logo">La bodega <span class="lite"> <small>Admin</small> </span></a>
     <!--logo end-->
 
     <div class="nav search-row" id="top_menu">
@@ -25,24 +25,27 @@
 
 
         <!-- user login dropdown start-->
-        <li class="dropdown">
+        <li class="dropdown animated fadeIn" *ngIf="userComplete; else loading">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                           <span class="profile-ava">
                               <img alt="" src="assets/img/avatar1_small.jpg">
                           </span>
-                          <span class="username">Jenifer Smith</span>
+                          <span class="username">{{userComplete.name}}</span>
                           <b class="caret"></b>
                       </a>
           <ul class="dropdown-menu extended logout">
             <div class="log-arrow-up"></div>
             <li class="eborder-top">
-              <a href="#"><i class="icon_profile"></i> Volver a la pagina</a>
+              <a routerLink="/home"><i class="icon_profile"></i> Volver a la pagina</a>
             </li>
             <li>
-              <a href=""><i class="icon_key_alt"></i> Cerrar Sesión</a>
+              <a href="" (click)="cerrarSesion()"><i class="icon_key_alt"></i> Cerrar Sesión</a>
             </li>
           </ul>
         </li>
+        <ng-template #loading>
+          <i class="fa fa-spin fa-spinner loading"></i>
+        </ng-template>
         <!-- user login dropdown end -->
       </ul>
       <!-- notificatoin dropdown end-->
