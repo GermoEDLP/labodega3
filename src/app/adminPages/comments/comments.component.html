@@ -6,7 +6,7 @@
    <div *ngIf="commentShowEmpty;else noComments">
     <div
     class="panel panel-default"
-    *ngFor="let comm of comments | commentShow; let i = index"
+    *ngFor="let comm of comments | commentShow: false; let i = index"
   >
     <a
       href=""

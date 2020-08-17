@@ -85,6 +85,7 @@ export class ProductComponent implements OnInit {
   createCommentForm() {
     this.commentForm = this.fb.group({
       content: ['', Validators.required],
+      rates: ['', Validators.required],
     });
   }
 
@@ -151,7 +152,7 @@ export class ProductComponent implements OnInit {
   }
 
   checkear() {
-    if (this.commentForm.controls['content'].valid) {
+    if (this.commentForm.valid) {
       this.userSub = this.user$.subscribe((data) => {
         if (data) {
           this.commSvc.createComment({
@@ -161,12 +162,21 @@ export class ProductComponent implements OnInit {
               id: String(data.uid)
             },
             product: {
-              name: String(this.product.name),
+              name: String(this.product.name)+' - '+this.product.desc,
               id: String(this.product.id)
             },
-            rate: 3,
+            rate: Number(this.commentForm.controls['rates'].value),
             show: false
-          })
+          }).then(()=>{
+            this.commentForm.reset();
+            Swal.fire(
+              'Comentario enviado',
+              'Tu comentario será revisado por nuestros moderadores antes de publicarse. Muchas gracias',
+              'info'
+              )
+            });
+            this.userSub.unsubscribe();
+
         } else {
           this.userSub.unsubscribe();
           Swal.fire({
@@ -187,7 +197,7 @@ export class ProductComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Debes colocar algo en la caja de comentarios',
+        text: 'Debes completar la caja de comentarios y la puntuación.',
       });
     }
   }
@@ -215,4 +225,10 @@ export class ProductComponent implements OnInit {
       this.userSub.unsubscribe();
     }
   }
+
+  onClick(event: Event){
+    window.scrollBy(0, 260);
+        
+  }
+
 }

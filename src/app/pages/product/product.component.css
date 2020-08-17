@@ -395,3 +395,19 @@
 .stars span {
   margin-right: 4px;
 }
+
+.container{
+  border: 1px solid #a9a9a985;
+  border-radius: 6px;
+  padding: 15px 15px;
+}
+
+.container input{
+  height: 50px;
+}
+
+.star-select{
+  height: 52px !important;
+    font-size: 30px !important;
+    width: 25px !important;
+}

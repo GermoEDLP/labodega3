@@ -29,7 +29,7 @@
                     </span>
                   </div>
                   <span *ngIf="comments"
-                    >{{ comments.length }} Comentarios</span
+                    >{{ comments | commentShow: true : true }} Comentarios</span
                   >
                 </div>
                 <div class="product-price-discount">
@@ -94,37 +94,71 @@
                 [innerHTML]="product.longDesc"
               ></div>
               <div id="about" class="tab-pane">
-                <form
-                  [formGroup]="commentForm"
-                  class="form-validate form-horizontal"
-                  (ngSubmit)="checkear()"
-                >
-                  <div class="form-group">
-                    <div class="col-md-9">
-                      <input
-                        type="text"
-                        class="form-control"
-                        formControlName="content"
-                        placeholder="Deje aqui su comentario..."
-                      />
+                <h4>Deje sus comentarios, sobre este producto, en la caja y vea que le pareció a nuestros clientes</h4>
+                <div class="container">
+                  <form
+                    [formGroup]="commentForm"
+                    class="form-validate form-horizontal"
+                    (ngSubmit)="checkear()"
+                  >
+                    <div class="form-group">
+                      <div class="col-md-12">
+                        <input
+                          type="text"
+                          class="form-control"
+                          formControlName="content"
+                          placeholder="Deje aqui su comentario..."
+                        />
+                      </div>
                     </div>
-                    <div class="col-md-3">
-                      <button type="submit" class="btn btn-default btn-block">
-                        Comentar
-                      </button>
+                    <div class="form-group">
+                      <div class="col-md-6">
+                        <div class="rate" (click)="onClick($event)">
+                          <input type="radio" id="star5" name="rates" value="5" formControlName="rates" />
+                          <label class="star-select" for="star5" title="text">5 stars</label>
+                          <input type="radio" id="star4" name="rates" value="4" formControlName="rates" />
+                          <label class="star-select" for="star4" title="text">4 stars</label>
+                          <input type="radio" id="star3" name="rates" value="3" formControlName="rates" />
+                          <label class="star-select" for="star3" title="text">3 stars</label>
+                          <input type="radio" id="star2" name="rates" value="2" formControlName="rates"/>
+                          <label class="star-select" for="star2" title="text">2 stars</label>
+                          <input type="radio" id="star1" name="rates" value="1" formControlName="rates"/>
+                          <label class="star-select" for="star1" title="text">1 star</label>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <button (click)="checkear()" class="btn btn-default btn-block">
+                          Comentar
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
 
-                <div class="profile-activity">
-                  <div class="act-time" *ngFor="let comm of comments">
+                <div class="profile-activity" *ngIf="comments">
+                  <div class="act-time" *ngFor="let comm of comments | commentShow: true">
                     <div class="activity-body act-in">
                       <span class="arrow"></span>
                       <div class="text">
-                        <p class="attribution">
-                          <a href="#">{{ comm.user.name }}</a
-                          >{{ comm.date | firestoreDate: "dd/MM/yy - HH:mm" }}
-                        </p>
+                        <div style="display: inline-block;">
+                          <p class="attribution">
+                            <a href="#">{{ comm.user.name }}</a
+                            >{{ comm.date | firestoreDate: "dd/MM/yy - HH:mm" }}
+                          </p>
+                            <div class="stars">
+                              <span *ngFor="let star of stars">
+                                <i
+                                  class="fa fa-star-o"
+                                  [ngClass]="{
+                                    'fa-star': star <= comm.rate,
+                                    'fa-star-o': star > comm.rate,
+                                    amarilla: star <= comm.rate
+                                  }"
+                                ></i>
+                              </span>
+                            </div>
+                        </div>
+                        
                         <p>{{ comm.content }}</p>
                       </div>
                     </div>
