@@ -33,6 +33,9 @@ export class HeaderComponent implements OnInit {
   categorias: Category[];
   viewSearchPreview: boolean = false;
   onSearchPreview: boolean = false;
+  loginModalDisplay: boolean = false;
+  registerModalDisplay: boolean = false;  
+  noPassModalDisplay: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -43,8 +46,12 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) {
     this.sesion = false;
-    shareService.changeEmitted$.subscribe((text) => {
-      this.cargarTodos();
+    shareService.changeEmitted$.subscribe((text: string) => {
+      if(text.includes('cargar')){
+        this.cargarTodos();
+      }else{
+        this.loginModalDisplay = true;
+      }
     });
     this.cargarTodos();
   }
@@ -85,11 +92,23 @@ export class HeaderComponent implements OnInit {
         icon: 'error',
         title: 'Termino demasiado corto',
       });
-    }
+    } 
   }
 
-  logout() {
-    this.userService.logout();
+  logout(){
+    this.userService.logout().then(()=>{
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 3000
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Sesión cerrada correctamente'
+      })
+    })
   }
 
   cargarTodos() {
@@ -110,6 +129,30 @@ export class HeaderComponent implements OnInit {
   blur(event) {
     if (!this.onSearchPreview) {
       this.viewSearchPreview = false;
+    }
+  }
+
+  cambiar(event: string) {
+    if (event.includes('cerrar')) {
+      if (event.includes('Login')) {
+        this.loginModalDisplay = false;
+      } else if (event.includes('NoPass')) {
+        this.noPassModalDisplay = false;
+      }else{
+        this.registerModalDisplay = false;
+      }
+    } else {
+      if (event.includes('Login')) {
+        this.loginModalDisplay = false;
+        this.registerModalDisplay = true;
+      } else if (event.includes('NoPass')) {
+        this.loginModalDisplay = false;
+        this.noPassModalDisplay = true;
+      }else{
+        this.loginModalDisplay = true;
+        this.registerModalDisplay = false;
+        this.noPassModalDisplay = false;        
+      }
     }
   }
 }

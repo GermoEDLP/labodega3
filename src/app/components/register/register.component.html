@@ -71,7 +71,7 @@
       <div class="form-group">
         <p>
           Si ya tienes cuenta,
-          <a data-dismiss="modal" data-toggle="modal" data-target="#mLogin"
+          <a (click)="cerrarM('cambiarRegistro')"
             >Iniciar sesion</a
           >
         </p>
@@ -84,7 +84,7 @@
       <button
           type="button"
           class="btn btn-default pull-left"
-          data-dismiss="modal"
+          (click)="cerrarM('cerrarRegistro')"
         >
           Cerrar
         </button>

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-login',
@@ -11,6 +13,10 @@ import { Observable } from 'rxjs';
 export class LoginComponent {
   loginF: FormGroup;
   emailSave: string;
+  error: boolean = false;
+
+  @Input('display') display: boolean;
+  @Output() close = new EventEmitter<string>(); 
 
   user$: Observable<any> = this.userService.auth.user;
 
@@ -30,12 +36,12 @@ export class LoginComponent {
       ],
       pass: ['', [Validators.required, Validators.minLength(8)]],
       record: [''],
-    });
+    }); 
   }
 
   login() {
     if (this.loginF.valid){
-    
+      this.error = false;
       this.userService.loginWithEmailAndPass(
         this.loginF.get('email').value,
         this.loginF.get('pass').value
@@ -44,13 +50,24 @@ export class LoginComponent {
         if(this.loginF.get('record').value){
           localStorage.setItem('email', this.loginF.get('email').value)
         }
-        //TODO setear indexDB y guaradar la info del usuario en la base de datos
+        this.cerrar('cerrarLogin');
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000
+        })
         
+        Toast.fire({
+          icon: 'success',
+          title: 'Sesión iniciada correctamente'
+        })
       })
       .catch(err => {
-        console.log(err);
-        
-      })}
+        this.error = true;        
+      })}else{
+        this.error = true;
+      }
   }
 
 
@@ -65,7 +82,9 @@ export class LoginComponent {
     //   )
   }
 
-  logout(){
-    this.userService.logout()
+  
+
+  cerrar(info: string){
+    this.close.emit(info);
   }
 }

@@ -11,6 +11,7 @@ import { PAGES_ROUTES } from './pages.routes';
 import { ComponentsModule } from '../components/components.module';
 import { CartComponent } from './cart/cart.component';
 import { SearchComponent } from './search/search.component';
+import { BuyComponent } from './buy/buy.component';
 
 
 
@@ -21,7 +22,8 @@ import { SearchComponent } from './search/search.component';
     ProductComponent,
     PagesComponent,
     CartComponent,
-    SearchComponent
+    SearchComponent,
+    BuyComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +38,8 @@ import { SearchComponent } from './search/search.component';
     AboutComponent,
     ProductComponent,
     CartComponent,
-    SearchComponent
+    SearchComponent,
+    BuyComponent
   ]
 })
 export class PagesModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { provs, deptos } from '../../temps/data';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
@@ -10,14 +10,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+  @Input('display') display: boolean;
+  @Output() close = new EventEmitter<string>(); 
+
   provincias: any[];
   ciudades = deptos;  
-  
-
   loadingBtn = false;
   aceptBtn = false;
   errores = false;
-
   registerF: FormGroup;
 
   constructor(private fb: FormBuilder, private userService: UserService) 
@@ -172,4 +173,7 @@ export class RegisterComponent implements OnInit {
     this.userService.sentEmailVerification();
   }
 
+  cerrarM(info: string){
+    this.close.emit(info);
+  }
 }

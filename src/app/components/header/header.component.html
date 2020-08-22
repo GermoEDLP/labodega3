@@ -164,7 +164,7 @@
               >
             </li>
             <li>
-              <a data-toggle="modal" data-target="#mLogin" href="#"
+              <a (click)="loginModalDisplay = !loginModalDisplay"
                 ><i class="icon_key_alt"></i> Iniciar sesión</a
               >
             </li>
@@ -179,11 +179,12 @@
 
 <!-- Modal Login -->
 <div
-  class="modal fade"
+  class="modal fade in animated bounce"
   id="mLogin"
   tabindex="-1"
   role="dialog"
   aria-labelledby="mLoginLabel"
+  [ngClass]="{ 'view-modal': loginModalDisplay }"
 >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -191,25 +192,24 @@
         <button
           type="button"
           class="close"
-          data-dismiss="modal"
-          aria-label="Close"
+          (click)="loginModalDisplay = false;"
         >
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="mLoginLabel">Inicio de sesión</h4>
       </div>
-      <app-login></app-login>
+      <app-login [display]='loginModalDisplay' (close)='cambiar($event)'></app-login>
     </div>
   </div>
 </div>
 
 <!-- Modal Registro -->
 <div
-  class="modal fade"
+  class="modal fade in animated bounce"
   id="mRegistro"
   tabindex="-1"
   role="dialog"
-  aria-labelledby="mLoginLabel"
+  [ngClass]="{ 'view-modal': registerModalDisplay }"
 >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -217,15 +217,42 @@
         <button
           type="button"
           class="close"
-          data-dismiss="modal"
-          aria-label="Close"
+          (click)="registerModalDisplay = false;"
         >
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="mLoginLabel">Registrarse</h4>
       </div>
 
-      <app-register></app-register>
+      <app-register [display]="registerModalDisplay" (close)='cambiar($event)'></app-register>
+      
+    </div>
+  </div>
+</div>
+
+<!-- Modal No-Pass -->
+<div
+  class="modal fade in animated bounce"
+  id="mRegistro"
+  tabindex="-1"
+  role="dialog"
+  [ngClass]="{ 'view-modal': noPassModalDisplay }"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          (click)="noPassModalDisplay = false;"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="mLoginLabel">Recuperar contraseña</h4>
+      </div>
+
+      <app-no-pass-reset [display]="noPassModalDisplay" (close)='cambiar($event)'></app-no-pass-reset>
+      
     </div>
   </div>
 </div>

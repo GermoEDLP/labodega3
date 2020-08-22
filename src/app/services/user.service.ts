@@ -16,6 +16,15 @@ export class UserService {
     return this.auth.createUserWithEmailAndPassword(email, pass);
   }
 
+  async resetPassword(email: string){
+    try{
+      return this.auth.sendPasswordResetEmail(email);
+    }catch(err){
+      console.log(err);
+      
+    }
+  }
+
   async createUserDB(user: User) {
     (await this.auth.currentUser).updateProfile({
       displayName: user.name,

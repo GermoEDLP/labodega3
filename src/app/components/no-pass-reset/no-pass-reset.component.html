@@ -1,0 +1,32 @@
+<div class="modal-body">
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        placeholder="ejemplo.ejemplo@gmail.com"
+        [formControl]="userEmail"
+      />
+    </div>
+    <div *ngIf="message" class="alert {{ message.alert }}">
+      {{ message.message }}
+    </div>
+
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-default pull-left"
+        (click)="cerrar('cerrarNoPass')"
+      >
+        Cerrar
+      </button>
+      <button *ngIf="!ok" (click)="resetPass()" class="btn btn-primary iniciarS">
+        Recuperar Contraseña
+      </button>
+      <button *ngIf="ok" (click)="cerrar('cambiarRegistro')" class="btn btn-primary iniciarS">
+        Ir a inicio de sesión
+      </button>
+    </div>
+  </form>
+</div>

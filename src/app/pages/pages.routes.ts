@@ -5,6 +5,7 @@ import { ProductComponent } from './product/product.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
 import { SearchComponent } from './search/search.component';
+import { BuyComponent } from './buy/buy.component';
 
 
 
@@ -19,6 +20,7 @@ const pagesRoutes: Routes = [
             { path: 'search/:cod', component: SearchComponent, data: { titulo: 'Buscar' } },
             { path: 'home', component: HomeComponent, data: { titulo: 'Inicio' } },
             { path: 'cart', component: CartComponent, data: { titulo: 'Carrito' } },
+            { path: 'buy', component: BuyComponent, data: { titulo: 'Compra' } },
             {path: '', component: HomeComponent}
         ]
     }

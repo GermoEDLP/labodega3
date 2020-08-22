@@ -14,6 +14,7 @@ export class CommentShowPipe implements PipeTransform {
       return value.filter((comm: Comment) => comm.show == arg).length;
     } else {
       return value.filter((comm: Comment) => comm.show == arg);
-    }
+    } 
   }
+  //Cometario de prueba
 }

@@ -84,3 +84,7 @@ header{
 .searchName span{
     margin-right: 8px;
 }
+
+.view-modal{
+    display: block;
+}
