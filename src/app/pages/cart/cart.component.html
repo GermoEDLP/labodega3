@@ -40,10 +40,10 @@
 
                 <td>{{ producto.cant }}</td>
                 <td>
-                  <span  *ngIf="!total.promo[i].sale">
+                  <span  *ngIf="!total.promo[i].sale.show">
                    $ {{producto.cant*producto.price | number: '1.2-2'}}
                   </span>
-                  <span *ngIf="total.promo[i].sale" class="sale">
+                  <span *ngIf="total.promo[i].sale.show" class="sale">
                    $ {{ total.promo[i].subtotal | number: '1.2-2' }}
                     <button
                       class="btn btn-default btn-info-sale"
@@ -101,7 +101,7 @@
           </ul>
 
           <a (click)="checkear()">
-            <button class="btn btn-default iniciarS" style="float: right;">
+            <button class="btn btn-default iniciarS" style="float: right;" [disabled]='productos?.length == 0'>
               Proceder a la compra
             </button>
           </a>

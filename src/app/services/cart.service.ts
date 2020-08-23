@@ -72,9 +72,8 @@ export class CartService {
         promo: [],
       };
       prods.forEach((prod: cartProduct) => {
-        totals.total += prod.cant * prod.price;
         let sub: subTotalCart[] = [];
-        sub.push({ pesos: totals.total, promo: undefined });
+        sub.push({ pesos: (prod.cant * prod.price), promo: {show: false, name: 'Only', off: (prod.cant * prod.price), cant: 1, desc: 'Only'} });
         prod.sale.forEach((sale: Sale) => {
           if (prod.cant >= sale.cant && sale.show) {
             sub.push({
@@ -85,7 +84,8 @@ export class CartService {
             });
           }
         });
-        totals.subtotal += this.mejorPromo(sub).subtotal;
+        totals.total = totals.total + (prod.cant * prod.price);
+        totals.subtotal = totals.subtotal + this.mejorPromo(sub).subtotal;
         totals.promo.push({
           prod: prod,
           sale: sub[this.mejorPromo(sub).pos].promo,

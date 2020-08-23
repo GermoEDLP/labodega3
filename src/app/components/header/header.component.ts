@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit {
     shareService.changeEmitted$.subscribe((text: string) => {
       if(text.includes('cargar')){
         this.cargarTodos();
-      }else{
+      }else if(text.includes('login')){
         this.loginModalDisplay = true;
       }
     });

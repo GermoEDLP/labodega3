@@ -1,11 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import {
-  ActivatedRoute,
-  Router,
-  NavigationStart,
-  NavigationEnd,
-  NavigationError,
-} from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Product, cartProduct, Comment } from '../../interfaces/interfaces';
 import { ProductosService } from '../../services/productos.service';
 import { CartService } from '../../services/cart.service';
@@ -31,7 +25,7 @@ export class ProductComponent implements OnInit {
   userSub: any;
 
   list: number[] = [1, 2, 3, 4, 5, 6, 10, 12, 15];
-  stars: number[] = [1,2,3,4,5];
+  stars: number[] = [1, 2, 3, 4, 5];
   rate: number;
 
   @ViewChild('cant') cant: ElementRef;
@@ -105,17 +99,21 @@ export class ProductComponent implements OnInit {
       .then(() => {
         if (element) {
           this.cartSvc.addOne(element.id, cant).then(() => {
-            this.shareService.emitChange('Hola mundo');
+            this.shareService.emitChange('cargar');
             const Toast = Swal.mixin({
               toast: true,
-              position: 'top-end',
+              position: 'top',
               showConfirmButton: false,
               timer: 1500,
             });
 
             Toast.fire({
               icon: 'success',
-              title: this.product.name + ' agregado correctamente',
+              title:
+                this.product.name +
+                ' - ' +
+                this.product.desc +
+                ' agregado correctamente',
             });
           });
         } else {
@@ -129,17 +127,21 @@ export class ProductComponent implements OnInit {
             idF: this.product.id,
           };
           this.cartSvc.saveProduct(itemCart).then(() => {
-            this.shareService.emitChange('Hola mundo');
+            this.shareService.emitChange('cargar');
             const Toast = Swal.mixin({
               toast: true,
-              position: 'top-end',
+              position: 'top',
               showConfirmButton: false,
               timer: 3000,
             });
 
             Toast.fire({
               icon: 'success',
-              title: this.product.name + ' agregado correctamente',
+              title:
+                this.product.name +
+                ' - ' +
+                this.product.desc +
+                ' agregado correctamente',
             });
           });
         }
@@ -155,28 +157,29 @@ export class ProductComponent implements OnInit {
     if (this.commentForm.valid) {
       this.userSub = this.user$.subscribe((data) => {
         if (data) {
-          this.commSvc.createComment({
-            content: this.commentForm.controls['content'].value,
-            user: {
-              name: String(data.displayName),
-              id: String(data.uid)
-            },
-            product: {
-              name: String(this.product.name)+' - '+this.product.desc,
-              id: String(this.product.id)
-            },
-            rate: Number(this.commentForm.controls['rates'].value),
-            show: false
-          }).then(()=>{
-            this.commentForm.reset();
-            Swal.fire(
-              'Comentario enviado',
-              'Tu comentario será revisado por nuestros moderadores antes de publicarse. Muchas gracias',
-              'info'
-              )
+          this.commSvc
+            .createComment({
+              content: this.commentForm.controls['content'].value,
+              user: {
+                name: String(data.displayName),
+                id: String(data.uid),
+              },
+              product: {
+                name: String(this.product.name) + ' - ' + this.product.desc,
+                id: String(this.product.id),
+              },
+              rate: Number(this.commentForm.controls['rates'].value),
+              show: false,
+            })
+            .then(() => {
+              this.commentForm.reset();
+              Swal.fire(
+                'Comentario enviado',
+                'Tu comentario será revisado por nuestros moderadores antes de publicarse. Muchas gracias',
+                'info'
+              );
             });
-            this.userSub.unsubscribe();
-
+          this.userSub.unsubscribe();
         } else {
           this.userSub.unsubscribe();
           Swal.fire({
@@ -202,21 +205,21 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  calcularRate(comms: Comment[]){
+  calcularRate(comms: Comment[]) {
     let counter = 0;
     let total = 0;
-    comms.forEach((comm: Comment)=>{
-      if(comm.show){
+    comms.forEach((comm: Comment) => {
+      if (comm.show) {
         counter++;
         total = total + comm.rate;
       }
     });
-    if(total==0){
+    if (total == 0) {
       return 0;
-    }else{
-      console.log(Math.round(total/counter));
-      
-      return Math.round(total/counter);
+    } else {
+      console.log(Math.round(total / counter));
+
+      return Math.round(total / counter);
     }
   }
 
@@ -226,9 +229,7 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  onClick(event: Event){
+  onClick(event: Event) {
     window.scrollBy(0, 260);
-        
   }
-
 }

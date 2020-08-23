@@ -27,8 +27,11 @@ export class ProdCardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  agregarACarrito(item: Product) {
+  public agregarACarrito(item: Product, cant?: number) {
     let element: any;
+    if(!cant){
+      cant=1;
+    }
     this.cartSvc
       .searchSame(item.id)
       .then((elemento) => {
@@ -37,24 +40,24 @@ export class ProdCardComponent implements OnInit {
       .then(() => {
         if (element) {
           this.cartSvc.addOne(element.id).then(()=>{
-            this.shareService.emitChange('Hola mundo');
+            this.shareService.emitChange('cargar');
             const Toast = Swal.mixin({
               toast: true,
-              position: 'top-end',
+              position: 'top',
               showConfirmButton: false,
               timer: 3000,
             });
 
             Toast.fire({
               icon: 'success',
-              title: item.name + ' agregado correctamente',
+              title: item.name + ' - '+ item.desc + ' agregado correctamente',
             });
           });
           
         } else {
           let itemCart: cartProduct = {
             name: item.name,
-            cant: 1,
+            cant: cant,
             price: item.price,
             img: item.image,
             sale: item.sale,
@@ -62,17 +65,17 @@ export class ProdCardComponent implements OnInit {
             idF: item.id,
           };
           this.cartSvc.saveProduct(itemCart).then(() => {
-            this.shareService.emitChange('Hola mundo');
+            this.shareService.emitChange('cargar');
             const Toast = Swal.mixin({
               toast: true,
-              position: 'top-end',
+              position: 'top',
               showConfirmButton: false,
               timer: 3000,
             });
 
             Toast.fire({
               icon: 'success',
-              title: item.name + ' agregado correctamente',
+              title: item.name + ' - '+ item.desc + ' agregado correctamente',
             });
           });
         }

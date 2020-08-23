@@ -41,28 +41,30 @@
               </p></span
             ><br />
           </div>
-          <div
-            class="promo-link promoted text-center"
-            *ngIf="
-              ofertaCaja(item.sale) == undefined && ofertaProducto(item.sale)
-            "
-          >
-            <strong>COMPRÁ {{ ofertaProducto(item.sale).cant }} Y PAGÁS</strong
-            ><br />
-            <span class="product-price"
-              >${{ ofertaProducto(item.sale).off }}</span
+
+            <div
+              class="promo-link promoted text-center"
+              *ngIf="
+                ofertaCaja(item.sale) == undefined && ofertaProducto(item.sale)
+              "
+              (click)="agregarACarrito(item, ofertaProducto(item.sale).cant)"
             >
-            c/u.
-            <span class="discount-arrow arrow-left"
-              ><p>
-                %{{
-                  (1 - ofertaProducto(item.sale).off / item.price) * 100
-                    | number: "1.0-0"
-                }}
-                OFF
-              </p></span
-            ><br />
-          </div>
+              <strong>COMPRÁ {{ ofertaProducto(item.sale).cant }} Y PAGÁS</strong
+              ><br />
+              <span class="product-price"
+                >${{ ofertaProducto(item.sale).off }}</span
+              >
+              c/u.
+              <span class="discount-arrow arrow-left"
+                ><p>
+                  %{{
+                    (1 - ofertaProducto(item.sale).off / item.price) * 100
+                      | number: "1.0-0"
+                  }}
+                  OFF
+                </p></span
+              ><br />
+            </div>
         </div>
         <div class="card-footer-4 text-muted">
           <div class="oferta" *ngIf="ofertaProducto(item.sale); else noOferta">
