@@ -1,0 +1,178 @@
+<app-steps [step]="2"></app-steps>
+
+<h3>
+  En este paso podrás evaluar las posibilidades de envio.
+</h3>
+
+<div class="sucursal">
+    <h2>Retiro en sucursal</h2>
+    <p>Retirar en la sucursal de Av. Corrientes #1520. Pergamino, Buenos Aires. Argentina</p>
+    <a class="round-black-btn-2" (click)="retirar()">Retira en sucursal</a>
+</div>
+
+<div class="sucursal">
+    <h2>Envio a destino</h2>
+    <p>Tener en cuenta que el costo de envio será adicionado al precio final. </p>
+    <div *ngIf="charge; else loading" class="animated fadeIn">
+      <form
+        class="form-validate form-horizontal"
+        id="feedback_form"
+        [formGroup]="shippForm"
+        *ngIf="shippForm"
+      >
+        <div class="form-group">
+          <div class="col-md-6" (click)="disabled()">
+            <label for="cname" class="control-label">Provincia</label>
+            <input
+              type="text"
+              [ngClass]="{
+                errorF:
+                  shippForm.get('prov').touched && shippForm.get('prov').invalid
+              }"
+              class="form-control"
+              formControlName="prov"
+              disabled
+              
+            />
+            <p
+              class="error-text"
+              [hidden]="
+                !(shippForm.get('prov').touched && shippForm.get('prov').invalid)
+              "
+            >
+              El nombre es obligatorio
+            </p>
+          </div>
+          <div class="col-md-6"  (click)="disabled()">
+            <label for="cemail" class="control-label">Ciudad</label>
+            <input
+              class="form-control"
+              [ngClass]="{
+                errorF:
+                  shippForm.get('city').touched && shippForm.get('city').invalid
+              }"
+              id="cemail"
+              type="text"
+              formControlName="city"
+              disabled
+            />
+            <p
+              class="error-text"
+              [hidden]="
+                !(shippForm.get('city').touched && shippForm.get('city').invalid)
+              "
+            >
+              Introduzca un mail valido
+            </p>
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <div class="col-md-12"  (click)="disabled()">
+            <label for="cname" class="control-label">Dirección </label>
+            <input
+              type="text"
+              [ngClass]="{
+                errorF:
+                  shippForm.get('adress').touched && shippForm.get('adress').invalid
+              }"
+              class="form-control"
+              formControlName="adress"
+              disabled
+            />
+            <p
+              class="error-text"
+              [hidden]="
+                !(
+                  shippForm.get('adress').touched && shippForm.get('adress').invalid
+                )
+              "
+            >
+              Introduzca un DNI valido
+            </p>
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <div class="col-md-6">
+            <label for="cname" class="control-label"
+              >Numero <small>(Detalla el numero)</small></label
+            >
+            <input
+              type="number"
+              [ngClass]="{
+                errorF:
+                  shippForm.get('numero').touched && shippForm.get('numero').invalid
+              }"
+              class="form-control"
+              formControlName="numero"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="cemail" class="control-label">Piso/Departamento</label>
+            <input
+              class="form-control"
+              [ngClass]="{
+                errorF:
+                  shippForm.get('dpto').touched && shippForm.get('dpto').invalid
+              }"
+              id="cemail"
+              type="text"
+              formControlName="dpto"
+              required
+            />
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <div class="col-md-12">
+            <label for="cname" class="control-label">Información adicional </label>
+            <input
+              type="text"
+              [ngClass]="{
+                errorF:
+                  shippForm.get('infoAdd').touched &&
+                  shippForm.get('infoAdd').invalid
+              }"
+              class="form-control popovers"
+              formControlName="infoAdd"
+              placeholder="Ej: Casa beige con reja negra. Al lado del Supermercado. Etc"
+              data-original-title="¿Que pongo acá?"
+              data-content="Toda la información que consideres necesaria para encontrar tu domicilio"
+              data-placement="top"
+              data-trigger="click"
+            />
+            <p
+              class="error-text"
+              [hidden]="
+                !(
+                  shippForm.get('infoAdd').touched &&
+                  shippForm.get('infoAdd').invalid
+                )
+              "
+            >
+              Introduzca un DNI valido
+            </p>
+          </div>
+        </div>
+    
+      </form>
+    </div>
+    <ng-template #loading>
+      <div style="margin-bottom: 50px;">
+        <app-loading></app-loading>
+      </div>
+    </ng-template>
+    
+    <h4>
+      Sitio Seguro -
+      <i
+        >Sólo te pediremos los datos necesarios para cumplir con tu pedido. No
+        almacenamos tu información de pago.</i
+      >
+    </h4>
+    
+    <div class="text-center">
+      <a class="round-black-btn-2" (click)="checkear()" [ngClass]="{disabled: shippForm.invalid}">Continuar</a>
+    </div>
+</div>

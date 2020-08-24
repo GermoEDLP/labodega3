@@ -1,0 +1,20 @@
+.sucursal{
+    padding: 25px;
+    border: 1px solid #afafaf;
+    border-radius: 8px;
+    text-align: center;
+}
+.sucursal h2{
+    margin-top: 0px;
+}
+
+.envio{
+    padding: 25px;
+    border: 1px solid #afafaf;
+    border-radius: 8px;
+}
+
+.envio h2{
+    margin-top: 0px;
+    text-align: center;
+}

@@ -12,6 +12,7 @@ import { ComponentsModule } from '../components/components.module';
 import { CartComponent } from './cart/cart.component';
 import { SearchComponent } from './search/search.component';
 import { BuyComponent } from './buy/buy.component';
+import { BuyModule } from './buy/buy.module';
 
 
 
@@ -22,8 +23,7 @@ import { BuyComponent } from './buy/buy.component';
     ProductComponent,
     PagesComponent,
     CartComponent,
-    SearchComponent,
-    BuyComponent
+    SearchComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +31,8 @@ import { BuyComponent } from './buy/buy.component';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    BuyModule
   ],
   exports: [
     HomeComponent,

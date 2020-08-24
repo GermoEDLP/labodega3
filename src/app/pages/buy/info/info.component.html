@@ -1,0 +1,80 @@
+<app-steps [step]="1"></app-steps>
+
+<h3>
+  En este paso confirmaremos tus datos de contacto y te solicitaremos algunos
+  adicionales
+</h3>
+
+<form
+  class="form-validate form-horizontal"
+  id="feedback_form"
+  [formGroup]="infoForm"
+>
+<div class="form-group">
+    <div class="col-md-6">
+      <label for="cname" class="control-label"
+        >Nombre</label
+      >
+      <input
+        type="text"
+        [ngClass]="{'errorF': infoForm.get('name').touched && infoForm.get('name').invalid}"
+        class="form-control"
+        formControlName="name"
+      />
+      <p class="error-text" [hidden]="!(infoForm.get('name').touched && infoForm.get('name').invalid)">El nombre es obligatorio</p>
+    </div>
+    <div class="col-md-6">
+      <label for="cemail" class="control-label"
+        >Email</label
+      >
+      <input
+        class="form-control"
+        [ngClass]="{'errorF': infoForm.get('email').touched && infoForm.get('email').invalid}"
+        id="cemail"
+        type="text"
+        formControlName="email"
+        required
+      />
+      <p class="error-text" [hidden]="!(infoForm.get('email').touched && infoForm.get('email').invalid)">Introduzca un mail valido</p>
+
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-6">
+      <label for="cname" class="control-label"
+        >DNI</label
+      >
+      <input
+        type="text"
+        [ngClass]="{'errorF': infoForm.get('dni').touched && infoForm.get('dni').invalid}"
+        class="form-control popovers"
+        formControlName="dni"
+        data-original-title="¿Porque pedimos este dato?" data-content="Necesitamos saber que el comprador cumple con la mayoria de edad (Ley 24.788)" data-placement="top" data-trigger="hover"
+      />
+      <p class="error-text" [hidden]="!(infoForm.get('dni').touched && infoForm.get('dni').invalid)">Introduzca un DNI valido</p>
+
+    </div>
+    <div class="col-md-6">
+      <label for="cemail" class="control-label"
+        >Telefono de contacto</label
+      >
+      <input
+        class="form-control"
+        [ngClass]="{'errorF': infoForm.get('phone').touched && infoForm.get('phone').invalid}"
+        id="cemail"
+        type="text"
+        placeholder="(011) 15-5544332211"
+        formControlName="phone"
+        required
+      />
+      <p class="error-text" [hidden]="!(infoForm.get('phone').touched && infoForm.get('phone').invalid)">Introduzca un Telefono valido respetando el formato (11) 15-5544332211</p>
+
+    </div>
+  </div>
+</form>
+
+<h4> Sitio Seguro - <i>Sólo te pediremos los datos necesarios para cumplir con tu pedido. No almacenamos tu información de pago.</i></h4>
+
+<div class="text-center">
+    <a class="round-black-btn-2" (click)="checkear()">Continuar</a>
+</div>

@@ -1,0 +1,33 @@
+<app-steps [step]="3"></app-steps>
+<h3>
+  En este paso podrás evaluar los diferentes métodos de pago con los que contamos.
+</h3>
+
+<div *ngIf="charge; else loading">
+    <div class="sucursal">
+        <h2>Pago en efectivo</h2>
+        <p>Contra reembolso en la dirección de entrega o en la sucursal</p>
+        <a class="round-black-btn-2" (click)="selectPayMethod('cash')">Efectivo</a>
+    </div>
+    <div class="sucursal">
+        <h2>Transferencia bancaria</h2>
+        <!-- <ul>
+            <li><b>CUIL: </b> 20-20202020-9</li>
+            <li><b>Cuenta: </b> 5698326-9</li>
+            <li><b>CBU: </b> 1234567891234567891234</li>
+            <li><b>Razon social: </b>Pedro Sanchez</li>
+        </ul> -->
+        <p>Tranfiere a nuestra cuenta bancaria. <small>(La acreditación puede tardar hasta 48hs)</small></p>
+        <a class="round-black-btn-2" (click)="selectPayMethod('bank')">Transferencia</a>
+    </div>
+    <div class="sucursal">
+        <h2>MercadoPago</h2>
+        <p>Utiliza la plataforma de MercadoPago y evalua pagos en cuotas y con tarjetas</p>
+        <a class="round-black-btn-2" (click)="selectPayMethod('mp')">MercadoPago</a>
+    </div>
+</div>
+<ng-template #loading>
+    <div>
+        <app-loading></app-loading>
+    </div>
+</ng-template>

@@ -1,23 +1,17 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { CartService } from '../../services/cart.service';
-import {
-  cartProduct,
-  TotalCart,
-  subTotalCart,
-  Promo,
-} from '../../interfaces/interfaces';
-import { ShareInfoService } from '../../services/share-info.service';
-import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { CartService } from '../../../services/cart.service';
+import { cartProduct, Promo, TotalCart } from '../../../interfaces/interfaces';
+import { ShareInfoService } from '../../../services/share-info.service';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css'],
+  selector: 'app-confirm',
+  templateUrl: './confirm.component.html',
+  styleUrls: ['../info/info.component.css'],
 })
-export class CartComponent implements OnInit {
-  productos: cartProduct[];
+export class ConfirmComponent implements OnInit {
+
   total: TotalCart;
 
   scrHeight: any;
@@ -28,48 +22,53 @@ export class CartComponent implements OnInit {
     this.scrHeight = window.innerHeight;
     this.scrWidth = window.innerWidth;
   }
+  data: any;
+  charge: boolean = false;
+  cart: cartProduct[];
 
-  constructor(
-    private userSvc: UserService,
-    private cartService: CartService,
-    private shareService: ShareInfoService,
-    private router: Router
-  ) {
-    this.getScreenSize();
+  constructor(private router: Router, private cartSvc: CartService,
+    private shareService: ShareInfoService,) {
+    this.arranque();
   }
 
-  ngOnInit() {
-    this.cargarTodos();
-  }
+  ngOnInit(): void {}
 
-  agregarProducto(product: cartProduct) {
-    this.cartService.saveProduct(product);
-  }
-
-  restar(id: number) {
-    this.cartService.restOne(id).then((resp) => {
-      this.cargarTodos();
-    });
-  }
-  sumar(id: number) {
-    this.cartService.addOne(id).then((resp) => {
-      this.cargarTodos();
-    });
+  arranque() {
+    if (localStorage.getItem('buyOrder')) {
+      this.data = JSON.parse(localStorage.getItem('buyOrder'));
+      let now = new Date().getTime();
+      if (this.data.expire > now) {
+        this.cargarTodos();
+      } else {
+        localStorage.removeItem('buyOrder');
+        Swal.fire(
+          'Orden Vencida',
+          'Paso demasiado tiempo desde que empezaste la compra, por favor vuelve a iniciarla',
+          'error'
+        ).then(() => {
+          this.router.navigateByUrl('/cart');
+        });
+      }
+    } else {
+      this.router.navigateByUrl('/home');
+    }
   }
 
   eliminar(id: number) {
-    this.cartService.deleteProduct(id).then((resp) => {
+    this.cartSvc.deleteProduct(id).then((resp) => {
       this.cargarTodos();
     });
   }
 
   cargarTodos() {
     this.shareService.emitChange('cargar');
-    this.cartService.getAll().then((resp: cartProduct[]) => {
-      this.productos = resp;
-      this.cartService.calcTotal().then((tot) => {
+    this.cartSvc.getAll().then((resp: cartProduct[]) => {
+      this.cart = resp;
+      this.cartSvc.calcTotal().then((tot) => {
         this.total = tot;
-        console.log(tot);
+        this.charge = true;
+        console.log(this.data);
+        
       });
     });
   }
@@ -134,34 +133,9 @@ export class CartComponent implements OnInit {
     });
   }
 
-  checkear() {
-    this.userSvc.auth.user.subscribe((data) => {
-      if(data){
-        if(data.emailVerified){
-          this.router.navigateByUrl('/buy/info');
-        }else{
-          Swal.fire(
-            'Email sin verificar',
-            'Por favor verifique su email antes de proceder',
-            'info'
-          )
-        }
-      }else{
-        Swal.fire({
-          title: 'Inicio de sesión',
-          text: "Para poder continuar con la compra, debes tener una sesión iniciada.",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Iniciar Sesión',
-          cancelButtonText: 'Cancelar'
-        }).then((result) => {
-          if (result.value) {
-            this.shareService.emitChange('login');
-          }
-        })
-      }
-    });
+  confirm(){
+    console.log(this.data);
+    
   }
+
 }
