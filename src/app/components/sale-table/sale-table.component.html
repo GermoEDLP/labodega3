@@ -1,0 +1,62 @@
+<div class="table-responsive" *ngIf="type == 'confirm'">
+  <table class="table table-striped" *ngIf="ventas.length > 0">
+    <thead>
+      <tr>
+        <th>Fecha generado</th>
+        <th>Fecha confimado</th>
+        <th>Usuario</th>
+        <th>Codigo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let venta of ventas" class="touch" (click)="verVenta(venta)">
+        <td *ngIf="venta.date">
+          {{ venta.date | firestoreDate: "dd/MM/yy  HH:mm" }}hs
+        </td>
+        <td *ngIf="venta.date">
+          {{ venta.dateConf | firestoreDate: "dd/MM/yy  HH:mm" }}hs
+        </td>
+        <td>{{ venta.userComplete.name }}</td>
+        <td>{{ venta.code }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-info" *ngIf="ventas.length == 0">{{ empty }}</div>
+</div>
+
+<div class="table-responsive" *ngIf="type == 'pend' || type == 'transfer'">
+  <table class="table table-striped" *ngIf="ventas.length > 0">
+    <thead>
+      <tr>
+        <th>Fecha generado</th>
+        <th>Usuario</th>
+        <th>Venta</th>
+        <th>Codigo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let venta of ventas | sortBy: 'desc':'date'"
+        class="touch"
+        (click)="verVenta(venta)"
+      >
+        <td *ngIf="venta.date">
+          {{ venta.date | firestoreDate: "dd/MM/yy  HH:mm" }}hs
+        </td>
+        <td *ngIf="!venta.date">Hola</td>
+        <td>{{ venta.userComplete.name }}</td>
+        <td *ngIf="!venta.shipp">Retira en local</td>
+        <td *ngIf="venta.shipp">Envio</td>
+        <td>{{ venta.code }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-info" *ngIf="ventas.length == 0">{{ empty }}</div>
+</div>
+
+<app-sale-modal
+  [type]="typeModal"
+  [view]="view"
+  [venta]="ventaModal"
+  (close)="cerrarModal($event)"
+></app-sale-modal>

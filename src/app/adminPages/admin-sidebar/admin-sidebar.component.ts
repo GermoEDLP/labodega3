@@ -12,12 +12,7 @@ export class AdminSidebarComponent implements OnInit, OnDestroy {
   //TODO traer el menu de manera dinamica
 
   constructor(private router: Router) {
-    this.router.events.subscribe((event) => {
-      
-      if (event instanceof ChildActivationEnd) {
-        this.arranque();
-      }
-    });
+    this.arranque();
   }
 
   ngOnInit(): void {
@@ -54,12 +49,12 @@ export class AdminSidebarComponent implements OnInit, OnDestroy {
         id: '003',
         subs: [
           {
-            name: 'Recientes',
-            url: ['list']
+            name: 'Organizar',
+            url: ['sales']
           },
           {
             name: 'Configuración',
-            url: ['']
+            url: ['confSale']
           }
         ]
       },

@@ -28,6 +28,12 @@ import { CatListaProdPipe } from '../pipes/cat-lista-prod.pipe';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { NoPassResetComponent } from './no-pass-reset/no-pass-reset.component';
+import { VentasPipe } from '../pipes/ventas.pipe';
+import { SaleTableComponent } from './sale-table/sale-table.component';
+
+import { NgpSortModule } from "ngp-sort-pipe";
+import { SaleModalComponent } from './sale-modal/sale-modal.component';
+import { InfoVentasPipe } from '../pipes/info-ventas.pipe';
 
 @NgModule({
   declarations: [
@@ -49,7 +55,11 @@ import { NoPassResetComponent } from './no-pass-reset/no-pass-reset.component';
     SliderShowPipe,
     CommentShowPipe,
     FirestoreDatePipe,
-    NoPassResetComponent
+    VentasPipe,
+    InfoVentasPipe,
+    NoPassResetComponent,
+    SaleTableComponent,
+    SaleModalComponent
   ],
   imports: [
     CommonModule,
@@ -57,7 +67,8 @@ import { NoPassResetComponent } from './no-pass-reset/no-pass-reset.component';
     ReactiveFormsModule,
     RouterModule,
     CarouselModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgpSortModule
   ],
   exports: [
     FooterComponent,
@@ -76,8 +87,11 @@ import { NoPassResetComponent } from './no-pass-reset/no-pass-reset.component';
     CatListaProdPipe,
     SearchPipe,
     SliderShowPipe,
+    VentasPipe,
+    InfoVentasPipe,
     CommentShowPipe,
-    FirestoreDatePipe
+    FirestoreDatePipe,
+    SaleTableComponent
   ]
 })
 export class ComponentsModule { }

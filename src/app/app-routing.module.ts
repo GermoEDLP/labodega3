@@ -9,6 +9,9 @@ import { SettingsComponent } from './adminPages/settings/settings.component';
 import { CategoriesComponent } from './adminPages/categories/categories.component';
 import { SliderComponent } from './adminPages/slider/slider.component';
 import { CommentsComponent } from './adminPages/comments/comments.component';
+import { SalesComponent } from './adminPages/sales/sales.component';
+import { SaleComponent } from './adminPages/sale/sale.component';
+import { ConfSaleComponent } from './adminPages/conf-sale/conf-sale.component';
 
 const routes: Routes = [
   { path: 'mayores', component: MayoresComponent },
@@ -23,6 +26,9 @@ const routes: Routes = [
       {path: 'settings', component: SettingsComponent},
       {path: 'slider', component: SliderComponent},
       {path: 'comment', component: CommentsComponent},
+      {path: 'sales', component: SalesComponent},
+      {path: 'sale/:id', component: SaleComponent},
+      {path: 'confSale', component: ConfSaleComponent},
       {path: '', component:StadisticsComponent}
     ]
   },

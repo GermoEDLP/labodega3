@@ -1,0 +1,139 @@
+<div
+  class="modal fade in animated pulse"
+  id="myModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+  [ngClass]="{ 'view-slider': view}"
+  *ngIf="venta"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-hidden="true"
+          (click)="cerrarModal()"
+        >
+          &times;
+        </button>
+        <h4 class="modal-title">Información de la venta</h4>
+      </div>
+      <div class="modal-body">
+          <p>Información de la venta</p>
+        <table class="table table-bordered table-condensed">
+          <tbody>
+            <tr>
+              <th>Fecha de generación:</th>
+              <td>{{ venta.date | firestoreDate: "dd/MM/yy  HH:mm" }}hs</td>
+              <th *ngIf="type == 'confirm'">Fecha de confirmación:</th>
+              <td *ngIf="type == 'confirm'">
+                {{ venta.dateConf | firestoreDate: "dd/MM/yy  HH:mm" }}hs
+              </td>
+              <th *ngIf="type !== 'confirm'"></th>
+              <td *ngIf="type !== 'confirm'"></td>
+            </tr>
+            <tr>
+              <th>Codigo:</th>
+              <td>{{ venta.code }}</td>
+              <th>Metodo de pago:</th>
+              <td>{{ venta.payMethod | infoVentas: "payMethod" }}</td>
+            </tr>
+            <tr>
+              <th>Tipo de entrega:</th>
+              <td>{{ venta.shipp | infoVentas: "shipp" }}</td>
+              <th>Estado:</th>
+              <td>{{ venta.state | infoVentas: "state" }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Información del comprador</p>
+        <table class="table table-bordered table-condensed">
+            <tbody>
+              <tr>
+                <th>Nombre:</th>
+                <td>{{ venta.userComplete.name }}</td>
+                <th>Telefono:</th>
+                <td>{{ venta.userComplete.phone }}</td>
+              </tr>
+              <tr>
+                <th>Email:</th>
+                <td colspan="3">{{ venta.userComplete.email }}</td>
+              </tr>
+              <tr *ngIf="venta.shipp">
+                <th>Dirección:</th>
+                <td>{{ venta.userComplete.adress }}</td>
+                <th>Provincia/Ciudad:</th>
+                <td>
+                  {{ venta.userComplete.prov }}, {{ venta.userComplete.city }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>Información de los productos</p>
+        <table class="table table-bordered table-condensed">
+          <tbody>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+            </tr>
+            <tr *ngFor="let prod of venta.products.promo">
+                <td><a [routerLink]="['/product', prod.prod.idF]" target="_blank">{{prod.prod.name}}</a></td>
+                <td>{{prod.prod.desc}}</td>
+                <td>{{prod.prod.cant}}</td>
+            </tr>
+            <tr>
+              <td colspan="4"></td>
+            </tr>
+            <tr>
+              <th colspan="2">Subtotal sin descuentos</th>
+              <td>$ {{venta.products.total}}</td>
+            </tr>
+            <tr>
+              <th colspan="2">Total a cobrar</th>
+              <td>$ {{venta.products.subtotal}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button
+          data-dismiss="modal"
+          class="btn btn-default pull-left"
+          type="button"
+          (click)="cerrarModal()"
+        >
+          Cerrar
+        </button>
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="confirmarArmado()"
+          *ngIf="type == 'pend'"
+        >
+          Confirmar armado
+        </button>
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="pasarAPendiente()"
+          *ngIf="type == 'transfer'"
+        >
+          Pasar a pendiente
+        </button>
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="finalizarVenta()"
+          *ngIf="type == 'confirm'"
+        >
+          Finalizar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

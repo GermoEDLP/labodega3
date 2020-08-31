@@ -1,0 +1,7 @@
+.touch{
+    cursor: pointer;
+}
+
+.touch:hover td{
+    background: #80808063;
+}

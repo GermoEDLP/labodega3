@@ -23,5 +23,6 @@ export const environment = {
         { cant: 'sale', keypath: 'sale', options: { unique: false } }       
       ]
     }]
-  }
+  },
+  mpUrl: "http://localhost:5000/labodegabebidas/us-central1/mail"
 };

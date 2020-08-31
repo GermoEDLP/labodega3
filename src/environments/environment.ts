@@ -28,7 +28,8 @@ export const environment = {
         { name: 'idF', keypath: 'idF', options: { unique: false } }       
       ]
     }]
-  }
+  },
+  mpUrl: "http://localhost:5000/labodegabebidas/us-central1/mail"
 };
 
 /*

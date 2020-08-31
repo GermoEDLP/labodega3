@@ -15,10 +15,12 @@ export class CartService {
   constructor(private dbService: NgxIndexedDBService) {}
 
   saveProduct(product: cartProduct) {
+    this.expires();
     return this.dbService.add('cart', product);
   }
 
   getAll() {
+    this.expires();
     return this.dbService.getAll('cart');
   }
 
@@ -38,6 +40,7 @@ export class CartService {
   }
 
   addOne(id: number, cant?: number) {
+    this.expires();
     if (!cant) {
       cant = 1;
     }
@@ -48,6 +51,7 @@ export class CartService {
   }
 
   restOne(id: number) {
+    this.expires();
     return this.dbService.getByKey('cart', id).then((prod) => {
       if (prod.cant == 1) {
         this.deleteProduct(id);
@@ -58,13 +62,17 @@ export class CartService {
     });
   }
 
-  deleteAll() {}
+  deleteAll() {
+    localStorage.removeItem('cartExpires');
+    return this.dbService.clear('cart');
+  }
 
   deleteProduct(id: number) {
     return this.dbService.delete('cart', id);
   }
 
   calcTotal() {
+    this.expires();
     return this.getAll().then((prods: cartProduct[]) => {
       let totals: TotalCart = {
         subtotal: 0,
@@ -118,5 +126,25 @@ export class CartService {
       .then(() => {
         return cant;
       });
+  }
+
+  expires(){
+    let now = new Date().getTime();
+    if(localStorage.getItem('cartExpires')){
+      if(Number(localStorage.getItem('cartExpires')) < now){
+        this.deleteAll();
+      }else{
+        this.updateExpires();
+      }
+    }else{
+      this.updateExpires();
+    }
+  }
+
+  updateExpires(){
+    let now = new Date().getTime();
+    now = now + (6*60*60*1000);
+    localStorage.removeItem('cartExpires');
+    localStorage.setItem('cartExpires', String(now));
   }
 }

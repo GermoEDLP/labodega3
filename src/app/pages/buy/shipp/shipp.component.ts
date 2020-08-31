@@ -4,7 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { provs } from '../../../temps/data';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { User } from '../../../interfaces/interfaces';
+import { User, Venta } from '../../../interfaces/interfaces';
 
 @Component({
   selector: 'app-shipp',
@@ -29,12 +29,20 @@ export class ShippComponent implements OnInit {
 
   arranque() {
     if (localStorage.getItem('buyOrder')) {
-      this.data = JSON.parse(localStorage.getItem('buyOrder'));
-      let now = new Date().getTime();
-      console.log('Ahora', now);
-      if (this.data.expire > now) {
+      this.data = JSON.parse(localStorage.getItem('buyOrder'));      
+      if (this.checkExpirancy()){
         this.crearFormulario();
-        this.cargarFormulario();
+        this.cargarFormulario();       
+      }
+    } else {
+      this.router.navigateByUrl('/home');
+    }
+  }
+
+  checkExpirancy(): boolean{
+    let now = new Date().getTime();
+      if (this.data.expire > now) {
+        return true;
       } else {
         localStorage.removeItem('buyOrder');
         Swal.fire(
@@ -45,9 +53,6 @@ export class ShippComponent implements OnInit {
           this.router.navigateByUrl('/cart');
         });
       }
-    } else {
-      this.router.navigateByUrl('/home');
-    }
   }
 
   cargarFormulario() {
@@ -74,11 +79,19 @@ export class ShippComponent implements OnInit {
   }
 
   retirar(){
+    if(!this.checkExpirancy()){
+      this.router.navigateByUrl('/home');
+    }
     if (localStorage.getItem('buyOrder')) {
       localStorage.removeItem('buyOrder');
     }
     let now = new Date().getTime();
     now = now + (15*60*1000);
+
+    this.user.phone = this.data.user.phone;
+    this.user.dni = this.data.user.dni;
+    this.user.email = this.data.user.email;
+    this.user.name = this.data.user.name;
     
     let item = {
       user: this.data.user,
@@ -91,22 +104,29 @@ export class ShippComponent implements OnInit {
   }
 
   checkear() {
+    if(!this.checkExpirancy()){
+      return;
+    }
     if (localStorage.getItem('buyOrder')) {
       localStorage.removeItem('buyOrder');
     }
     let now = new Date().getTime();
     now = now + (15*60*1000);
+
+    this.user.phone = this.data.user.phone;
+    this.user.dni = this.data.user.dni;
+    this.user.email = this.data.user.email;
+    this.user.name = this.data.user.name;
     
-    let item = {
-      user: this.data.user,
+    let item: Venta = {
       shipp: true,
       shippData: {
-        prov: this.shippForm.controls['prov'].value,
-        city: this.shippForm.controls['city'].value,
-        adress: this.shippForm.controls['adress'].value,
-        numero: this.shippForm.controls['numero'].value,
-        dpto: this.shippForm.controls['dpto'].value,
-        infoAdd: this.shippForm.controls['infoAdd'].value
+        prov: String(this.shippForm.controls['prov'].value),
+        city: String(this.shippForm.controls['city'].value),
+        adress: String(this.shippForm.controls['adress'].value),
+        numero:Number( this.shippForm.controls['numero'].value),
+        dpto: String(this.shippForm.controls['dpto'].value),
+        infoAdd: String(this.shippForm.controls['infoAdd'].value)
       },
       userComplete: this.user,
       expire: now

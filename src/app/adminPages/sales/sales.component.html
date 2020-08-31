@@ -1,0 +1,68 @@
+<h3 class="page-header">Ventas</h3>
+
+<div *ngIf="ventas; else loading">
+  
+  <div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#home" aria-controls="home" role="tab" data-toggle="tab"
+          >Para entregar</a
+        >
+      </li>
+      <li role="presentation">
+        <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"
+          >Para enviar</a
+        >
+      </li>
+    </ul>
+  
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="home">
+        <app-sale-table [type]="'confirm'" [ventas]='ventas | ventasPorState: "confirm": "noShipp"' [empty]="'No hay pedidos para entregar'"></app-sale-table>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="profile">
+        <app-sale-table [type]="'confirm'" [ventas]='ventas | ventasPorState: "confirm": "shipp"' [empty]="'No hay pedidos para enviar'"></app-sale-table>
+      </div>
+    </div>
+  </div>
+  
+  <div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active">
+        <a href="#armar" aria-controls="armar" role="tab" data-toggle="tab"
+          >Para armar</a
+        >
+      </li>
+      <li role="presentation">
+        <a href="#transfer" aria-controls="transfer" role="tab" data-toggle="tab"
+          >Esperando Transferencia</a
+        >
+      </li>
+      <li role="presentation">
+        <a href="#mp" aria-controls="mp" role="tab" data-toggle="tab"
+          >Esperando MP</a
+        >
+      </li>
+    </ul>
+  
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="armar">
+        <app-sale-table [type]="'pend'" [ventas]="ventas | ventasPorState: 'pend'" [empty]="'No hay ningun pedido para armar'"></app-sale-table>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="transfer">
+        <app-sale-table [type]="'pend'" [ventas]="ventas | ventasPorState: 'transfer'" [empty]="'No hay ninguna transferencia pendiente'"></app-sale-table>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="mp">
+        <app-sale-table [type]="'pend'" [ventas]="ventas | ventasPorState: 'mpPay'" [empty]="'No hay ningun pago de MercadoPago pendiente'"></app-sale-table>
+      </div>
+    </div>
+  </div>
+
+</div>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

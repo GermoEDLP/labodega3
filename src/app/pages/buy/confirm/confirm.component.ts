@@ -2,8 +2,10 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CartService } from '../../../services/cart.service';
-import { cartProduct, Promo, TotalCart } from '../../../interfaces/interfaces';
+import { cartProduct, Promo, TotalCart, Venta } from '../../../interfaces/interfaces';
 import { ShareInfoService } from '../../../services/share-info.service';
+import { PayService } from '../../../services/pay.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-confirm',
@@ -11,7 +13,6 @@ import { ShareInfoService } from '../../../services/share-info.service';
   styleUrls: ['../info/info.component.css'],
 })
 export class ConfirmComponent implements OnInit {
-
   total: TotalCart;
 
   scrHeight: any;
@@ -22,12 +23,16 @@ export class ConfirmComponent implements OnInit {
     this.scrHeight = window.innerHeight;
     this.scrWidth = window.innerWidth;
   }
-  data: any;
+  data: Venta;
   charge: boolean = false;
   cart: cartProduct[];
 
-  constructor(private router: Router, private cartSvc: CartService,
-    private shareService: ShareInfoService,) {
+  constructor(
+    private router: Router,
+    private cartSvc: CartService,
+    private shareService: ShareInfoService,
+    private paySvc: PayService
+  ) {
     this.arranque();
   }
 
@@ -36,9 +41,18 @@ export class ConfirmComponent implements OnInit {
   arranque() {
     if (localStorage.getItem('buyOrder')) {
       this.data = JSON.parse(localStorage.getItem('buyOrder'));
-      let now = new Date().getTime();
-      if (this.data.expire > now) {
+      if (this.checkExpirancy()) {
         this.cargarTodos();
+      }
+    } else {
+      this.router.navigateByUrl('/home');
+    }
+  }
+
+  checkExpirancy(): boolean{
+    let now = new Date().getTime();
+      if (this.data.expire > now) {
+        return true;
       } else {
         localStorage.removeItem('buyOrder');
         Swal.fire(
@@ -49,9 +63,6 @@ export class ConfirmComponent implements OnInit {
           this.router.navigateByUrl('/cart');
         });
       }
-    } else {
-      this.router.navigateByUrl('/home');
-    }
   }
 
   eliminar(id: number) {
@@ -67,8 +78,6 @@ export class ConfirmComponent implements OnInit {
       this.cartSvc.calcTotal().then((tot) => {
         this.total = tot;
         this.charge = true;
-        console.log(this.data);
-        
       });
     });
   }
@@ -133,9 +142,68 @@ export class ConfirmComponent implements OnInit {
     });
   }
 
-  confirm(){
+  confirm() {
+    if(!this.checkExpirancy()){
+      return;
+    }
+    this.data.products = this.total;
     console.log(this.data);
-    
+    Swal.fire({
+      icon: 'info',
+      title: 'Aguarde un momento por favor, estamos procesando su solicitud',
+      showConfirmButton: false
+    })
+    this.paySvc.newVenta(this.data).then((data: Observable<any>)=>{
+      data.subscribe((data)=>{
+        Swal.close();
+        let mensaje = this.mensajePorMetodoDePago(this.data, data);
+        if(this.data.payMethod.includes('mp')){
+          window.open(data.url.init_point);
+        }
+        Swal.fire(mensaje).then(()=>{
+          this.cartSvc.deleteAll();
+          localStorage.removeItem('buyOrder');
+          this.router.navigateByUrl('/home');
+        });
+      })
+    })
   }
+
+  mensajePorMetodoDePago(venta: Venta, data: any){
+      let response;
+      switch (venta.payMethod) {
+        case 'cash':
+          response = {
+            title: 'Pedido creado',
+            text: 'Recibira un mail cuando hayamos preparado su pedido y pueda buscarlo en sucursal. Muchas gracias.',
+            icon: 'success'
+          }
+          break;
+        case 'bank':
+          response = {
+            title: 'Pedido creado',
+            text: 'Se ha enviado un correo al mail declarado con los datos bancarios de la empresa. Una vez haya realizado el pago, se confirmará la compra. Muchas gracias.',
+            icon: 'success'
+          }
+          break;
+        case 'mp':
+          response = {
+            title: 'Pedido creado',
+            html: `Se debería haber abierto una nueva pestaña a la pagina de MercadoPago para poder realizar el pago correspondiente, de no ser así, el siguiente link lo redirigirá. Muchas gracias.</p>
+            <a href="${data.url.init_point}" target="_blank">Link MercadoPago</a>`,
+            icon: 'success'
+          }
+          break;
+      
+        default:
+          response = {
+            title: 'Error al realizar el pedido',
+            text: 'Por favor intentelo nuevamente o comuniquese con nuestro mail de ayuda: info@labodega.com',
+            icon: 'error'
+          }
+          break;
+      }
+      return response;
+    }
 
 }

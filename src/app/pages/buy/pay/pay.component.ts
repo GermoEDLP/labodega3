@@ -22,9 +22,16 @@ export class PayComponent implements OnInit {
   arranque() {
     if (localStorage.getItem('buyOrder')) {
       this.data = JSON.parse(localStorage.getItem('buyOrder'));
-      let now = new Date().getTime();
+      this.charge = this.checkExpirancy();
+    } else {
+      this.router.navigateByUrl('/home');
+    }
+  }
+
+  checkExpirancy(): boolean{
+    let now = new Date().getTime();
       if (this.data.expire > now) {
-        this.charge = true;
+        return true;
       } else {
         localStorage.removeItem('buyOrder');
         Swal.fire(
@@ -35,12 +42,12 @@ export class PayComponent implements OnInit {
           this.router.navigateByUrl('/cart');
         });
       }
-    } else {
-      this.router.navigateByUrl('/home');
-    }
   }
 
   selectPayMethod(id: string){
+    if(!this.checkExpirancy()){
+      return;
+    }
     if (localStorage.getItem('buyOrder')) {
       localStorage.removeItem('buyOrder');
     }

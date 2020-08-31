@@ -24,14 +24,16 @@ export interface Sale{
 }
 
 export interface User{
-    uid?: string;
-    name: string;
-    born?: string;
-    email: string;
-    role: string;
-    prov?: string;
-    city?: string;
-    adress?: string;
+    uid?: string,
+    name: string,
+    born?: string,
+    email: string,
+    role: string,
+    prov?: string,
+    city?: string,
+    adress?: string,
+    phone?: string,
+    dni?: string
 }
 
 export interface cartProduct{
@@ -105,4 +107,28 @@ interface CommentUser{
 interface CommentProd{
     id: string,
     name: string
+}
+
+export interface Venta{
+    id?: string,
+    code?: string;
+    state?: string,
+    expire: number,
+    payMethod?: string,
+    shipp: boolean,
+    shippData?: ShippData,
+    userComplete: User,
+    products?: TotalCart,
+    date?: Date,
+    dateConf?: Date,
+    dateFinal?: Date
+}
+
+export interface ShippData{
+    adress: string,
+    city: string,
+    prov: string,
+    dpto: string,
+    numero: number,
+    infoAdd: string
 }

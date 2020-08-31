@@ -18,6 +18,9 @@ import { SliderComponent } from './slider/slider.component'
 //CK Editor
 import { CKEditorModule, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
 import { CommentsComponent } from './comments/comments.component';
+import { SalesComponent } from './sales/sales.component';
+import { SaleComponent } from './sale/sale.component';
+import { ConfSaleComponent } from './conf-sale/conf-sale.component';
 
 
 
@@ -32,7 +35,10 @@ import { CommentsComponent } from './comments/comments.component';
     SettingsComponent,
     CategoriesComponent,
     SliderComponent,
-    CommentsComponent
+    CommentsComponent,
+    SalesComponent,
+    SaleComponent,
+    ConfSaleComponent
   ],
   imports: [
     AppRoutingModule,
@@ -51,6 +57,11 @@ import { CommentsComponent } from './comments/comments.component';
     StadisticsComponent,
     NewProductComponent,
     SettingsComponent,
+    CategoriesComponent,
+    SliderComponent,
+    CommentsComponent,
+    SalesComponent,
+    SaleComponent
   ]
 })
 export class AdminModule { }
