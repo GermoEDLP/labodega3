@@ -21,12 +21,14 @@ import { AngularFireStorageModule, AngularFireStorage } from '@angular/fire/stor
 import { NgxIndexedDBModule } from 'ngx-indexed-db';
 import { AdminComponent } from './adminPages/admin.component';
 import { AdminModule } from './adminPages/admin.module';
+import { MostrarDirective } from './directives/mostrar.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MayoresComponent
+    MayoresComponent,
+    MostrarDirective
   ],
   imports: [
     BrowserModule,

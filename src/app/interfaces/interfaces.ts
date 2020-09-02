@@ -119,9 +119,9 @@ export interface Venta{
     shippData?: ShippData,
     userComplete: User,
     products?: TotalCart,
-    date?: Date,
-    dateConf?: Date,
-    dateFinal?: Date
+    date?: any,
+    dateConf?: any,
+    dateFinal?: any
 }
 
 export interface ShippData{
@@ -132,3 +132,18 @@ export interface ShippData{
     numero: number,
     infoAdd: string
 }
+
+
+export interface Options {
+    bussnessName: string;
+    buyAdress: string;
+    buyBankAcount: string;
+    buyCBU: string;
+    buyCUIL: string;
+    buyEmailCount: string;
+    buyEmailPass: string;
+    buyRazonSocial: string;
+    buySchedule: string;
+    deliverySchedule: string;
+  }
+  

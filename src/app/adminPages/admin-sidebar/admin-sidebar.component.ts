@@ -1,21 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, NavigationEnd, ChildActivationEnd } from '@angular/router';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-sidebar',
   templateUrl: './admin-sidebar.component.html',
   styleUrls: ['./admin-sidebar.component.css']
 })
-export class AdminSidebarComponent implements OnInit, OnDestroy {
+export class AdminSidebarComponent implements OnInit, OnDestroy{
 
   menu: any[];
   //TODO traer el menu de manera dinamica
 
   constructor(private router: Router) {
-    this.arranque();
   }
 
+
   ngOnInit(): void {
+    this.arranque();
   }
 
   arranque(){
@@ -26,7 +27,7 @@ export class AdminSidebarComponent implements OnInit, OnDestroy {
         subs: [
           {
             name: 'Generales',
-            url: ['list']
+            url: ['stadistics']
           },
         ]
       },
@@ -53,8 +54,8 @@ export class AdminSidebarComponent implements OnInit, OnDestroy {
             url: ['sales']
           },
           {
-            name: 'Configuración',
-            url: ['confSale']
+            name: 'Historial',
+            url: ['history']
           }
         ]
       },
@@ -79,6 +80,10 @@ export class AdminSidebarComponent implements OnInit, OnDestroy {
           {
             name: 'Categorias',
             url: ['categories']
+          },
+          {
+            name: 'Información',
+            url: ['confSale']
           }
         ]
       }

@@ -48,7 +48,7 @@ export class PayService {
     } else {
       venta.state = 'pend';
     }
-    venta.code = id.slice(0, 6);
+    venta.code = id.slice(0, 6).toLocaleUpperCase();
     return this.collRef.doc(id).set(venta);
   }
 
@@ -92,7 +92,9 @@ export class PayService {
           venta.code,
           venta.products.subtotal,
           venta.shipp
-        );
+        ).subscribe((data)=>{
+          return data
+        });
       })
     }
   }
@@ -117,7 +119,9 @@ export class PayService {
       code: code,
       total: total,
     };
-    return this.http.post(url, data);
+    console.log(url, data);
+    
+    return this.http.post(url, data)
   }
 
   finalize(venta: Venta){

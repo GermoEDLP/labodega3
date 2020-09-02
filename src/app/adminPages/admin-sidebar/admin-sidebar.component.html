@@ -1,5 +1,5 @@
 
-    <aside>
+    <aside *ngIf="menu">
         <div id="sidebar" class="nav-collapse sidebar-admin">
           <!-- sidebar menu start-->
           <ul class="sidebar-menu" *ngIf="menu">
@@ -10,7 +10,7 @@
                             <span>{{item.name}}</span>
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
-              <ul class="sub" >
+              <ul class="sub2" [id]="item.name">
                 <li *ngFor="let subItem of item.subs">
                   <a *ngIf="subItem.url.length == 1" class="" href="" [routerLink]="['/admin', subItem.url[0]]">{{subItem.name}}</a>
                   <a *ngIf="subItem.url.length > 1" class="" href="" [routerLink]="['/admin', subItem.url[0], subItem.url[1]]">{{subItem.name}}</a>

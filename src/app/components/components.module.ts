@@ -34,6 +34,9 @@ import { SaleTableComponent } from './sale-table/sale-table.component';
 import { NgpSortModule } from "ngp-sort-pipe";
 import { SaleModalComponent } from './sale-modal/sale-modal.component';
 import { InfoVentasPipe } from '../pipes/info-ventas.pipe';
+import { GraficosComponent } from './graficos/graficos.component';
+
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,8 @@ import { InfoVentasPipe } from '../pipes/info-ventas.pipe';
     InfoVentasPipe,
     NoPassResetComponent,
     SaleTableComponent,
-    SaleModalComponent
+    SaleModalComponent,
+    GraficosComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +72,8 @@ import { InfoVentasPipe } from '../pipes/info-ventas.pipe';
     RouterModule,
     CarouselModule,
     NgxPaginationModule,
-    NgpSortModule
+    NgpSortModule,
+    ChartsModule
   ],
   exports: [
     FooterComponent,
@@ -91,7 +96,8 @@ import { InfoVentasPipe } from '../pipes/info-ventas.pipe';
     InfoVentasPipe,
     CommentShowPipe,
     FirestoreDatePipe,
-    SaleTableComponent
+    SaleTableComponent,
+    GraficosComponent
   ]
 })
 export class ComponentsModule { }

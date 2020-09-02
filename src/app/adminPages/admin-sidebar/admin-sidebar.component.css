@@ -14,3 +14,16 @@ ul.sidebar-menu li a{
 ul.sidebar-menu li a span{
   cursor: pointer;
 }
+
+ul.sidebar-menu li ul.sub2 li a{
+    padding: 0 0 0 32px;
+    line-height: 35px;
+    height: 35px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+ul.sidebar-menu li ul.sub2{
+  padding-left: 15px;
+  display: none;
+}

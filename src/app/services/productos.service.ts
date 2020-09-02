@@ -130,5 +130,9 @@ export class ProductosService {
     return catsFinal;
   }
 
+  ultimosProds(){
+    return this.db.collection('products', ref => ref.orderBy('date', 'desc')).valueChanges();
+  }
+
 
 }

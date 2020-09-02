@@ -17,7 +17,7 @@
           {{ venta.dateConf | firestoreDate: "dd/MM/yy  HH:mm" }}hs
         </td>
         <td>{{ venta.userComplete.name }}</td>
-        <td>{{ venta.code }}</td>
+        <td style="letter-spacing: 1px;"><b>{{ venta.code }}</b></td>
       </tr>
     </tbody>
   </table>
@@ -47,7 +47,43 @@
         <td>{{ venta.userComplete.name }}</td>
         <td *ngIf="!venta.shipp">Retira en local</td>
         <td *ngIf="venta.shipp">Envio</td>
-        <td>{{ venta.code }}</td>
+        <td style="letter-spacing: 1px;"><b>{{ venta.code }}</b></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="alert alert-info" *ngIf="ventas.length == 0">{{ empty }}</div>
+</div>
+
+<div class="table-responsive" *ngIf="type == 'finalize'">
+  <table class="table table-striped" *ngIf="ventas.length > 0">
+    <thead>
+      <tr>
+        <th>Fecha generado</th>
+        <th>Fecha confimado</th>
+        <th>Fecha entregado</th>
+        <th>Usuario</th>
+        <th>Importe</th>
+        <th>Codigo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let venta of ventas | sortBy: 'desc':'date'"
+        class="touch"
+        (click)="verVenta(venta)"
+      >
+        <td>
+          {{ venta.date | firestoreDate: "dd/MM/yy  HH:mm" }}hs
+        </td>
+        <td>
+          {{ venta.dateConf | firestoreDate: "dd/MM/yy  HH:mm" }}hs
+        </td>
+        <td>
+          {{ venta.dateFinal | firestoreDate: "dd/MM/yy  HH:mm" }}hs
+        </td>
+        <td>{{ venta.userComplete.name }}</td>
+        <td>$ {{venta.products.subtotal}}</td>
+        <td style="letter-spacing: 1px;"><b>{{ venta.code }}</b></td>
       </tr>
     </tbody>
   </table>

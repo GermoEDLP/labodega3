@@ -12,6 +12,7 @@ import { CommentsComponent } from './adminPages/comments/comments.component';
 import { SalesComponent } from './adminPages/sales/sales.component';
 import { SaleComponent } from './adminPages/sale/sale.component';
 import { ConfSaleComponent } from './adminPages/conf-sale/conf-sale.component';
+import { HistoryComponent } from './adminPages/history/history.component';
 
 const routes: Routes = [
   { path: 'mayores', component: MayoresComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
       {path: 'comment', component: CommentsComponent},
       {path: 'sales', component: SalesComponent},
       {path: 'sale/:id', component: SaleComponent},
+      {path: 'history', component: HistoryComponent},
       {path: 'confSale', component: ConfSaleComponent},
       {path: '', component:StadisticsComponent}
     ]

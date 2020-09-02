@@ -29,12 +29,16 @@
             <tr>
               <th>Fecha de generación:</th>
               <td>{{ venta.date | firestoreDate: "dd/MM/yy  HH:mm" }}hs</td>
-              <th *ngIf="type == 'confirm'">Fecha de confirmación:</th>
-              <td *ngIf="type == 'confirm'">
+              <th *ngIf="venta.dateConf">Fecha de confirmación:</th>
+              <td *ngIf="venta.dateConf">
                 {{ venta.dateConf | firestoreDate: "dd/MM/yy  HH:mm" }}hs
               </td>
-              <th *ngIf="type !== 'confirm'"></th>
-              <td *ngIf="type !== 'confirm'"></td>
+              <th *ngIf="!venta.dateConf"></th>
+              <td *ngIf="!venta.dateConf"></td>
+            </tr>
+            <tr *ngIf="venta.dateFinal">
+              <th>Fecha de entrega:</th>
+              <td>{{ venta.dateFinal | firestoreDate: "dd/MM/yy  HH:mm" }}hs</td>
             </tr>
             <tr>
               <th>Codigo:</th>
@@ -65,11 +69,21 @@
               </tr>
               <tr *ngIf="venta.shipp">
                 <th>Dirección:</th>
-                <td>{{ venta.userComplete.adress }}</td>
+                <td colspan="3">{{ venta.userComplete.adress }}</td>
+              </tr>
+              <tr *ngIf="venta.shipp">
+                <th>Numero/Depto.:</th>
+                <td>
+                  #{{ venta.shippData.numero }} / "{{ venta.shippData.dpto }}"
+                </td>
                 <th>Provincia/Ciudad:</th>
                 <td>
                   {{ venta.userComplete.prov }}, {{ venta.userComplete.city }}
                 </td>
+              </tr>
+              <tr *ngIf="venta.shipp">
+                <th>Información adicional:</th>
+                <td colspan="3">{{ venta.shippData.infoAdd }}</td>
               </tr>
             </tbody>
           </table>

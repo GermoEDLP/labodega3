@@ -19,9 +19,7 @@ export class SalesComponent implements OnInit {
 
   arranque(){
     this.vtasSvc.getAll().subscribe((ventas: Venta[])=>{
-      this.ventas = ventas;
-      console.log(ventas);
-      
+      this.ventas = ventas;      
     })
   }
 

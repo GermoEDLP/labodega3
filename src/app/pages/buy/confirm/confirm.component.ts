@@ -161,6 +161,7 @@ export class ConfirmComponent implements OnInit {
           window.open(data.url.init_point);
         }
         Swal.fire(mensaje).then(()=>{
+          this.shareService.emitChange('cargar');
           this.cartSvc.deleteAll();
           localStorage.removeItem('buyOrder');
           this.router.navigateByUrl('/home');

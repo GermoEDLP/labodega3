@@ -1,1 +1,52 @@
-<p>stadistics works!</p>
+<h3 class="page-header">
+    Estadisticas generales
+  </h3>
+
+<div class="panel-body" *ngIf="productos; else loading">
+  <div class="tab-pane" id="chartjs">
+    <div class="row">
+      <!-- Line -->
+      <div class="col-md-6 animated fadeIn">
+        <section class="panel">
+          <header class="panel-heading">Ventas por mes</header>
+          <app-graficos [type]="'VxM'"></app-graficos>
+        </section>
+      </div>
+      <div class="col-md-6 animated fadeIn">
+        <section class="panel">
+          <header class="panel-heading">Ingreso por mes</header>
+          <app-graficos [type]="'IxM'"></app-graficos>
+        </section>
+      </div>
+      <div class="col-md-6 animated fadeIn">
+        <section class="panel">
+          <header class="panel-heading">Ultimos productos agregados</header>
+            <section class="panel">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let prod of productos; let i = index" (click)="redirect(prod)" class="touch">
+                    <td>{{i+1}}</td>
+                    <td>{{prod.name}}</td>
+                    <td>{{prod.desc}}</td>
+                    <td>{{prod.date | firestoreDate: 'dd/MM/yyyy'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

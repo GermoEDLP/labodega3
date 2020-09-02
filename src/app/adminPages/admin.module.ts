@@ -21,6 +21,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { SalesComponent } from './sales/sales.component';
 import { SaleComponent } from './sale/sale.component';
 import { ConfSaleComponent } from './conf-sale/conf-sale.component';
+import { HistoryComponent } from './history/history.component';
 
 
 
@@ -38,7 +39,8 @@ import { ConfSaleComponent } from './conf-sale/conf-sale.component';
     CommentsComponent,
     SalesComponent,
     SaleComponent,
-    ConfSaleComponent
+    ConfSaleComponent,
+    HistoryComponent
   ],
   imports: [
     AppRoutingModule,
@@ -61,7 +63,8 @@ import { ConfSaleComponent } from './conf-sale/conf-sale.component';
     SliderComponent,
     CommentsComponent,
     SalesComponent,
-    SaleComponent
+    SaleComponent,
+    HistoryComponent
   ]
 })
 export class AdminModule { }
