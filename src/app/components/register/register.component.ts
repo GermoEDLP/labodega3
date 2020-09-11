@@ -7,23 +7,21 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
-
   @Input('display') display: boolean;
-  @Output() close = new EventEmitter<string>(); 
+  @Output() close = new EventEmitter<string>();
 
   provincias: any[];
-  ciudades = deptos;  
+  ciudades = deptos;
   loadingBtn = false;
   aceptBtn = false;
   errores = false;
   registerF: FormGroup;
 
-  constructor(private fb: FormBuilder, private userService: UserService) 
-  {
-    this.crearFormReg(); 
+  constructor(private fb: FormBuilder, private userService: UserService) {
+    this.crearFormReg();
   }
 
   ngOnInit(): void {
@@ -53,12 +51,14 @@ export class RegisterComponent implements OnInit {
   }
 
   get emailExist() {
-    if(this.registerF.controls['email'].errors && this.registerF.controls['email'].errors['emailExist'] == null){
-      return false
-      
-    }else{
-      return true
-    } ;
+    if (
+      this.registerF.controls['email'].errors &&
+      this.registerF.controls['email'].errors['emailExist'] == null
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   get emailValid() {
@@ -68,7 +68,6 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  
   crearFormReg() {
     this.registerF = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(8)]],
@@ -93,6 +92,7 @@ export class RegisterComponent implements OnInit {
     this.loadingBtn = true;
     if (this.registerF.invalid) {
       this.registerF.markAllAsTouched();
+      this.loadingBtn = false;
     } else {
       this.userService
         .createUserAuth(
@@ -100,23 +100,25 @@ export class RegisterComponent implements OnInit {
           this.registerF.get('pass').value
         )
         .then((resp) => {
-          this.userService.createUserDB({
-            uid: resp.user.uid,
-            name: this.registerF.get('name').value,
-            born: this.registerF.get('born').value,
-            email: resp.user.email,
-            role: 'USER_ROLE',
-            prov: this.registerF.get('prov').value,
-            city: this.registerF.get('city').value,
-            adress: this.registerF.get('adress').value,
-          }).then(resp => {
-            console.log('ok', resp);
-            this.resentEmail();
-            
-          }).catch(err => {
-            console.log('error', err);
-            this.errores = true;
-          })
+          this.userService
+            .createUserDB({
+              uid: resp.user.uid,
+              name: this.registerF.get('name').value,
+              born: this.registerF.get('born').value,
+              email: resp.user.email,
+              role: 'USER_ROLE',
+              prov: this.registerF.get('prov').value,
+              city: this.registerF.get('city').value,
+              adress: this.registerF.get('adress').value,
+            })
+            .then((resp) => {
+              console.log('ok', resp);
+              this.resentEmail();
+            })
+            .catch((err) => {
+              console.log('error', err);
+              this.errores = true;
+            });
 
           console.log(resp);
           this.loadingBtn = false;
@@ -138,7 +140,6 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  
   repitePassInvalid() {
     let pass = this.registerF.get('pass');
     let pass2 = this.registerF.get('pass2');
@@ -169,11 +170,15 @@ export class RegisterComponent implements OnInit {
       });
   }
 
-  resentEmail(){
+  resentEmail() {
     this.userService.sentEmailVerification();
   }
 
-  cerrarM(info: string){
+  cerrarM(info: string) {
+    this.loadingBtn = false;
+    this.aceptBtn = false;
+    this.errores = false;
+    this.registerF.markAsUntouched();
     this.close.emit(info);
   }
 }

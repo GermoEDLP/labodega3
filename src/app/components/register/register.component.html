@@ -40,10 +40,9 @@
       </div>
 
       <div class="form-group" [class.has-error]="campoInvalido('email')">
-        <label>Email</label>
+        <label>Email</label> 
         <input type="email" class="form-control" placeholder="Contraseña"  formControlName="email"/>
-        <span class="help-block" *ngIf="emailValid && !aceptBtn">Debes ingresar un correo valido.</span>
-        <span class="help-block" *ngIf="emailExist && !aceptBtn">Ya existe una cuenta con este mail.</span>
+        <span class="help-block" *ngIf="campoInvalido('email')">El email no debe estar registrado ya.</span>
       </div>
 
       <div class="form-group" [class.has-error]="campoInvalido('pass')">

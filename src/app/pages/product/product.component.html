@@ -75,24 +75,19 @@
             </div>
           </div>
         </div>
-        <section class="panel">
-          <header class="panel-heading tab-bg-primary-2">
-            <ul class="nav nav-tabs">
-              <li class="active">
-                <a data-toggle="tab" href="#home">Descripción</a>
-              </li>
-              <li class="">
-                <a data-toggle="tab" href="#about">Comentarios</a>
-              </li>
-            </ul>
-          </header>
-          <div class="panel-body">
-            <div class="tab-content">
+          
+        
+              <div *ngIf="product.longDesc">
+                <h3>Información adicional</h3>
               <div
+              
                 id="home"
                 class="tab-pane active"
                 [innerHTML]="product.longDesc"
               ></div>
+              </div>
+              <br>
+              <h3>Comentarios</h3>
               <div id="about" class="tab-pane">
                 <h4>Deje sus comentarios, sobre este producto, en la caja y vea que le pareció a nuestros clientes</h4>
                 <div class="container">
@@ -165,9 +160,9 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
+          
+        
+        
       </div>
     </div>
     <!-- page start-->

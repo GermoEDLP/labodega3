@@ -11,14 +11,16 @@
     >
       <div class="card-4 h-100">
         <!-- <img [src]="url" alt="" onload="console.log('ok')" [hidden]='false'> -->
-        <app-loading-image
-          [url]="item.image"
-          [unitSale]="ofertaProducto(item.sale)"
-          [price]="item.price"
-        ></app-loading-image>
+        <a [routerLink]="['/product', item.id]">
+          <app-loading-image
+            [url]="item.image"
+            [unitSale]="ofertaProducto(item.sale)"
+            [price]="item.price"
+          ></app-loading-image>
+        </a>
         <div class="card-body-4" style="text-align: center;">
           <h5 class="card-title-4">
-            <a href="" [routerLink]="['/product', item.id]">{{ item.name }}</a>
+            <a class="titulo" [routerLink]="['/product', item.id]">{{ item.name }}</a>
           </h5>
           <p class="card-text-4">
             {{ item.desc }}
