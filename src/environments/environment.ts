@@ -29,7 +29,25 @@ export const environment = {
       ]
     }]
   },
-  mpUrl: "http://localhost:5000/labodegabebidas/us-central1/mail"
+  mpUrl: "http://localhost:5000/labodegabebidas/us-central1/mail",
+  price: [
+    {
+      min: '100',
+      max: '250'
+    },
+    {
+      min: '250',
+      max: '500'
+    },
+    {
+      min: '500',
+      max: '1000'
+    },
+    {
+      min: '1000',
+      max: '50000'
+    },
+  ]
 };
 
 /*

@@ -3,6 +3,7 @@ import { ProductosService } from '../../services/productos.service';
 import { Product, Category, FilterCat } from '../../interfaces/interfaces';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { CatsService } from '../../services/cats.service';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-search',
@@ -13,9 +14,12 @@ export class SearchComponent implements OnInit {
   lista: Product[] = [];
   cats: Category[];
   termino: string;
-  categoria: string[];
+  codigo: string;
+  categoria: string[] = null;
   categoriasFiltradas: FilterCat[];
   prodsCat: Product[];
+  porPrecio: any = null
+  precios = environment.price;
 
   constructor(
     private _prodService: ProductosService,
@@ -24,6 +28,7 @@ export class SearchComponent implements OnInit {
     private router: Router
   ) {
     this.router.events.subscribe((event) => {
+      this.porPrecio = null;
       if (event instanceof NavigationEnd) {
         this.arranque();
       }
@@ -33,19 +38,32 @@ export class SearchComponent implements OnInit {
   async arranque() {
     this.termino = null;
     this.categoria = [];
-    let cod: any = this.route.snapshot.paramMap.get('cod');
+    let cod: string = this.route.snapshot.paramMap.get('cod');
+    this.codigo = cod;
+    let price: string = this.route.snapshot.paramMap.get('price')
     if (cod.includes('categorie')) {
       cod = cod.slice(9);
       this.categoria[0] = cod;
       this._prodService
         .getProductByCat(this.categoria[0])
         .subscribe((prodsCat: Product[]) => {
-          this.prodsCat = prodsCat;
+          if(price){
+            this.porPrecio = Number(price);
+            this.prodsCat = prodsCat.filter((prod: Product)=>prod.price>this.precios[price].min && prod.price<=this.precios[price].max);
+          }else{
+            this.prodsCat = prodsCat;
+          }
         });
     } else {
       this.termino = cod;
       this._prodService.getProducts().subscribe((lista: Product[]) => {
-        this.lista = this.buscarProductosPorTermino(cod, lista);
+        if(price){
+          this.porPrecio = Number(price);
+          this.lista = this.buscarProductosPorTermino(cod, lista).filter((prod: Product)=>prod.price>this.precios[price].min && prod.price<=this.precios[price].max);
+        }else{
+          this.lista = this.buscarProductosPorTermino(cod, lista);
+        }
+        
       });
     }
     this.catsSvc.getCats().subscribe(async (cats: Category[]) => {

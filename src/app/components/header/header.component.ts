@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit {
     this.sesion = false;
     shareService.changeEmitted$.subscribe((text: string) => {
       if(text.includes('cargar')){
-        this.cargarTodos();
+        this.cargarTodos(); 
       }else if(text.includes('login')){
         this.loginModalDisplay = true;
       }

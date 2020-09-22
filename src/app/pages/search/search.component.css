@@ -1,16 +1,39 @@
-.wrapper{
-    margin-top: 86px;
+.wrapper {
+  margin-top: 115px;
 }
 
 .slider-size {
-    height: 200px !important; 
-  }
-  
-
-.title-info{    
-    font-size: 23px;
+  height: 200px !important;
 }
 
-button{
-    margin-right: 5px;
+.title-info {
+  text-align: center;
+  background: #a7a7a7;
+  color: white;
+  padding: 20px;
+  font-size: 30px;
+}
+
+button {
+  margin-right: 5px;
+}
+
+.priceSelected{
+    background: aliceblue;
+}
+
+.colapsableUno{
+    margin-bottom: -22px;
+}
+
+a.list-group-item{
+    color: black;
+}
+
+.filtros{
+  margin-top: 45px;
+}
+
+.panel-collapse{
+  margin-bottom: -21px;
 }

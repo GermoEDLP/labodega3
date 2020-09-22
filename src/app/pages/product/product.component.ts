@@ -1,4 +1,10 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  OnDestroy,
+} from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Product, cartProduct, Comment } from '../../interfaces/interfaces';
 import { ProductosService } from '../../services/productos.service';
@@ -8,21 +14,26 @@ import Swal from 'sweetalert2';
 import { CommentsService } from '../../services/comments.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, Subject } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnDestroy {
   cod: string;
   product: Product;
   comments: Comment[];
   view = false;
   commentForm: FormGroup;
   user$: Observable<any> = this.userSvc.auth.user;
-  userSub: any;
+  userSub: Subscription;
+  commentSub: Subscription;
+  prodSub: Subscription;
+
+  private stop$: Subject<boolean> = new Subject();
 
   list: number[] = [1, 2, 3, 4, 5, 6, 10, 12, 15];
   stars: number[] = [1, 2, 3, 4, 5];
@@ -40,7 +51,7 @@ export class ProductComponent implements OnInit {
     private fb: FormBuilder,
     private userSvc: UserService
   ) {
-    this.router.events.subscribe((event) => {
+    this.router.events.pipe(takeUntil(this.stop$)).subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.arranque();
       }
@@ -52,11 +63,12 @@ export class ProductComponent implements OnInit {
   arranque() {
     this.cod = this.route.snapshot.paramMap.get('cod');
     this.createCommentForm();
-    this.prodScv.getProductById(this.cod).subscribe((prod: Product) => {
+    this.prodScv.getProductById(this.cod).pipe(takeUntil(this.stop$)).subscribe((prod: Product) => {
       if (prod) {
         this.product = prod;
         this.commSvc
           .getCommentByProduct(prod.id)
+          .pipe(takeUntil(this.stop$))
           .subscribe((comms: Comment[]) => {
             this.rate = this.calcularRate(comms);
             this.comments = comms.sort(function (a, b) {
@@ -155,7 +167,7 @@ export class ProductComponent implements OnInit {
 
   checkear() {
     if (this.commentForm.valid) {
-      this.userSub = this.user$.subscribe((data) => {
+      this.user$.pipe(take(1)).subscribe((data) => {
         if (data) {
           this.commSvc
             .createComment({
@@ -179,9 +191,7 @@ export class ProductComponent implements OnInit {
                 'info'
               );
             });
-          this.userSub.unsubscribe();
         } else {
-          this.userSub.unsubscribe();
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -191,7 +201,7 @@ export class ProductComponent implements OnInit {
             cancelButtonText: 'Cancelar',
           }).then((result) => {
             if (result.value) {
-              console.log('Desplegar menu de Login');
+              this.shareService.emitChange('login');
             }
           });
         }
@@ -224,9 +234,8 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    if (this.userSub) {
-      this.userSub.unsubscribe();
-    }
+    this.stop$.next();
+    this.stop$.complete();    
   }
 
   onClick(event: Event) {

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { listaCat } from '../../temps/dataProd';
-import { Category } from '../../interfaces/interfaces';
 import { CatsService } from '../../services/cats.service';
 
 @Component({

@@ -1,7 +1,13 @@
 header{
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/labodegabebidas.appspot.com/o/others%2Fbg_navbar.png?alt=media&token=6f8db491-8d96-4cec-a012-0ffeeab25320') !important;
+    background: #a7a7a7;
     color: black;
     vertical-align: middle;
+}
+
+@media(min-width: 740px){
+    .icon-reorder.tooltips{
+        display: none;
+    }
 }
 
 #logo{

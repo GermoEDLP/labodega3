@@ -22,6 +22,7 @@ import { NgxIndexedDBModule } from 'ngx-indexed-db';
 import { AdminComponent } from './adminPages/admin.component';
 import { AdminModule } from './adminPages/admin.module';
 import { MostrarDirective } from './directives/mostrar.directive';
+import { CleanCatPipe } from './pipes/clean-cat.pipe';
 
 
 @NgModule({

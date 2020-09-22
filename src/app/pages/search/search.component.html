@@ -2,22 +2,90 @@
 <section id="main-content">
   <section class="wrapper">
     <div class="row">
-      <div class="col-lg-12" *ngIf="termino && cats">
-        <h3 class="page-header">Busqueda: {{ termino }}</h3>
-        <h4 class="title-info" *ngIf="cats.length!=0"><b>CATEGORIAS</b></h4>
-        <a class="btn btn-default" *ngFor="let item of categoriasFiltradas" routerLink="/search/{{item.id}}">
-            {{item.cat}}
-        </a>
-        <br />
-        <h4 class="title-info" *ngIf="lista.length!=0"><b>PRODUCTOS</b></h4>
-        <app-prod-card [items]="lista"></app-prod-card>
+      <div class="col-md-3 filtros" >
+        <h3>Filtros</h3>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-parent="#accordion" href="#colapsableUno" aria-expanded="true" aria-controls="colapsableUno">
+              <h4 class="panel-title">
+                <a role="button" >
+                  Precios
+                </a>
+              </h4>
+            </div>
+            <div id="colapsableUno" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+             
+                <ul class="list-group">
+                  <a class="list-group-item" *ngFor="let precio of precios; let i = index; last as theLast" [ngClass]="{priceSelected: i == porPrecio}">
+                    <li *ngIf="!theLast" [routerLink]="['/search', codigo, {price: i}]" >
+                      ${{precio.min}} a ${{precio.max}}
+                    </li>
+                    <li *ngIf="theLast" [routerLink]="['/search', codigo, {price: i}]" >
+                      ${{precio.min}} en adelante
+                    </li>
+                  </a>
+                </ul>
+             
+            </div>
+          </div>
+          <div class="panel panel-default" *ngIf="!termino && cats">
+            <div class="panel-heading" role="tab" id="headingTwo"  data-toggle="collapse" data-parent="#accordion" href="#colapsableDos" aria-expanded="true" aria-controls="colapsableDos">
+              <h4 class="panel-title">
+                <a role="button">
+                  {{ categoria | cats: cats: 'nombreCat' }}
+                </a>
+              </h4>
+            </div>
+            <div id="colapsableDos" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+             
+                <ul class="list-group">
+                  <a class="list-group-item" *ngFor="let cat of (categoria | cats:  cats: 'subs'); let i = index">
+                    <li [routerLink]="['/search','categorie'+ cat.link]">
+                      {{cat.name}}
+                    </li>
+                  </a>
+                </ul>
+             
+            </div>
+          </div>
+          
+        </div>
+
       </div>
-      <div class="col-lg-12" *ngIf="categoria && cats">
-        <h4 class="title-info"><b>CATEGORIA: {{categoria | cats: cats}}</b></h4>
-        <app-prod-card [items]="prodsCat"></app-prod-card>
-      </div>  
-      <div *ngIf="!categoria && !termino"> 
-          <app-loading></app-loading>
+      <div class="col-md-9">
+        <div *ngIf="termino && cats">
+          <h3 class="page-header">Busqueda: {{ termino }}</h3>
+          <h4
+            class="title-info"
+            *ngIf="cats.length != 0 && categoriasFiltradas.length > 0"
+          >
+            <b>CATEGORIAS</b>
+          </h4>
+          <a
+            class="btn btn-default"
+            *ngFor="let item of categoriasFiltradas"
+            routerLink="/search/{{ item.id }}"
+          >
+            {{ item.cat }}
+          </a>
+          <br />
+          <h4 class="title-info"><b>PRODUCTOS</b></h4>
+          <app-prod-card [items]="lista"></app-prod-card>
+        </div>
+        <div *ngIf="categoria && cats && !termino">
+          <h4 class="title-info">
+            <b>CATEGORIA: {{ categoria | cats: cats: 'nombre' }}</b>
+            <br>
+            <b *ngIf="porPrecio && porPrecio<(precios.length-1)">PRECIO: ${{precios[porPrecio].min}} a ${{precios[porPrecio].max}}</b>
+            <b *ngIf="porPrecio && porPrecio==(precios.length-1)">PRECIO: ${{precios[porPrecio].min}} en adelante</b>
+
+          </h4>
+          <app-prod-card [items]="prodsCat"></app-prod-card>
+        </div>
+      </div>
+
+      <div *ngIf="!categoria && !termino">
+        <app-loading></app-loading>
       </div>
     </div>
     <!-- page start-->

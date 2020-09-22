@@ -328,7 +328,8 @@ export class NewProductComponent implements OnInit {
   async updatePromo(pos: number, item: Sale) {
     const { value: formValues } = await Swal.fire({
       title: 'Nueva Promoción',
-      html: `<input value="${item.name}" type="text" name="nombre" id="nombre" class="swal2-input" placeholder="Nombre de la promo" maxlength="10" title="Este nombre debe ser corto e identificar correctamente la promoción. Ejemplo: 2x1, 3x2, 50% 2da u., etc">
+      html: //html 
+      `<input value="${item.name}" type="text" name="nombre" id="nombre" class="swal2-input" placeholder="Nombre de la promo" maxlength="10" title="Este nombre debe ser corto e identificar correctamente la promoción. Ejemplo: 2x1, 3x2, 50% 2da u., etc">
       <input value="${item.desc}" type="text" name="desc" id="desc" class="swal2-input" placeholder="Descripcion de la promo" maxlength="15" title="Aqui se describe la promoción. Tambien debe ser corto. Ejemplo: Para 2x1, se puede colocar 'Llevas 2, pagas 1'">
       <input value="${item.cant}" type="number" name="cant" id="cant" class="swal2-input" placeholder="Cantidad minima de producto" style="max-width: none !important;" title="Aqui especificaremos la cantidad de productos que debe adquirir el usuario para que aplique la promo. Por ejemplo: Para un 3x2, son necesarias un minimo de 3 unidades.">
       <input value="${item.off}" type="number" name="off" id="off" class="swal2-input" placeholder="Precio final pro producto" style="max-width: none !important;" title="Aqui colocaremos el precio final del producto afectado por la promocion. Por ejemplo: En un 2x1, el precio seria la mitad (50% off)">

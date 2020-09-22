@@ -37,34 +37,44 @@ import { InfoVentasPipe } from '../pipes/info-ventas.pipe';
 import { GraficosComponent } from './graficos/graficos.component';
 
 import { ChartsModule } from 'ng2-charts';
+import { MenuComponent } from './menu/menu.component';
+import { ShowMegaMenuDirective } from './directives/show-mega-menu.directive';
+import { HideMegaMenuDirective } from './directives/hide-mega-menu.directive';
+import { CleanCatPipe } from '../pipes/clean-cat.pipe';
+
+const componentes = [
+  FooterComponent,
+  HeaderComponent,
+  NavbarComponent,
+  SidebarComponent,
+  ProdCardComponent,
+  BreadcrumbsComponent,
+  CarrouselComponent,
+  LoadingComponent,
+  LoadingMainComponent,
+  LoadingImageComponent,
+  LoginComponent,
+  RegisterComponent,
+  SearchPipe,
+  SearchCatPipe,
+  CleanCatPipe,
+  CatListaProdPipe,
+  SliderShowPipe,
+  CommentShowPipe,
+  FirestoreDatePipe,
+  VentasPipe,
+  InfoVentasPipe,
+  NoPassResetComponent,
+  SaleTableComponent,
+  SaleModalComponent,
+  GraficosComponent,
+  MenuComponent,
+  ShowMegaMenuDirective,
+  HideMegaMenuDirective
+]
 
 @NgModule({
-  declarations: [
-    FooterComponent,
-    HeaderComponent,
-    NavbarComponent,
-    SidebarComponent,
-    ProdCardComponent,
-    BreadcrumbsComponent,
-    CarrouselComponent,
-    LoadingComponent,
-    LoadingMainComponent,
-    LoadingImageComponent,
-    LoginComponent,
-    RegisterComponent,
-    SearchPipe,
-    SearchCatPipe,
-    CatListaProdPipe,
-    SliderShowPipe,
-    CommentShowPipe,
-    FirestoreDatePipe,
-    VentasPipe,
-    InfoVentasPipe,
-    NoPassResetComponent,
-    SaleTableComponent,
-    SaleModalComponent,
-    GraficosComponent
-  ],
+  declarations: componentes,
   imports: [
     CommonModule,
     FormsModule,
@@ -75,29 +85,6 @@ import { ChartsModule } from 'ng2-charts';
     NgpSortModule,
     ChartsModule
   ],
-  exports: [
-    FooterComponent,
-    HeaderComponent,
-    NavbarComponent,
-    SidebarComponent,
-    ProdCardComponent,
-    BreadcrumbsComponent,
-    CarrouselComponent,
-    LoadingComponent,
-    LoadingMainComponent,
-    LoadingImageComponent,
-    LoginComponent,
-    RegisterComponent,
-    SearchCatPipe,
-    CatListaProdPipe,
-    SearchPipe,
-    SliderShowPipe,
-    VentasPipe,
-    InfoVentasPipe,
-    CommentShowPipe,
-    FirestoreDatePipe,
-    SaleTableComponent,
-    GraficosComponent
-  ]
+  exports: componentes
 })
 export class ComponentsModule { }

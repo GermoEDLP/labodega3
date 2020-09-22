@@ -6,7 +6,7 @@
     </div>  
     <!-- // imagen que se mostrara al completar la carga -->
     <div [hidden]="!viewImage">
-        <img [src]="url" #image  class="card-img-top-4 animated fadeIn slower" style="height: 300px">
+        <img [src]="url" #image  class="card-img-top-4 animated fadeIn slower" style="height: 400px">
         <div class="discount" *ngIf="unitSale">
             <p class="sale-unit"> {{unitSale.name}}</p>
             <p class="sale-unit" style="font-size: 10px;">{{unitSale.desc}}</p>

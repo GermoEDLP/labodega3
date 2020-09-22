@@ -9,6 +9,11 @@
     }
 } */
 
+.nav-collapse{
+    overflow: hidden;
+    margin-left: -180px;
+} 
+
 .disabled{
     display: none;
 }

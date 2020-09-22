@@ -1,0 +1,143 @@
+<ul id="jetmenu" class="jetmenu custom visible-sm visible-md visible-lg">
+  <li
+    class="left"
+    style="display: block"
+    showMegaMenu
+    *ngFor="let cat of catsSvc.menu; let i = index"
+    [id]="'li' + i"
+  >
+    <a>{{ cat.name | uppercase }}</a>
+
+    <div class="megamenu full-width animated fadeIn fast">
+      <div class="row">
+        <div class="col1 visible-sm visible-md visible-lg">
+          <ul>
+            <li class="title">
+              <a
+                [routerLink]="['/search', 'categorie' + cat.id]"
+                (click)="cerrarmMegaMenu(i)"
+                >{{ cat.name | uppercase }}</a
+              >
+            </li>
+
+            <li *ngFor="let sub of cat.subs | cleanCat; let si = index">
+              <a
+                [routerLink]="['/search', 'categorie' + cat.id + 'subs' + si]"
+                (click)="cerrarmMegaMenu(i)"
+                >{{ sub }}</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="col1 visible-sm visible-md visible-lg">
+          <ul>
+            <li class="title">{{ cat.name | uppercase }} POR PRECIO</li>
+
+            <li
+              class=""
+              *ngFor="let precio of precios; let pi = index; last as isLast"
+            >
+              <a
+                *ngIf="!isLast"
+                [routerLink]="['/search', 'categorie' + cat.id, { price: pi }]"
+                (click)="cerrarmMegaMenu(i)"
+                >${{ precio.min }} a ${{ precio.max }}</a
+              >
+              <a
+                *ngIf="isLast"
+                [routerLink]="['/search', 'categorie' + cat.id, { price: pi }]"
+                (click)="cerrarmMegaMenu(i)"
+                >${{ precio.min }} en adelante</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="col1">
+          <ul>
+            <li class="title">RECOMENDADOS</li>
+
+            <li>
+              <a href="/vinos?o=vendidos">Más Vendidos</a>
+            </li>
+
+            <li>
+              <a href="/vinos?o=calificados">Mejor Calificados</a>
+            </li>
+
+            <li>
+              <a href="/vinos/lista-de-precios" class="highlight"
+                >Lista de Precios</a
+              >
+            </li>
+
+            <li>
+              <a href="/calculador" class="highlight">Calculador</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="visible-lg">
+          <div class="col2">
+            <div class="menu-product">
+              <div class="row">
+                <div class="col-md-6">
+                  <a href="">
+                    <img src="assets/img/branca.jpg" alt="" />
+                  </a>
+                </div>
+                <div class="col-md-6">
+                  <div class="name">
+                    <h3>
+                      <a href="/vinos-ficha/Luigi-Bosca-Malbec"
+                        >LUIGI BOSCA MALBEC</a
+                      >
+                    </h3>
+                  </div>
+
+                  <div class="small-buy">
+                    <div class="promo-link promoted text-center">
+                      <strong>
+                        <!-- COMPRÁ {{ ofertaCaja(item.sale).cant }} Y PAGÁS -->
+
+                        COMPRÁ 6 Y PAGÁS
+                      </strong>
+
+                      <br />
+
+                      <span class="product-price">
+                        <!-- ${{ ofertaCaja(item.sale).off }} -->
+
+                        $200
+                      </span>
+
+                      c/u.
+
+                      <span class="discount-arrow arrow-left">
+                        <p>
+                          <!-- %{{
+                            (1 - ofertaCaja(item.sale).off / item.price) * 100
+                              | number: "1.0-0"
+                          }}
+                          OFF -->
+                          %20 OFF
+                        </p>
+                      </span>
+
+                      <br />
+                    </div>
+
+                    <a class="discount btn-block">
+                      <p>Comprar</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

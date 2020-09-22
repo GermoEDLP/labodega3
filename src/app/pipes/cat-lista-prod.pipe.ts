@@ -5,22 +5,44 @@ import { Category } from '../interfaces/interfaces';
   name: 'cats',
 })
 export class CatListaProdPipe implements PipeTransform {
-  transform(value: string[], arg: Category[]) {
-    let respuesta: any[] = [];
-    value.forEach((cat: string) => {
-      if (cat.includes('subs')) {
-        let parts = cat.split('subs');
-        let name = arg.find((categorie) => categorie.id == parts[0]).subs[parts[1]];
-        if(name && name !== "SubcategoriaDesabilitadaPorAdmin"){
-          respuesta.push(name);
+  transform(value: string[], arg: Category[], retorno?: string): any {
+    if (retorno == 'subs') {
+      let valor = value[0].slice(0, 20);
+      let pre = arg.find((cat) => cat.id == valor);
+      let preObj = [];
+      pre.subs.forEach((element, i) => {
+        preObj.push({
+          name: element,
+          link: pre.id+'subs'+i
+        })  
+      });
+      preObj = preObj.filter((sub)=>sub.name!=='SubcategoriaDesabilitadaPorAdmin');
+      return preObj;
+    } else {
+      let respuesta: any;
+      if (value[0].includes('subs')) {
+        let parts = value[0].split('subs');
+        if (retorno == 'nombreCat') {
+          function probar(cat) {
+            return cat.id == parts[0];
+          }
+          let pre = arg.find(probar);
+          respuesta = pre.name;
+        } else {
+          function test(cat) {
+            return cat.id == parts[0];
+          }
+          let pre = arg.find(test);
+          respuesta = pre.subs[parts[1]];
         }
       } else {
-        let name = arg.find((categorie) => categorie.id == cat).name;
-        if(name){
-          respuesta.push(name);
+        function test(cat){
+          return  cat.id == value[0];
         }
+        let pre = arg.find(test);
+        respuesta = pre.name;
       }
-    });
-    return respuesta;
+      return respuesta;
+    }
   }
 }
