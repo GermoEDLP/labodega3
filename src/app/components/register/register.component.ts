@@ -106,6 +106,7 @@ export class RegisterComponent implements OnInit {
               name: this.registerF.get('name').value,
               born: this.registerF.get('born').value,
               email: resp.user.email,
+              avatar: '1',
               role: 'USER_ROLE',
               prov: this.registerF.get('prov').value,
               city: this.registerF.get('city').value,

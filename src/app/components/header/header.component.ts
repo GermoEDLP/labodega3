@@ -13,8 +13,8 @@ import { ShareInfoService } from '../../services/share-info.service';
 import { ProductosService } from '../../services/productos.service';
 import { CatsService } from '../../services/cats.service';
 import { Router } from '@angular/router';
-import { JsonPipe } from '@angular/common';
 import { User } from '../../interfaces/interfaces';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -57,13 +57,17 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.prodSvc.getProducts().subscribe((prods: Product[]) => {
+    this.arranque();
+  }
+
+  arranque(){
+    this.prodSvc.getProducts().pipe(take(1)).subscribe((prods: Product[]) => {
       this.productos = prods;
     });
-    this.catsSvc.getCats().subscribe((cats: Category[]) => {
+    this.catsSvc.getCats().pipe(take(1)).subscribe((cats: Category[]) => {
       this.categorias = cats;
     });
-    this.user$.subscribe((data) => {
+    this.user$.pipe(take(1)).subscribe((data) => {
       if (data) {
         this.userService.getUserData(data.uid).subscribe((data: User) => {
           this.userComplete = data;

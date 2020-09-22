@@ -1,0 +1,205 @@
+<section id="main-content" *ngIf="userComplete; else loading">
+  <section class="wrapper">
+    <h3>PERFIL DE USUARIO</h3>
+
+    <form [formGroup]="profileForm" class="form-validate form-horizontal">
+      <div class="form-group">
+        <div class="col-md-6">
+          <label for="editor" class="control-label">Nombre y apellido</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="name"
+            required
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="editor" class="control-label">Fecha de nacimiento</label>
+          <input
+            class="form-control"
+            type="date"
+            formControlName="born"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          <label for="editor" class="control-label">Dirección</label>
+          <input
+            class="form-control"
+            type="text"
+            formControlName="adress"
+            required
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="editor" class="control-label">Provincia</label>
+          <select
+            class="form-control"
+            (change)="activarCiudad()"
+            formControlName="prov"
+          >
+            <option
+              *ngFor="let provincia of provincias"
+              [value]="provincia.nombre"
+            >
+              {{ provincia.nombre }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="editor" class="control-label">Ciudad</label>
+          <select class="form-control" formControlName="city">
+            <option *ngFor="let ciudad of ciudades" [value]="ciudad.nombre">
+              {{ ciudad.nombre }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          <div class="avatar">
+            <div style="margin-bottom: 10px">
+              <div class="btn-group-vertical" style="min-width: 60%">
+                <button
+                  class="btn btn-default"
+                  data-toggle="modal"
+                  data-target="#avatarModal"
+                >
+                  Cambiar avatar
+                </button>
+                <button
+                  class="btn btn-default"
+                  data-toggle="modal"
+                  data-target="#emailModal"
+                >
+                  Cambiar email
+                </button>
+                <button
+                  class="btn btn-default"
+                  data-toggle="modal"
+                  data-target="#passModal"
+                >
+                  Cambiar contraseña
+                </button>
+              </div>
+            </div>
+            <img
+              [src]="'assets/img/avatars/' + avatarP + '.jpg'"
+              alt=""
+              class="img-thumbnail img-circle"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          <div class="avatar" style="margin: 15px 0px">
+            <button class="btn btn-success">Guardar todos los cambios</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+</section>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="avatarModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Selecciona un avatar</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row" *ngIf="userComplete">
+          <div
+            class="col-sm-6 col-md-4 col-lg-3 avatarModalImg"
+            [ngClass]="{ selected: avatar == avatarP }"
+            *ngFor="let avatar of helperArray; let i = index"
+          >
+            <a
+              (click)="avatarP = avatar"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <img
+                [src]="'assets/img/avatars/' + (i + 1) + '.jpg'"
+                alt=""
+                class="img-responsive img-circle img-thumbnail"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  id="emailModal"
+  *ngIf="userComplete"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Nuevo correo electronico</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Debes tener en cuenta que esta información es muy importante, por lo
+          que te recomendamos que verifiques correctamente los datos que vayas a
+          ingresar.
+        </p>
+        <div [formGroup]="emailForm">
+          <input
+            type="email"
+            formControlName="email"
+            class="form-control form-input"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-default pull-left"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          Cerrar
+        </button>
+
+        <button class="btn btn-primary" (click)="cambiarEmail()">
+          Actualizar correo
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

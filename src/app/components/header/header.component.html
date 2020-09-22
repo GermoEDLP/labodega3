@@ -116,7 +116,7 @@
       <li class="dropdown" *ngIf="userComplete && user$ | async as user; else noSession">
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
           <span class="profile-ava">
-            <img alt="" src="assets/img/avatar1_small.jpg" />
+            <img alt="" class="avatar" [src]="'assets/img/avatars/'+userComplete.avatar+'.jpg'" />
           </span>
           <span class="username">{{ user.displayName }}</span>
           <b class="caret"></b>
@@ -151,7 +151,7 @@
         <li class="dropdown">
           <a data-toggle="dropdown" class="dropdown-toggle" href="#">
             <span class="profile-ava">
-              <img id="img_avatar" src="assets/img/avatar1.jpg" />
+              <img id="img_avatar" src="assets/img/avatars/1.jpg" />
             </span>
             <span class="username">Anonimo</span>
             <b class="caret"></b>

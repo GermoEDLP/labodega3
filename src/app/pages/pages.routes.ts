@@ -10,6 +10,7 @@ import { InfoComponent } from './buy/info/info.component';
 import { ShippComponent } from './buy/shipp/shipp.component';
 import { PayComponent } from './buy/pay/pay.component';
 import { ConfirmComponent } from './buy/confirm/confirm.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -24,6 +25,7 @@ const pagesRoutes: Routes = [
             { path: 'search/:cod', component: SearchComponent, data: { titulo: 'Buscar' } },
             { path: 'home', component: HomeComponent, data: { titulo: 'Inicio' } },
             { path: 'cart', component: CartComponent, data: { titulo: 'Carrito' } },
+            { path: 'profile', component: ProfileComponent, data: { titulo: 'Perfil' } },
             { path: 'buy', component: BuyComponent, 
             children: [
                 { path: 'info', component: InfoComponent, data: { titulo: 'Información del cliente' } },

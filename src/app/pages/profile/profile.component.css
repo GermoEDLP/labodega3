@@ -1,0 +1,28 @@
+.wrapper{
+    margin-top: 100px !important;
+}
+
+.avatar{
+    text-align: center;
+}
+
+.avatarModalImg{
+    margin: 5px 0px;
+    padding: 18px;
+}
+
+.avatarModalImg:hover{
+    border: 5px solid rgba(209, 209, 209, 0.2);
+    border-radius: 25px;
+    background: rgba(209,209,209,0.2);
+}
+
+.selected{
+    border: 5px solid rgb(209 209 209);
+    border-radius: 25px;
+    background: rgba(209,209,209,0.6);
+}
+
+.modal-body{
+    margin: 10px;
+}

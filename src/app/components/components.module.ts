@@ -41,6 +41,7 @@ import { MenuComponent } from './menu/menu.component';
 import { ShowMegaMenuDirective } from './directives/show-mega-menu.directive';
 import { HideMegaMenuDirective } from './directives/hide-mega-menu.directive';
 import { CleanCatPipe } from '../pipes/clean-cat.pipe';
+import { AvatarDirective } from '../directives/avatar.directive';
 
 const componentes = [
   FooterComponent,
@@ -70,7 +71,8 @@ const componentes = [
   GraficosComponent,
   MenuComponent,
   ShowMegaMenuDirective,
-  HideMegaMenuDirective
+  HideMegaMenuDirective,
+  AvatarDirective
 ]
 
 @NgModule({

@@ -33,7 +33,8 @@ export interface User{
     city?: string,
     adress?: string,
     phone?: string,
-    dni?: string
+    dni?: string,
+    avatar?: string
 }
 
 export interface cartProduct{

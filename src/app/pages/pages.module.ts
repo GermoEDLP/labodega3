@@ -11,20 +11,21 @@ import { PAGES_ROUTES } from './pages.routes';
 import { ComponentsModule } from '../components/components.module';
 import { CartComponent } from './cart/cart.component';
 import { SearchComponent } from './search/search.component';
-import { BuyComponent } from './buy/buy.component';
 import { BuyModule } from './buy/buy.module';
+import { ProfileComponent } from './profile/profile.component';
 
-
+const components = [
+  HomeComponent,
+  AboutComponent,
+  ProductComponent,
+  PagesComponent,
+  CartComponent,
+  SearchComponent,
+  ProfileComponent
+]
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    AboutComponent,
-    ProductComponent,
-    PagesComponent,
-    CartComponent,
-    SearchComponent
-  ],
+  declarations: components,
   imports: [
     CommonModule,
     PAGES_ROUTES,
@@ -34,13 +35,6 @@ import { BuyModule } from './buy/buy.module';
     ComponentsModule,
     BuyModule
   ],
-  exports: [
-    HomeComponent,
-    AboutComponent,
-    ProductComponent,
-    CartComponent,
-    SearchComponent,
-    BuyComponent
-  ]
+  exports: components
 })
 export class PagesModule { }
