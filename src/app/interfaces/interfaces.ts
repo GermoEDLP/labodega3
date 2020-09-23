@@ -34,7 +34,9 @@ export interface User{
     adress?: string,
     phone?: string,
     dni?: string,
-    avatar?: string
+    avatar?: string,
+    created_at?: any,
+    update_at?: any
 }
 
 export interface cartProduct{

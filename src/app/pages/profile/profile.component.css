@@ -26,3 +26,59 @@
 .modal-body{
     margin: 10px;
 }
+
+.user-row {
+    margin-bottom: 14px;
+}
+
+.user-row:last-child {
+    margin-bottom: 0;
+}
+
+.dropdown-user {
+    margin: 13px 0;
+    padding: 5px;
+    height: 100%;
+}
+
+.dropdown-user:hover {
+    cursor: pointer;
+}
+
+.table-user-information > tbody > tr {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+.table-user-information > tbody > tr:first-child {
+    border-top: 0;
+}
+
+
+.table-user-information > tbody > tr > td {
+    border-top: 0;
+}
+.toppad
+{margin-top:20px;
+}
+
+.panel-title{
+    padding-left: 10px !important;
+}
+
+.panel.panel-info .panel-heading, .panel.panel-info .panel-footer {
+    background: #f5f5f5;
+    color: #858585;
+    border-color: #c9c9c9;
+}
+
+.table{
+    margin-top: -16px!important;
+}
+
+.table2 tbody tr td,.table2 tbody tr th {
+    text-align: center;
+}
+
+.table2 tbody tr td i{
+    cursor: pointer;
+}

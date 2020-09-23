@@ -2,105 +2,107 @@
   <section class="wrapper">
     <h3>PERFIL DE USUARIO</h3>
 
-    <form [formGroup]="profileForm" class="form-validate form-horizontal">
-      <div class="form-group">
-        <div class="col-md-6">
-          <label for="editor" class="control-label">Nombre y apellido</label>
-          <input
-            class="form-control"
-            type="text"
-            formControlName="name"
-            required
-          />
-        </div>
-        <div class="col-md-6">
-          <label for="editor" class="control-label">Fecha de nacimiento</label>
-          <input
-            class="form-control"
-            type="date"
-            formControlName="born"
-            required
-          />
-        </div>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ userComplete.name }}</h3>
       </div>
-      <div class="form-group">
-        <div class="col-md-12">
-          <label for="editor" class="control-label">Dirección</label>
-          <input
-            class="form-control"
-            type="text"
-            formControlName="adress"
-            required
-          />
-        </div>
-        <div class="col-md-6">
-          <label for="editor" class="control-label">Provincia</label>
-          <select
-            class="form-control"
-            (change)="activarCiudad()"
-            formControlName="prov"
-          >
-            <option
-              *ngFor="let provincia of provincias"
-              [value]="provincia.nombre"
-            >
-              {{ provincia.nombre }}
-            </option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <label for="editor" class="control-label">Ciudad</label>
-          <select class="form-control" formControlName="city">
-            <option *ngFor="let ciudad of ciudades" [value]="ciudad.nombre">
-              {{ ciudad.nombre }}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-12">
-          <div class="avatar">
-            <div style="margin-bottom: 10px">
-              <div class="btn-group-vertical" style="min-width: 60%">
-                <button
-                  class="btn btn-default"
-                  data-toggle="modal"
-                  data-target="#avatarModal"
-                >
-                  Cambiar avatar
-                </button>
-                <button
-                  class="btn btn-default"
-                  data-toggle="modal"
-                  data-target="#emailModal"
-                >
-                  Cambiar email
-                </button>
-                <button
-                  class="btn btn-default"
-                  data-toggle="modal"
-                  data-target="#passModal"
-                >
-                  Cambiar contraseña
-                </button>
-              </div>
-            </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-3 col-lg-3" align="center">
             <img
-              [src]="'assets/img/avatars/' + avatarP + '.jpg'"
-              alt=""
-              class="img-thumbnail img-circle"
+              alt="Avatar del usuario"
+              [src]="'assets/img/avatars/' + userComplete.avatar + '.jpg'"
+              class="img-circle img-responsive"
             />
           </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-md-12">
-          <div class="avatar" style="margin: 15px 0px">
-            <button class="btn btn-success">Guardar todos los cambios</button>
+
+          <div class="col-md-9 col-lg-9">
+            <table class="table table-user-information">
+              <tbody>
+                <tr>
+                  <td><b>Nombre</b></td>
+                  <td>{{ userComplete.name }}</td>
+                </tr>
+                <tr>
+                  <td><b>Fecha de nacimiento</b></td>
+                  <td>{{ userComplete.born }}</td>
+                </tr>
+                <tr>
+                  <td><b>Domicilio</b></td>
+                  <td>{{ userComplete.adress }}</td>
+                </tr>
+                <tr>
+                  <td><b>Provincia/Ciudad</b></td>
+                  <td>{{ userComplete.prov }} / {{ userComplete.city }}</td>
+                </tr>
+                <tr>
+                  <td><b>Email</b></td>
+                  <td>{{ userComplete.email }}</td>
+                </tr>
+                <tr>
+                  <td><b>Fecha de creación de la cuenta</b></td>
+                  <td>{{ userComplete.created_at | firestoreDate: 'dd/MM/yy' }}</td>
+                </tr>
+                <tr>
+                  <td><b>Ultima actualización de la cuenta</b></td>
+                  <td>{{ userComplete.update_at | firestoreDate: 'dd/MM/yy' }}</td>
+                </tr>
+                <tr *ngIf="userComplete.phone">
+                  <td><b>Telefono</b></td>
+                  <td>
+                    {{ userComplete.phone }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <a
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#updateModal"
+              >Actualizar información</a
+            >
           </div>
         </div>
       </div>
-    </form>
+      <div class="panel-footer"></div>
+    </div>
+
+    <div class="panel panel-info" id="hist">
+      <div class="panel-heading">
+        <h3 class="panel-title">Historial de pedidos</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="table-responsive">
+            <table class="table table2 table-striped table-hover">
+              <tbody>
+                <tr>
+                  <th>Fecha de generado</th>
+                  <th>Fecha de finalizado</th>
+                  <th>Productos</th>
+                  <th>Codigo</th>
+                  <th>Estado</th>
+                </tr>
+                <tr *ngFor="let venta of historical; let i = index">
+                  <td>{{ venta.date | firestoreDate: "short" }}</td>
+                  <td *ngIf="venta.dateFinal">
+                    {{ venta.dateFinal | firestoreDate: "short" }}
+                  </td>
+                  <td *ngIf="!venta.dateFinal">-</td>
+                  <td (click)="popUpProducts(i)">
+                    <i class="fa fa-shopping-cart"></i>
+                  </td>
+                  <td>{{ venta.code }}</td>
+                  <td>{{ venta.state | infoVentas: "stateProfile" }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer"></div>
+    </div>
   </section>
 </section>
 
@@ -108,16 +110,16 @@
   <app-loading></app-loading>
 </ng-template>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="avatarModal">
+<!--
+//=================================================
+// Modal de avatar
+//=================================================
+-->
+<div class="modal fade" role="dialog" id="avatarModal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" (click)="toggleModal( '#updateModal', '#avatarModal', true)">
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title">Selecciona un avatar</h4>
@@ -130,7 +132,7 @@
             *ngFor="let avatar of helperArray; let i = index"
           >
             <a
-              (click)="avatarP = avatar"
+              (click)="avatarP = avatar; toggleModal( '#updateModal', '#avatarModal', true)"
               data-dismiss="modal"
               aria-label="Close"
             >
@@ -148,8 +150,12 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 
+<!--
+//=================================================
+// Modal de cambio de email
+//=================================================
+-->
 <div
   class="modal fade"
   tabindex="-1"
@@ -163,8 +169,7 @@
         <button
           type="button"
           class="close"
-          data-dismiss="modal"
-          aria-label="Close"
+          (click)="toggleModal('#updateModal', '#emailModal', true)"
         >
           <span aria-hidden="true">&times;</span>
         </button>
@@ -187,8 +192,7 @@
       <div class="modal-footer">
         <button
           class="btn btn-default pull-left"
-          data-dismiss="modal"
-          aria-label="Close"
+          (click)="toggleModal('#updateModal', '#emailModal', true)"
         >
           Cerrar
         </button>
@@ -202,4 +206,193 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
+
+<!--
+//=================================================
+// Modal de productos de la venta
+//=================================================
+-->
+<div
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  id="productModal"
+  *ngIf="userComplete"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="closeProdModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Compra</h4>
+      </div>
+      <div class="modal-body" *ngIf="productoModal">
+        <table class="table table-striped table-responsive">
+          <tbody>
+            <tr>
+              <th>Prod.</th>
+              <th>Desc.</th>
+              <th>Cant.</th>
+              <th>Subtot.</th>
+            </tr>
+            <tr *ngFor="let prod of productoModal.promo">
+              <td>{{ prod.prod.name }}</td>
+              <td>{{ prod.prod.desc }}</td>
+              <td>{{ prod.prod.cant }}</td>
+              <td>{{ prod.subtotal }}</td>
+            </tr>
+            <tr></tr>
+            <tr>
+              <th>Total</th>
+              <th></th>
+              <th></th>
+              <th>{{ productoModal.subtotal }}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!--
+//=================================================
+// Modal de Update
+//=================================================
+-->
+<div
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  id="updateModal"
+  *ngIf="userComplete"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Actualización de datos</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="profileForm" class="form-validate form-horizontal">
+          <div class="form-group">
+            <div class="col-md-6">
+              <label for="editor" class="control-label"
+                >Nombre y apellido</label
+              >
+              <input
+                class="form-control"
+                type="text"
+                formControlName="name"
+                required
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="editor" class="control-label"
+                >Fecha de nacimiento</label
+              >
+              <input
+                class="form-control"
+                type="date"
+                formControlName="born"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-12">
+              <label for="editor" class="control-label">Dirección</label>
+              <input
+                class="form-control"
+                type="text"
+                formControlName="adress"
+                required
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="editor" class="control-label">Provincia</label>
+              <select
+                class="form-control"
+                (change)="activarCiudad()"
+                formControlName="prov"
+              >
+                <option
+                  *ngFor="let provincia of provincias"
+                  [value]="provincia.nombre"
+                >
+                  {{ provincia.nombre }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="editor" class="control-label">Ciudad</label>
+              <select class="form-control" formControlName="city">
+                <option
+                  *ngFor="let ciudad of ciudadByProv"
+                  [value]="ciudad.nombre"
+                >
+                  {{ ciudad.nombre }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-12">
+              <div class="avatar">
+                <div style="margin-bottom: 10px">
+                  <div class="btn-group-vertical" style="min-width: 60%">
+                    <button class="btn btn-default" (click)="toggleModal('#avatarModal', '#updateModal', 'static')">
+                      Cambiar avatar
+                    </button>
+                    <button
+                      class="btn btn-default"
+                      (click)="toggleModal('#emailModal', '#updateModal', 'static' )"
+                    >
+                      Cambiar email
+                    </button>
+                    <button
+                      class="btn btn-default"
+                      (click)="cambiarPass()"
+                    >
+                      Cambiar contraseña
+                    </button>
+                  </div>
+                </div>
+                <img
+                  [src]="'assets/img/avatars/' + avatarP + '.jpg'"
+                  alt=""
+                  class="img-thumbnail img-circle"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          class="btn btn-default pull-left"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          Cerrar
+        </button>
+
+        <button class="btn btn-success" (click)="updateDatos()">
+          Guardar
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

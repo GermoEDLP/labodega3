@@ -67,7 +67,7 @@ export class HeaderComponent implements OnInit {
     this.catsSvc.getCats().pipe(take(1)).subscribe((cats: Category[]) => {
       this.categorias = cats;
     });
-    this.user$.pipe(take(1)).subscribe((data) => {
+    this.user$.subscribe((data) => {
       if (data) {
         this.userService.getUserData(data.uid).subscribe((data: User) => {
           this.userComplete = data;

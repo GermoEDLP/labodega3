@@ -41,6 +41,23 @@ export class InfoVentasPipe implements PipeTransform {
             break;
         }
 
+      case 'stateProfile':
+        switch (value) {
+          case 'pend':
+            return 'Siendo armado';
+          case 'transfer':
+            return 'Esperando transferencia ';
+          case 'mpPay':
+            return 'Esperando pago (MP)';
+          case 'confirm':
+            return 'Confirmada';
+          case 'finalize':
+            return 'Finalizada';
+
+          default:
+            break;
+        }
+
       default:
         break;
     }
