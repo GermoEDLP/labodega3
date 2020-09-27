@@ -2,7 +2,8 @@
   <div class="toggle-nav">
     <div
       class="icon-reorder visible-xs"
-      data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+      data-toggle="collapse"
+      data-target="#bs-example-navbar-collapse-1"
     >
       <i class="icon_menu"></i>
     </div>
@@ -12,7 +13,7 @@
   <a routerLink="/home" class="logo"
     ><img id="logo" src="assets/img/logo.png" alt=""
   /></a>
-  <a routerLink="/home" class="logo visible-md"
+  <a routerLink="/home" class="logo visible-md visible-lg visible-xl"
     ><img id="logo" src="assets/img/logo2.png" alt=""
   /></a>
   <!--logo end-->
@@ -26,7 +27,7 @@
             class="form-control"
             placeholder="Buscar"
             name="searchTerm"
-            autocomplete="off" 
+            autocomplete="off"
             [(ngModel)]="searchTerm"
             (focus)="focus()"
             (blur)="blur($event)"
@@ -76,12 +77,23 @@
     <!--  search form end -->
   </div>
 
-  <div class="top-nav notification-row">
+  <div class="cart_sm visible-xs">
+    <ul class="nav pull-right top-menu">
+      <li>
+        <a [routerLink]="['/cart']">
+          <i class="icon_cart_alt"></i>
+          <span class="badge bg-important">{{ cartCount }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="top-nav notification-row hidden-xs">
     <!-- notificatoin dropdown start-->
     <ul class="nav pull-right top-menu">
       <!-- Cart start-->
       <li id="cart_notification" class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+        <a data-toggle="dropdown" class="dropdown-toggle">
           <i class="icon_cart_alt"></i>
           <span class="badge bg-important">{{ cartCount }}</span>
         </a>
@@ -115,10 +127,17 @@
       <!-- Cart end-->
 
       <!-- user login dropdown start-->
-      <li class="dropdown" *ngIf="userComplete && user$ | async as user; else noSession">
+      <li
+        class="dropdown"
+        *ngIf="userComplete && user$ | async as user; else noSession"
+      >
         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
           <span class="profile-ava">
-            <img alt="" class="avatar" [src]="'assets/img/avatars/'+userComplete.avatar+'.jpg'" />
+            <img
+              alt=""
+              class="avatar"
+              [src]="'assets/img/avatars/' + userComplete.avatar + '.jpg'"
+            />
           </span>
           <span class="username">{{ user.displayName }}</span>
           <b class="caret"></b>
@@ -126,7 +145,9 @@
         <ul class="dropdown-menu extended logout">
           <div class="log-arrow-up"></div>
           <li class="eborder-top">
-            <a [routerLink]="['/profile']"><i class="icon_profile"></i> Mi cuenta</a>
+            <a [routerLink]="['/profile']"
+              ><i class="icon_profile"></i> Mi cuenta</a
+            >
           </li>
           <li>
             <a href="#" routerLink="/cart"
@@ -188,16 +209,15 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button
-          type="button"
-          class="close"
-          (click)="loginModalDisplay = false;"
-        >
+        <button type="button" class="close" (click)="loginModalDisplay = false">
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="mLoginLabel">Inicio de sesión</h4>
       </div>
-      <app-login [display]='loginModalDisplay' (close)='cambiar($event)'></app-login>
+      <app-login
+        [display]="loginModalDisplay"
+        (close)="cambiar($event)"
+      ></app-login>
     </div>
   </div>
 </div>
@@ -216,15 +236,17 @@
         <button
           type="button"
           class="close"
-          (click)="registerModalDisplay = false;"
+          (click)="registerModalDisplay = false"
         >
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="mLoginLabel">Registrarse</h4>
       </div>
 
-      <app-register [display]="registerModalDisplay" (close)='cambiar($event)'></app-register>
-      
+      <app-register
+        [display]="registerModalDisplay"
+        (close)="cambiar($event)"
+      ></app-register>
     </div>
   </div>
 </div>
@@ -243,25 +265,32 @@
         <button
           type="button"
           class="close"
-          (click)="noPassModalDisplay = false;"
+          (click)="noPassModalDisplay = false"
         >
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="mLoginLabel">Recuperar contraseña</h4>
       </div>
 
-      <app-no-pass-reset [display]="noPassModalDisplay" (close)='cambiar($event)'></app-no-pass-reset>
-      
+      <app-no-pass-reset
+        [display]="noPassModalDisplay"
+        (close)="cambiar($event)"
+      ></app-no-pass-reset>
     </div>
   </div>
 </div>
 
-
-<nav class="navbar navbar-default visible-xs visible-sm" style="top: 36px">
+<nav class="navbar navbar-default visible-xs" style="top: 36px">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button
+        type="button"
+        class="navbar-toggle collapsed"
+        data-toggle="collapse"
+        data-target="#bs-example-navbar-collapse-1"
+        aria-expanded="false"
+      >
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -271,99 +300,133 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color: black;" *ngIf="catsSvc.menu">
+    <div
+      class="collapse navbar-collapse"
+      id="bs-example-navbar-collapse-1"
+      style="background-color: black"
+      *ngIf="catsSvc.menu"
+    >
       <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <li class="dropdown" *ngIf="userComplete && user$ | async as user; else noSession">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-              <span class="profile-ava">
-                <img alt="" class="avatar" [src]="'assets/img/avatars/'+userComplete.avatar+'.jpg'" />
-              </span>
-              <span class="username" style="margin-left: 10px;">{{ user.displayName }}</span>
-            </a>
-            <ul class="dropdown-menu animated flipInX">
-              <div class="log-arrow-up"></div>
-              <li>
-                <a (click)="colapsarMenu()" [routerLink]="['/profile']"><i class="icon_profile"></i> Mi cuenta</a>
-              </li>
-              <li>
-                <a (click)="colapsarMenu()" routerLink="/cart"
-                  ><i class="icon_cart_alt"></i> Carrito</a
-                >
-              </li>
-              <li *ngIf="userComplete.role == 'ADMIN_ROLE'">
-                <a (click)="colapsarMenu()" href="http://localhost:4200/#/admin"
-                  ><i class="fa fa-gears"></i> Opciones de ADMIN</a
-                >
-              </li>
-              <li>
-                <a (click)="logout(); colapsarMenu()" href="#"
-                  ><i class="icon_key_alt"></i> Cerrar sesión</a
-                >
-              </li>
-            </ul>
-          </li>
-          <form class="navbar-form visible-xs" id="searchColl">
-            <input
-              class="form-control"
-              placeholder="Buscar"
-              name="searchTerm"
-              autocomplete="off" 
-              [(ngModel)]="searchTerm"
-              (focus)="focus()"
-              (blur)="blur($event)"
-              (keyup.enter)="search(searchTerm)"
-            />
-          </form>
+        <li class="dropdown"></li>
+        <li
+          class="dropdown"
+          *ngIf="userComplete && user$ | async as user; else noSession"
+        >
+          <a
+            data-toggle="dropdown"
+            class="dropdown-toggle"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <span class="profile-ava">
+              <img
+                alt=""
+                class="avatar"
+                [src]="'assets/img/avatars/' + userComplete.avatar + '.jpg'"
+              />
+            </span>
+            <span class="username" style="margin-left: 10px">{{
+              user.displayName
+            }}</span>
+          </a>
+          <ul class="dropdown-menu animated flipInX">
+            <div class="log-arrow-up"></div>
+            <li>
+              <a (click)="colapsarMenu()" [routerLink]="['/profile']"
+                ><i class="icon_profile"></i> Mi cuenta</a
+              >
+            </li>
+            <li>
+              <a (click)="colapsarMenu()" routerLink="/cart"
+                ><i class="icon_cart_alt"></i> Carrito</a
+              >
+            </li>
+            <li *ngIf="userComplete.role == 'ADMIN_ROLE'">
+              <a (click)="colapsarMenu()" href="http://localhost:4200/#/admin"
+                ><i class="fa fa-gears"></i> Opciones de ADMIN</a
+              >
+            </li>
+            <li>
+              <a (click)="logout(); colapsarMenu()" href="#"
+                ><i class="icon_key_alt"></i> Cerrar sesión</a
+              >
+            </li>
+          </ul>
+        </li>
+        <form class="navbar-form visible-xs" id="searchColl">
+          <input
+            class="form-control"
+            placeholder="Buscar"
+            name="searchTerm"
+            autocomplete="off"
+            [(ngModel)]="searchTerm"
+            (focus)="focus()"
+            (blur)="blur($event)"
+            (keyup.enter)="search(searchTerm)"
+          />
+        </form>
         <li class="dropdown" *ngFor="let menuItem of catsSvc.menu">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.name | uppercase}}</a>
+          <a
+            class="dropdown-toggle"
+            data-toggle="dropdown"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >{{ menuItem.name | uppercase }}</a
+          >
           <ul class="dropdown-menu animated flipInX">
             <li *ngFor="let subItem of menuItem.subs">
-              <a  (click)="colapsarMenu()" [routerLink]="['/admin', subItem]">{{subItem | uppercase}}</a>
+              <a (click)="colapsarMenu()" [routerLink]="['/admin', subItem]">{{
+                subItem | uppercase
+              }}</a>
             </li>
           </ul>
         </li>
       </ul>
-      
+
       <div
-          id="searchCollDiv"
-          class="previewSearch"
-          style="display: block;"
-          *ngIf="searchTerm.length > 2 && viewSearchPreview"
-          (mouseenter)="onSearchPreview = true"
-          (mouseleave)="onSearchPreview = false"
-        >
-          <p><b>PRODUCTOS</b></p>
-          <ul>
-            <li *ngFor="let item of productos | search: searchTerm">
-              <a
-                href=""
-                [routerLink]="['/product', item.id]"
-                (click)="searchTerm = ''"
-              >
-                <p class="searchName">
-                  {{ item.name
-                  }}<span class="pull-right"
-                    ><b>$ {{ item.price }}</b></span
-                  >
-                </p>
-                <p class="searchDesc">{{ item.desc }}</p>
-              </a>
-            </li>
-          </ul>
-          <p><b>CATEGORIAS</b></p>
-          <ul>
-            <li *ngFor="let item of categorias | searchCat: searchTerm">
-              <a
-                href=""
-                [routerLink]="['/search', item.id]"
-                (click)="searchTerm = ''"
-              >
-                <p class="searchName">{{ item.cat }}</p>
-              </a>
-            </li>
-          </ul>
-        </div>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+        id="searchCollDiv"
+        class="previewSearch"
+        style="display: block"
+        *ngIf="searchTerm.length > 2 && viewSearchPreview"
+        (mouseenter)="onSearchPreview = true"
+        (mouseleave)="onSearchPreview = false"
+      >
+        <p><b>PRODUCTOS</b></p>
+        <ul>
+          <li *ngFor="let item of productos | search: searchTerm">
+            <a
+              href=""
+              [routerLink]="['/product', item.id]"
+              (click)="searchTerm = ''"
+            >
+              <p class="searchName">
+                {{ item.name
+                }}<span class="pull-right"
+                  ><b>$ {{ item.price }}</b></span
+                >
+              </p>
+              <p class="searchDesc">{{ item.desc }}</p>
+            </a>
+          </li>
+        </ul>
+        <p><b>CATEGORIAS</b></p>
+        <ul>
+          <li *ngFor="let item of categorias | searchCat: searchTerm">
+            <a
+              href=""
+              [routerLink]="['/search', item.id]"
+              (click)="searchTerm = ''"
+            >
+              <p class="searchName">{{ item.cat }}</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
 </nav>

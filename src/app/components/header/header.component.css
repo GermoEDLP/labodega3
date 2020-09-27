@@ -130,3 +130,21 @@ li.dropdown{
     top: 158px;
     width: 90%;
 }
+
+.cart_sm{
+    margin: 36px -10px 0px 0px;
+}
+
+.cart_sm .badge{
+    position: absolute;
+    right: -8px;
+    top: -5px;
+    z-index: 100;
+    border-radius: 9px;
+    min-width: 18px;
+    height: 18px;
+    text-align: center;
+    padding: 3px 5px;
+    background: #00a0df;
+    font-weight: 400;
+}

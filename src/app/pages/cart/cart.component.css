@@ -2,6 +2,12 @@
     margin-top: 115px;
 }
 
+@media(max-width: 768px){
+    .wrapper{
+        margin-top: 15px;
+    }
+}
+
 .img_cart{
     height: 45px;
 }

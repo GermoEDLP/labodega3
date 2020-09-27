@@ -2,6 +2,12 @@
   margin-top: 140px;
 }
 
+@media(max-width: 768px){
+  .wrapper{
+      margin-top: 30px;
+  }
+}
+
 #cant {
   width: 80px;
 }
