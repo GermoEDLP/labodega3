@@ -1,7 +1,6 @@
 
-    <aside *ngIf="menu">
+    <!-- <aside *ngIf="menu">
         <div id="sidebar" class="nav-collapse sidebar-admin">
-          <!-- sidebar menu start-->
           <ul class="sidebar-menu" *ngIf="menu">
             
             <li class="sub-menu" *ngFor="let item of menu">
@@ -15,36 +14,9 @@
                   <a *ngIf="subItem.url.length == 1" class="" href="" [routerLink]="['/admin', subItem.url[0]]">{{subItem.name}}</a>
                   <a *ngIf="subItem.url.length > 1" class="" href="" [routerLink]="['/admin', subItem.url[0], subItem.url[1]]">{{subItem.name}}</a>
                 </li>
-                <!-- <li><a class="" href="" [routerLink]="['/admin', 'newProd', 'nuevo']">Agregar nuevo</a></li> -->
               </ul>
             </li>
-            <!-- <li class="sub-menu">
-              <a  class="" >
-                            <i class="icon_documents_alt"></i>
-                            <span>Ventas</span>
-                            <span class="menu-arrow arrow_carrot-right"></span>
-                        </a>
-              <ul class="sub">
-                <li><a class="" href="">Recientes</a></li>
-                <li><a class="" href="">Configuración</a></li>
-              </ul>
-            </li>
-  
-            <li class="sub-menu ">
-              <a class="" >
-                            <i class="icon_cogs"></i>
-                            <span>Configuración</span>
-                            <span class="menu-arrow arrow_carrot-right"></span>
-                        </a>
-              <ul class="sub">
-                <li><a class="" href="">Slider</a></li>
-                <li><a class="" [routerLink]="['/admin', 'categories']">Categorias</a></li>
-                <li><a class="" href=""><span>Cuenta</span></a></li>
-                <li><a class="" href=""><span>Datos</span></a></li>
-              </ul>
-            </li>
-   -->
+           
           </ul>
-          <!-- sidebar menu end-->
         </div>
-      </aside>
+      </aside> -->

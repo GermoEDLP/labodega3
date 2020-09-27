@@ -37,6 +37,13 @@
                 </div>
               </div>
               <p>{{ product.desc }}</p>
+
+                <div class="alerta-pedido alert-dismissible" role="alert" *ngIf="product.stock<=0">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  Este producto no posee stock disponible. Igual no te preocupes, puedes comprar igualmente, solo que el tiempo de armado de pedido puede ser un poco mas largo que lo normal.
+                </div>
+
+
               <div
                 class="row"
                 *ngIf="product.sale"
@@ -165,6 +172,7 @@
         
       </div>
     </div>
+    <app-recomend></app-recomend>
     <!-- page start-->
     <div class="row" [hidden]="view">
       <app-loading></app-loading>

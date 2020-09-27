@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Venta } from '../interfaces/interfaces';
+import { Venta } from '../../interfaces/interfaces';
 
 @Pipe({
   name: 'ventasPorState',

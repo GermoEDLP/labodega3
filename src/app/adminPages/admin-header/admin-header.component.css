@@ -21,3 +21,25 @@ header{
     margin: 16px 13px;
     font-size: 20px;
   }
+
+  .navbar-default{
+    background-color: #1a2732 !important;
+    border: none;
+    color: white;
+  }
+
+  .navbar-default .navbar-nav > li > a {
+    color: #ffffff;
+}
+
+.navbar-default .navbar-nav > li {
+  cursor: pointer;
+}
+
+.navbar-default .navbar-nav > li:hover > a {
+  color: rgb(163, 163, 163)
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color:  #1a2732;
+}

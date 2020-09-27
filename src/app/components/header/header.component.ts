@@ -16,6 +16,8 @@ import { Router } from '@angular/router';
 import { User } from '../../interfaces/interfaces';
 import { take } from 'rxjs/operators';
 
+declare var $:any;
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -42,7 +44,7 @@ export class HeaderComponent implements OnInit {
     private cartService: CartService,
     private shareService: ShareInfoService,
     private prodSvc: ProductosService,
-    private catsSvc: CatsService,
+    public catsSvc: CatsService,
     private router: Router
   ) {
     this.sesion = false;
@@ -78,6 +80,7 @@ export class HeaderComponent implements OnInit {
 
   search(searchTerm: string) {
     if (searchTerm.length > 2) {
+      this.colapsarMenu();
       this.router.navigateByUrl(`/search/${searchTerm}`);
       // let ls: {term: string}[] = JSON.parse(localStorage.getItem('search')) || [];
       // ls.push({term: searchTerm});
@@ -97,6 +100,10 @@ export class HeaderComponent implements OnInit {
         title: 'Termino demasiado corto',
       });
     } 
+  }
+
+  colapsarMenu(){
+    $('#bs-example-navbar-collapse-1').collapse('hide')
   }
 
   logout(){

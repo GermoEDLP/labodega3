@@ -13,6 +13,7 @@ import { CartComponent } from './cart/cart.component';
 import { SearchComponent } from './search/search.component';
 import { BuyModule } from './buy/buy.module';
 import { ProfileComponent } from './profile/profile.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 const components = [
   HomeComponent,
@@ -33,7 +34,8 @@ const components = [
     ReactiveFormsModule,
     AppRoutingModule,
     ComponentsModule,
-    BuyModule
+    BuyModule,
+    PipesModule
   ],
   exports: components
 })

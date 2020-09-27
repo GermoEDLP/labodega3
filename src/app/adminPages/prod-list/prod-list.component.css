@@ -15,3 +15,11 @@
 img{
     height: 40px;
 }
+
+a.nombre{
+    text-decoration: none;
+    color: inherit
+}
+a.nombre:hover{
+    color: black;
+}

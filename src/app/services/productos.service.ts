@@ -3,9 +3,11 @@ import { Product, Category } from '../interfaces/interfaces';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
+import { filter, finalize, map, take } from 'rxjs/operators';
 import { UserService } from './user.service';
 import { CatsService } from './cats.service';
+import { data } from 'jquery';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root',
@@ -41,6 +43,10 @@ export class ProductosService {
     ).valueChanges();
   }
 
+  getProductsForRecomend(){
+      return this.db.collection('products', ref => ref.orderBy('name').limit(3)).valueChanges();
+  }
+
   creaProductoYSubeImagen(prod: Product, image: any, noFoto: boolean){
     if(noFoto){
       this.downloadURL = image;
@@ -64,6 +70,18 @@ export class ProductosService {
         return res('ok');
       })
       
+    }
+  }
+
+  variarStock(id: string, cant: number, suma: boolean){
+    if(suma){
+      return this.db.collection('products').doc(id).update({
+        stock: firebase.firestore.FieldValue.increment(cant)
+      })
+    }else{
+      return this.db.collection('products').doc(id).update({
+        stock: firebase.firestore.FieldValue.increment(-cant)
+      })
     }
   }
 

@@ -1062,11 +1062,9 @@ a.logo {
 
     font-weight: 300;
 
-    color: #fed189;
+    color: #fed189 !important;
 
     float: left;
-
-    margin-top: 15px;
 
     text-transform: uppercase;
 

@@ -1,9 +1,8 @@
 <header class="header">
   <div class="toggle-nav">
     <div
-      class="icon-reorder tooltips"
-      data-original-title="Toggle Navigation"
-      data-placement="bottom"
+      class="icon-reorder visible-xs"
+      data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
     >
       <i class="icon_menu"></i>
     </div>
@@ -13,11 +12,14 @@
   <a routerLink="/home" class="logo"
     ><img id="logo" src="assets/img/logo.png" alt=""
   /></a>
+  <a routerLink="/home" class="logo visible-md"
+    ><img id="logo" src="assets/img/logo2.png" alt=""
+  /></a>
   <!--logo end-->
 
   <div class="nav search-row" id="top_menu">
     <!--  search form start -->
-    <ul class="nav top-menu">
+    <ul class="nav top-menu visible-sm visible-md visible-lg visible-xl">
       <li>
         <form class="navbar-form">
           <input
@@ -33,7 +35,7 @@
         </form>
         <div
           id="searchP"
-          class="previewSearch"
+          class="previewSearch visible-sm visible-md visible-lg visible-xl"
           *ngIf="searchTerm.length > 2 && viewSearchPreview"
           (mouseenter)="onSearchPreview = true"
           (mouseleave)="onSearchPreview = false"
@@ -253,3 +255,115 @@
     </div>
   </div>
 </div>
+
+
+<nav class="navbar navbar-default visible-xs visible-sm" style="top: 36px">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background-color: black;" *ngIf="catsSvc.menu">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <li class="dropdown" *ngIf="userComplete && user$ | async as user; else noSession">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="profile-ava">
+                <img alt="" class="avatar" [src]="'assets/img/avatars/'+userComplete.avatar+'.jpg'" />
+              </span>
+              <span class="username" style="margin-left: 10px;">{{ user.displayName }}</span>
+            </a>
+            <ul class="dropdown-menu animated flipInX">
+              <div class="log-arrow-up"></div>
+              <li>
+                <a (click)="colapsarMenu()" [routerLink]="['/profile']"><i class="icon_profile"></i> Mi cuenta</a>
+              </li>
+              <li>
+                <a (click)="colapsarMenu()" routerLink="/cart"
+                  ><i class="icon_cart_alt"></i> Carrito</a
+                >
+              </li>
+              <li *ngIf="userComplete.role == 'ADMIN_ROLE'">
+                <a (click)="colapsarMenu()" href="http://localhost:4200/#/admin"
+                  ><i class="fa fa-gears"></i> Opciones de ADMIN</a
+                >
+              </li>
+              <li>
+                <a (click)="logout(); colapsarMenu()" href="#"
+                  ><i class="icon_key_alt"></i> Cerrar sesión</a
+                >
+              </li>
+            </ul>
+          </li>
+          <form class="navbar-form visible-xs" id="searchColl">
+            <input
+              class="form-control"
+              placeholder="Buscar"
+              name="searchTerm"
+              autocomplete="off" 
+              [(ngModel)]="searchTerm"
+              (focus)="focus()"
+              (blur)="blur($event)"
+              (keyup.enter)="search(searchTerm)"
+            />
+          </form>
+        <li class="dropdown" *ngFor="let menuItem of catsSvc.menu">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.name | uppercase}}</a>
+          <ul class="dropdown-menu animated flipInX">
+            <li *ngFor="let subItem of menuItem.subs">
+              <a  (click)="colapsarMenu()" [routerLink]="['/admin', subItem]">{{subItem | uppercase}}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      
+      <div
+          id="searchCollDiv"
+          class="previewSearch"
+          style="display: block;"
+          *ngIf="searchTerm.length > 2 && viewSearchPreview"
+          (mouseenter)="onSearchPreview = true"
+          (mouseleave)="onSearchPreview = false"
+        >
+          <p><b>PRODUCTOS</b></p>
+          <ul>
+            <li *ngFor="let item of productos | search: searchTerm">
+              <a
+                href=""
+                [routerLink]="['/product', item.id]"
+                (click)="searchTerm = ''"
+              >
+                <p class="searchName">
+                  {{ item.name
+                  }}<span class="pull-right"
+                    ><b>$ {{ item.price }}</b></span
+                  >
+                </p>
+                <p class="searchDesc">{{ item.desc }}</p>
+              </a>
+            </li>
+          </ul>
+          <p><b>CATEGORIAS</b></p>
+          <ul>
+            <li *ngFor="let item of categorias | searchCat: searchTerm">
+              <a
+                href=""
+                [routerLink]="['/search', item.id]"
+                (click)="searchTerm = ''"
+              >
+                <p class="searchName">{{ item.cat }}</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

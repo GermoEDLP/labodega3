@@ -1,1 +1,37 @@
-<h1>Footer works</h1>
+<div class="footer">
+
+    <div class="container" *ngIf="cats && opt">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>CATEGORIAS</h4>
+                <ul>
+                    <a *ngFor="let cat of cats" [routerLink]="['/search', 'categorie'+cat.id]">
+                        <li>{{cat.name | uppercase}}</li>
+                    </a>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>CONTACTANOS</h4>
+                <ul>
+                    <li>{{opt.bussnessName | uppercase}}</li>
+                    <li>{{opt.buyAdress | uppercase}}</li>
+                    <li>{{opt.bussnessName | uppercase}}</li>
+                    <li>{{opt.buySchedule | uppercase}}</li>
+                    <li>{{opt.buyEmailCount | uppercase}}</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>MEDIOS DE PAGOS</h4>
+                <ul>
+                    <li>EFECTIVO</li>
+                    <li>TRANSFERENCIA BANCARIA</li>
+                    <li>MERCADO PAGO</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+</div>

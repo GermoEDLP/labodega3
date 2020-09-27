@@ -6,6 +6,7 @@ import { cartProduct, Promo, TotalCart, Venta } from '../../../interfaces/interf
 import { ShareInfoService } from '../../../services/share-info.service';
 import { PayService } from '../../../services/pay.service';
 import { Observable } from 'rxjs';
+import { ProductosService } from '../../../services/productos.service';
 
 @Component({
   selector: 'app-confirm',
@@ -31,7 +32,8 @@ export class ConfirmComponent implements OnInit {
     private router: Router,
     private cartSvc: CartService,
     private shareService: ShareInfoService,
-    private paySvc: PayService
+    private paySvc: PayService,
+    private prodSvc: ProductosService
   ) {
     this.arranque();
   }
@@ -156,6 +158,9 @@ export class ConfirmComponent implements OnInit {
     this.paySvc.newVenta(this.data).then((data: Observable<any>)=>{
       data.subscribe((data)=>{
         Swal.close();
+        this.data.products.promo.forEach((promo: Promo)=>{
+          this.prodSvc.variarStock(promo.prod.idF, promo.prod.cant, false);
+        })
         let mensaje = this.mensajePorMetodoDePago(this.data, data);
         if(this.data.payMethod.includes('mp')){
           window.open(data.url.init_point);

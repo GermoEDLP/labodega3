@@ -137,15 +137,15 @@ export class CartComponent implements OnInit {
   checkear() {
     this.userSvc.auth.user.subscribe((data) => {
       if(data){
-        if(data.emailVerified){
+        // if(data.emailVerified){
           this.router.navigateByUrl('/buy/info');
-        }else{
-          Swal.fire(
-            'Email sin verificar',
-            'Por favor verifique su email antes de proceder',
-            'info'
-          )
-        }
+        // }else{
+        //   Swal.fire(
+        //     'Email sin verificar',
+        //     'Por favor verifique su email antes de proceder',
+        //     'info'
+        //   )
+        // }
       }else{
         Swal.fire({
           title: 'Inicio de sesión',

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Category, FilterCat } from '../interfaces/interfaces';
+import { Category, FilterCat } from '../../interfaces/interfaces';
 
 @Pipe({
   name: 'searchCat'

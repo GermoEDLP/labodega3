@@ -2,16 +2,15 @@ header{
     background: #a7a7a7;
     color: black;
     vertical-align: middle;
-}
-
-@media(min-width: 740px){
-    .icon-reorder.tooltips{
-        display: none;
-    }
+    height: 96px;
 }
 
 .avatar{
     height: 40px;
+}
+
+a.logo{
+    margin-top: 15px;
 }
 
 #logo{
@@ -97,4 +96,37 @@ header{
 
 .view-modal{
     display: block;
+}
+
+li.dropdown{
+    cursor: pointer;
+}
+
+.navbar-nav{
+    background-color: black;
+}
+.navbar-nav li a{
+    color: white;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color: black;
+}
+
+.dropdown-menu{
+    background-color: rgb(56, 56, 56)!important;
+}
+
+#searchColl{
+    margin: 10px;
+    border: none !important;
+}
+
+#searchColl input{
+    margin: auto;
+}
+
+#searchCollDiv{
+    top: 158px;
+    width: 90%;
 }

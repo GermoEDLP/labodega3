@@ -14,10 +14,11 @@ import { Router } from '@angular/router';
 export class ProdCardComponent implements OnInit {
   carga = false;
   p: any;
-  itemPerPage: number = 2
+  itemPerPage: number = 12
 
   @Input() items: Product[];
   @Input() termino: string = null;
+  @Input() recomend: boolean = false;
 
   constructor(
     private cartSvc: CartService,

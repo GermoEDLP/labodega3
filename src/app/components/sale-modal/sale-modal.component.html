@@ -5,7 +5,7 @@
   role="dialog"
   aria-labelledby="myModalLabel"
   aria-hidden="true"
-  [ngClass]="{ 'view-slider': view}"
+  [ngClass]="{ 'view-slider': view }"
   *ngIf="venta"
 >
   <div class="modal-dialog">
@@ -23,7 +23,7 @@
         <h4 class="modal-title">Información de la venta</h4>
       </div>
       <div class="modal-body">
-          <p>Información de la venta</p>
+        <p>Información de la venta</p>
         <table class="table table-bordered table-condensed">
           <tbody>
             <tr>
@@ -38,7 +38,9 @@
             </tr>
             <tr *ngIf="venta.dateFinal">
               <th>Fecha de entrega:</th>
-              <td>{{ venta.dateFinal | firestoreDate: "dd/MM/yy  HH:mm" }}hs</td>
+              <td>
+                {{ venta.dateFinal | firestoreDate: "dd/MM/yy  HH:mm" }}hs
+              </td>
             </tr>
             <tr>
               <th>Codigo:</th>
@@ -56,60 +58,66 @@
         </table>
         <p>Información del comprador</p>
         <table class="table table-bordered table-condensed">
-            <tbody>
-              <tr>
-                <th>Nombre:</th>
-                <td>{{ venta.userComplete.name }}</td>
-                <th>Telefono:</th>
-                <td>{{ venta.userComplete.phone }}</td>
-              </tr>
-              <tr>
-                <th>Email:</th>
-                <td colspan="3">{{ venta.userComplete.email }}</td>
-              </tr>
-              <tr *ngIf="venta.shipp">
-                <th>Dirección:</th>
-                <td colspan="3">{{ venta.userComplete.adress }}</td>
-              </tr>
-              <tr *ngIf="venta.shipp">
-                <th>Numero/Depto.:</th>
-                <td>
-                  #{{ venta.shippData.numero }} / "{{ venta.shippData.dpto }}"
-                </td>
-                <th>Provincia/Ciudad:</th>
-                <td>
-                  {{ venta.userComplete.prov }}, {{ venta.userComplete.city }}
-                </td>
-              </tr>
-              <tr *ngIf="venta.shipp">
-                <th>Información adicional:</th>
-                <td colspan="3">{{ venta.shippData.infoAdd }}</td>
-              </tr>
-            </tbody>
-          </table>
-          <p>Información de los productos</p>
+          <tbody>
+            <tr>
+              <th>Nombre:</th>
+              <td>{{ venta.userComplete.name }}</td>
+              <th>Telefono:</th>
+              <td>{{ venta.userComplete.phone }}</td>
+            </tr>
+            <tr>
+              <th>Email:</th>
+              <td colspan="3">
+                <span>{{ venta.userComplete.email }}</span>
+              </td>
+            </tr>
+            <tr *ngIf="venta.shipp">
+              <th>Dirección:</th>
+              <td colspan="3">{{ venta.userComplete.adress }}</td>
+            </tr>
+            <tr *ngIf="venta.shipp">
+              <th>Numero/Depto.:</th>
+              <td>
+                #{{ venta.shippData.numero }} / "{{ venta.shippData.dpto }}"
+              </td>
+              <th>Provincia/Ciudad:</th>
+              <td>
+                {{ venta.userComplete.prov }}, {{ venta.userComplete.city }}
+              </td>
+            </tr>
+            <tr *ngIf="venta.shipp">
+              <th>Información adicional:</th>
+              <td colspan="3">{{ venta.shippData.infoAdd }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Información de los productos</p>
         <table class="table table-bordered table-condensed">
           <tbody>
             <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Cantidad</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Cantidad</th>
             </tr>
             <tr *ngFor="let prod of venta.products.promo">
-                <td><a [routerLink]="['/product', prod.prod.idF]" target="_blank">{{prod.prod.name}}</a></td>
-                <td>{{prod.prod.desc}}</td>
-                <td>{{prod.prod.cant}}</td>
+              <td>
+                <a [routerLink]="['/product', prod.prod.idF]" target="_blank">{{
+                  prod.prod.name
+                }}</a>
+              </td>
+              <td>{{ prod.prod.desc }}</td>
+              <td>{{ prod.prod.cant }}</td>
             </tr>
             <tr>
               <td colspan="4"></td>
             </tr>
             <tr>
               <th colspan="2">Subtotal sin descuentos</th>
-              <td>$ {{venta.products.total}}</td>
+              <td>$ {{ venta.products.total }}</td>
             </tr>
             <tr>
               <th colspan="2">Total a cobrar</th>
-              <td>$ {{venta.products.subtotal}}</td>
+              <td>$ {{ venta.products.subtotal }}</td>
             </tr>
           </tbody>
         </table>
@@ -135,7 +143,7 @@
           class="btn btn-success"
           type="button"
           (click)="pasarAPendiente()"
-          *ngIf="type == 'transfer'"
+          *ngIf="type == 'transfer' || type == 'mpPay'"
         >
           Pasar a pendiente
         </button>
@@ -151,3 +159,4 @@
     </div>
   </div>
 </div>
+

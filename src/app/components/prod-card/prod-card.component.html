@@ -1,6 +1,6 @@
 <div class="container">
   <div *ngIf="items; else loading">
-  <div class="text-center row" *ngIf="items.length>0">
+  <div class="text-center row" *ngIf="items.length>0 && !recomend">
     <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)" previousLabel="Anterior"
     nextLabel="Siguiente" maxSize="5"></pagination-controls>
   </div>
@@ -89,7 +89,7 @@
       </div>
     </div>
   </div>
-  <div class="text-center row"  *ngIf="items.length>0">
+  <div class="text-center row"  *ngIf="items.length>0 && !recomend">
     <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)" previousLabel="Anterior"
     nextLabel="Siguiente" maxSize="5"></pagination-controls>
   </div>

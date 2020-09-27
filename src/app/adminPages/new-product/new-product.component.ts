@@ -26,7 +26,7 @@ export class NewProductComponent implements OnInit {
   }
 
   code: string;
-  producto: any;
+  producto: Product;
   categoriasDelProd: {
     id: string;
     name?: string;
@@ -365,4 +365,6 @@ export class NewProductComponent implements OnInit {
 
     console.log(data, this.prodForm.controls['longDesc'].value);
   }
+
+
 }

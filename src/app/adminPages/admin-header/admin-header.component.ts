@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
 import { User } from '../../interfaces/interfaces';
 import { Router } from '@angular/router';
+import { menuAdmin } from '../../temps/data';
 
 @Component({
   selector: 'app-admin-header',
@@ -13,6 +14,7 @@ export class AdminHeaderComponent implements OnInit {
 
   user$: Observable<any> = this.userService.auth.user;
   userComplete: User;
+  menu = menuAdmin;
 
   constructor(private userService: UserService, private router: Router) {
     this.arranque();

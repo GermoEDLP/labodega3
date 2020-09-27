@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Slider } from '../interfaces/interfaces';
+import { Slider } from '../../interfaces/interfaces';
 
 @Pipe({
   name: 'sliderShow'

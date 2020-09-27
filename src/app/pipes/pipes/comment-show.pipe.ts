@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Comment } from '../interfaces/interfaces';
+import { Comment } from '../../interfaces/interfaces';
 
 @Pipe({
   name: 'commentShow',

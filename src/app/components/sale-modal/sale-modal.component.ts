@@ -61,10 +61,13 @@ export class SaleModalComponent implements OnInit {
             this.paySvc.updateStateVenta(this.venta, 'pend').then(() => {
               this.cerrarModal();
               this.topBarInfoPopUp('Pasado a Pendiente');
-            });
+            }).catch((err)=>{
+              console.log('Error: ', err);
+              });;
           });
       }
-    });
+    })
+    ;
   }
   finalizarVenta() {
     Swal.fire({
@@ -104,6 +107,9 @@ export class SaleModalComponent implements OnInit {
       title: leyenda,
     });
   }
+
+
+  
 
 
 }

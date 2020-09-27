@@ -1,7 +1,7 @@
 .jetmenu {
   width: 100%;
   padding: 0;
-  margin: 96px 0px 0px 0px;
+  margin: 23px 0px 0px 0px;
   position: fixed;
   float: left;
   list-style: none;
@@ -59,9 +59,14 @@
     width: 20%;
 }
 
-.megamenu .row .col1, .megamenu .row .col2, .megamenu .row .col3, .megamenu .row .col4, .megamenu .row .col5, .megamenu .row .col6 {
+.megamenu .row .col1, .megamenu .row .col3, .megamenu .row .col4, .megamenu .row .col5, .megamenu .row .col6 {
     float: left;
     box-sizing: border-box;
+}
+
+.megamenu .row .col2{
+  float: right;
+  box-sizing: border-box;
 }
 
 .jetmenu li > .megamenu ul {
