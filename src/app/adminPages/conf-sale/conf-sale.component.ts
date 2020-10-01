@@ -43,7 +43,11 @@ export class ConfSaleComponent implements OnInit {
       buyEmailPass: [opt.buyEmailPass, [Validators.required]],
       buyRazonSocial: [opt.buyRazonSocial, [Validators.required]],
       buySchedule: [opt.buySchedule, [Validators.required]],
-      deliverySchedule: [opt.deliverySchedule, [Validators.required]]
+      deliverySchedule: [opt.deliverySchedule, [Validators.required]],
+      bussnessPhone: [opt.bussnessPhone, [Validators.required]],
+      afipLink: [opt.afipLink],
+      whatsappLink: [opt.whatsappLink],
+
     })
   }
 

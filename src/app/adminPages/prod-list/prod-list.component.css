@@ -23,3 +23,11 @@ a.nombre{
 a.nombre:hover{
     color: black;
 }
+
+.sinStock{
+ background: #ff63475c !important;
+}
+
+.sinStock:hover{
+    background: #ff63475c !important;
+}

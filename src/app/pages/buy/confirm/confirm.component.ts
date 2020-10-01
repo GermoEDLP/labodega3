@@ -157,6 +157,8 @@ export class ConfirmComponent implements OnInit {
     })
     this.paySvc.newVenta(this.data).then((data: Observable<any>)=>{
       data.subscribe((data)=>{
+        console.log(data);
+        
         Swal.close();
         this.data.products.promo.forEach((promo: Promo)=>{
           this.prodSvc.variarStock(promo.prod.idF, promo.prod.cant, false);

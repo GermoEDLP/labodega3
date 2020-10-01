@@ -27,6 +27,7 @@ export class NewProductComponent implements OnInit {
 
   code: string;
   producto: Product;
+  viewCatMenu: boolean = false;
   categoriasDelProd: {
     id: string;
     name?: string;
@@ -366,5 +367,49 @@ export class NewProductComponent implements OnInit {
     console.log(data, this.prodForm.controls['longDesc'].value);
   }
 
+  cambiarEstado(id: string, show: boolean){
+    let title: string;
+    let text: string;
+    if(show){
+      title = '¿Estas seguro de desabilitar este producto?'
+      text = 'Si desabilita este producto, nadie podra verlo, ni ponerlo en su carrito, ni aparecerá en las busquedas'
+    }else{
+      title = '¿Estas seguro de habilitar este producto?';
+      text = 'Si habilita este producto, todos podran verlo, ponerlo en su carrito y aparecerá en las busquedas'
+    }
 
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#ccc',
+      confirmButtonText: 'Actualizar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.prodService.cambiarEstadoVisual(id, show).then(()=>{
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 3000
+          })
+
+          Toast.fire({
+            title: 'Actualizado!',
+            text: 'El producto ha sido correctamente actualizado de la base de datos.',
+            icon: 'success'
+          })
+        })
+      }
+    })
+  }
+
+  revisarAgregarCat(event){
+    if(event){
+      this.agregarCategoria(event.name, event.id)
+    }
+  }
 }

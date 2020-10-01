@@ -25,9 +25,13 @@ export class AdminHeaderComponent implements OnInit {
 
   arranque(){
     this.user$.subscribe((data)=>{
-      this.userService.getUserData(data.uid).subscribe((data: User)=>{
-        this.userComplete = data;       
-      });      
+      if(data){
+        this.userService.getUserData(data.uid).subscribe((data: User)=>{
+          this.userComplete = data;       
+        });      
+      }else{
+        this.router.navigateByUrl('/home')
+      }
     }); 
   }
 

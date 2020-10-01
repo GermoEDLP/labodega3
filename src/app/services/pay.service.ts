@@ -153,4 +153,17 @@ export class PayService {
     venta.state = newState;
     return this.collRef.doc(venta.id).update(venta);
   }
+
+  contactMail(name: string, email: string, subject: string, message: string){
+    let url = this.url + '/contact';
+    let data = {
+      email: email,
+      subject: subject,
+      message: message,
+      name: name
+    };    
+    return this.http.post(url, data);
+  }
+
+
 }

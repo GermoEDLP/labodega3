@@ -1,0 +1,60 @@
+<div class="modal fade" id="modalCats" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="cerrarSinMas()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Categorias disponibles</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container" *ngIf="cats">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="list-group ">
+                <div  *ngFor="let item of cats.slice(0,(cats.length/2)+1)" class="contentCat"> 
+                  <a class="list-group-item cat" (click)="cerrar(item.name, item.id)">
+                    {{item.name}}
+                  </a>
+                    <a class="list-group-item subCat" (click)="cerrar(sub, item.id, i)" *ngFor="let sub of item.subs  | cats: cats: 'filtrarAdmin'; let i = index">
+                      {{sub}}
+                    </a>
+                </div>
+                 
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="list-group ">
+                <div  *ngFor="let item of cats.slice((cats.length/2)+1, cats.length)" class="contentCat"> 
+                  <a class="list-group-item cat" (click)="cerrar(item.name, item.id)">
+                    {{item.name}}
+                  </a>
+                    <a class="list-group-item subCat" (click)="cerrar(sub, item.id, i)" *ngFor="let sub of item.subs  | cats: cats: 'filtrarAdmin'; let i = index">
+                      {{sub}}
+                    </a>
+                </div>
+                 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-default"
+          data-dismiss="modal"
+          (click)="cerrarSinMas()"
+        >
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-primary">
+          Actualizar categorias
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

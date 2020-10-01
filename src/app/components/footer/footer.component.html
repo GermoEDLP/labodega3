@@ -1,10 +1,10 @@
 <div class="footer">
 
-    <div class="container" *ngIf="cats && opt">
+    <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <h4>CATEGORIAS</h4>
-                <ul>
+                <ul *ngIf="cats">
                     <a *ngFor="let cat of cats" [routerLink]="['/search', 'categorie'+cat.id]">
                         <li>{{cat.name | uppercase}}</li>
                     </a>
@@ -12,10 +12,10 @@
             </div>
             <div class="col-md-4">
                 <h4>CONTACTANOS</h4>
-                <ul>
+                <ul *ngIf="opt">
                     <li>{{opt.bussnessName | uppercase}}</li>
                     <li>{{opt.buyAdress | uppercase}}</li>
-                    <li>{{opt.bussnessName | uppercase}}</li>
+                    <li>{{opt.bussnessPhone  | uppercase}}</li>
                     <li>{{opt.buySchedule | uppercase}}</li>
                     <li>{{opt.buyEmailCount | uppercase}}</li>
                 </ul>
@@ -29,9 +29,10 @@
                 </ul>
             </div>
         </div>
+        <div class="row">
+            <div class="sub_footer">
+                <p>Todos los derechos reservados. Beber con moderación. Prohibida la venta a menores de 18 años.</p>
+            </div>
+        </div>
     </div>
-    
-
-
-
 </div>

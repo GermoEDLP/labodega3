@@ -1,28 +1,39 @@
+//Modulos de Angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { ProductComponent } from './product/product.component';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+//Modulos propios
 import { AppRoutingModule } from '../app-routing.module';
-import { PagesComponent } from './pages.component';
-import { PAGES_ROUTES } from './pages.routes';
 import { ComponentsModule } from '../components/components.module';
+import { BuyModule } from './buy/buy.module';
+import { PipesModule } from '../pipes/pipes.module';
+
+//Modulos externos
+import { RecaptchaModule } from 'ng-recaptcha';
+
+//Componentes
 import { CartComponent } from './cart/cart.component';
 import { SearchComponent } from './search/search.component';
-import { BuyModule } from './buy/buy.module';
 import { ProfileComponent } from './profile/profile.component';
-import { PipesModule } from '../pipes/pipes.module';
+import { ContactComponent } from './contact/contact.component';
+import { HomeComponent } from './home/home.component';
+import { ProductComponent } from './product/product.component';
+import { PagesComponent } from './pages.component';
+
+//Otros
+import { PAGES_ROUTES } from './pages.routes';
+
+
 
 const components = [
   HomeComponent,
-  AboutComponent,
   ProductComponent,
   PagesComponent,
   CartComponent,
   SearchComponent,
-  ProfileComponent
+  ProfileComponent,
+  ContactComponent
 ]
 
 @NgModule({
@@ -35,7 +46,8 @@ const components = [
     AppRoutingModule,
     ComponentsModule,
     BuyModule,
-    PipesModule
+    PipesModule,
+    RecaptchaModule
   ],
   exports: components
 })

@@ -1,18 +1,22 @@
 
 .iniciarS{    
     color: #ffffff;
-    background-color: chocolate;
-    border-color: chocolate;
+    background-color: black;
+    border: 1px solid black;
 }
 
 .iniciarS:hover{    
-    color: white;
-    background-color: rgb(211, 169, 114);
-    border-color: chocolate;
+    color: black;
+    background-color: rgb(225, 225, 225);
+    border: 1px solid black;
+}
+
+button{
+    border-radius: 0px !important;
 }
 
 .modal-footer{
-    background: #deb887;
+    background: #a7a7a7;
     border: none;
     box-shadow: none;
 }

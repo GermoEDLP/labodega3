@@ -35,6 +35,13 @@ export class CatListaProdPipe implements PipeTransform {
         }
       });
       return respuesta;
+    }else if (retorno == 'filtrarAdmin'){
+      let filtrado = value.filter((sub)=>sub!=='SubcategoriaDesabilitadaPorAdmin');
+      return filtrado;
+    }else if( retorno =='breadcrumbs'){
+      let cat = value.filter((ref)=>!ref.includes('subs'))[0];
+      let catCat = arg.find(ref=>ref.id==cat);
+      return catCat
     }else {
       let respuesta: any;
       if (value[0].includes('subs')) {

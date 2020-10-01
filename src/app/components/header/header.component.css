@@ -34,15 +34,21 @@ a.logo{
 
 
 .modal-content, .modal-body,.modal-footer{
-    background-color: rgb(222, 184, 135) !important;
+    background-color: #a7a7a7 !important;
+    border-radius: 0px;
+    border: none;
+    color:white !important
+}
+
+.modal-header{
+    background-color:#323232 !important;
     border-radius: 0px;
     border: none;
 }
 
-.modal-header{
-    background-color: rgb(211, 169, 114) !important;
-    border-radius: 0px;
-    border: none;
+.modal-header h4{
+    
+    color: white !important
 }
 
 .modal-title{

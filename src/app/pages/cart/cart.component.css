@@ -33,20 +33,20 @@
 }
 
 .total{
-    background-color: tan;
+    background-color: #a7a7a7;
     color: black;
 }
 
 .iniciarS{    
     color: #ffffff;
-    background-color: chocolate;
-    border-color: chocolate;
+    background-color: black;
+    border-color: black;
 }
 
 .iniciarS:hover{    
-    color: white;
-    background-color: rgb(211, 169, 114);
-    border-color: chocolate;
+    color: #323232;
+    background-color: rgb(225, 225, 225);
+    border-color: black;
 }
 
 @media(max-width: 550px){

@@ -1,0 +1,15 @@
+.subCat{
+    background-color: #c7c7c7;
+    text-indent: 20px;
+    color: black;
+    cursor: pointer;
+}
+
+.cat{
+    color: black;
+    cursor: pointer;
+}
+
+.contentCat{
+    margin-bottom: 8px;
+}

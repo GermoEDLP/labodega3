@@ -31,6 +31,7 @@ import { SaleModalComponent } from './sale-modal/sale-modal.component';
 import { GraficosComponent } from './graficos/graficos.component';
 import { MenuComponent } from './menu/menu.component';
 import { RecomendComponent } from './recomend/recomend.component';
+import { MenuCatNewProdComponent } from './menu-cat-new-prod/menu-cat-new-prod.component';
 
 //Directivas
 import { ShowMegaMenuDirective } from './directives/show-mega-menu.directive';
@@ -60,7 +61,8 @@ const componentes = [
   RecomendComponent,
   ShowMegaMenuDirective,
   HideMegaMenuDirective,
-  AvatarDirective
+  AvatarDirective,
+  MenuCatNewProdComponent
 ]
 
 @NgModule({

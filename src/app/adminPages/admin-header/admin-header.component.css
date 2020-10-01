@@ -43,3 +43,7 @@ header{
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
   background-color:  #1a2732;
 }
+
+.subitme{
+  color: #969696 !important;
+}

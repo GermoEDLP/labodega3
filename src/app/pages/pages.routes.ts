@@ -1,6 +1,12 @@
-import { PagesComponent } from './pages.component';
+//Modulos de Angular
 import { RouterModule, Routes } from '@angular/router';
-import { AboutComponent } from './about/about.component';
+
+//Modulos propios
+
+//Modulos externos
+
+//Componentes
+import { PagesComponent } from './pages.component';
 import { ProductComponent } from './product/product.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
@@ -11,6 +17,10 @@ import { ShippComponent } from './buy/shipp/shipp.component';
 import { PayComponent } from './buy/pay/pay.component';
 import { ConfirmComponent } from './buy/confirm/confirm.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ContactComponent } from './contact/contact.component';
+
+//Otros
+
 
 
 
@@ -20,7 +30,7 @@ const pagesRoutes: Routes = [
         path: '',
         component: PagesComponent,
         children: [
-            { path: 'about', component: AboutComponent, data: { titulo: 'Nosotros' } },
+            { path: 'contact', component: ContactComponent, data: { titulo: 'Contacto' } }, 
             { path: 'product/:cod', component: ProductComponent, data: { titulo: 'Producto' } },            
             { path: 'search/:cod', component: SearchComponent, data: { titulo: 'Buscar' } },
             { path: 'home', component: HomeComponent, data: { titulo: 'Inicio' } },

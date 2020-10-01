@@ -6,7 +6,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Product, cartProduct, Comment } from '../../interfaces/interfaces';
+import { Product, cartProduct, Comment, Category, Sale } from '../../interfaces/interfaces';
 import { ProductosService } from '../../services/productos.service';
 import { CartService } from '../../services/cart.service';
 import { ShareInfoService } from '../../services/share-info.service';
@@ -16,6 +16,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Observable, Subscription, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
+import { CatsService } from '../../services/cats.service';
 
 @Component({
   selector: 'app-product',
@@ -32,6 +33,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   userSub: Subscription;
   commentSub: Subscription;
   prodSub: Subscription;
+  cats: Category[];
 
   private stop$: Subject<boolean> = new Subject();
 
@@ -46,6 +48,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     private prodScv: ProductosService,
     private router: Router,
     private cartSvc: CartService,
+    private catsSvc: CatsService,
     private shareService: ShareInfoService,
     private commSvc: CommentsService,
     private fb: FormBuilder,
@@ -63,6 +66,9 @@ export class ProductComponent implements OnInit, OnDestroy {
   arranque() {
     this.cod = this.route.snapshot.paramMap.get('cod');
     this.createCommentForm();
+    this.catsSvc.getCats().pipe(take(1)).subscribe((data: Category[])=>{
+      this.cats = data;
+    })
     this.prodScv.getProductById(this.cod).pipe(takeUntil(this.stop$)).subscribe((prod: Product) => {
       if (prod) {
         this.product = prod;
@@ -86,6 +92,16 @@ export class ProductComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl('/home');
       }
     });
+  }
+
+  ofertaProducto(sales: Sale[]): Sale{
+    let saleProd: Sale;
+    sales.forEach((sale: Sale)=>{
+      if(sale.cant < 5 && sale.show){
+        saleProd = sale;
+      }
+    })
+    return saleProd;
   }
 
   createCommentForm() {

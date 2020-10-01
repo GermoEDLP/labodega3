@@ -85,6 +85,12 @@ export class ProductosService {
     }
   }
 
+  cambiarEstadoVisual(id: string, state: boolean){
+    return this.collRef.doc(id).update({
+      show: !state
+    });
+  }
+
   actualizaProducto(prod: Product){    
     prod.image = this.downloadURL;
     return this.collRef.doc(prod.id).update(prod);

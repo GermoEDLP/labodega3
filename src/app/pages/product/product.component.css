@@ -13,20 +13,20 @@
 }
 
 .round-black-btn-2 {
-  background: #d3a972;
+  background: black;
   color: #fff;
   padding: 7px 45px;
-  display: inline-block;
-  border: 1.5px solid #d3a972;
+  display: inline-block; 
+  border: 1.5px solid black;
   margin-top: 5px;
   transition: all 0.5s ease-in-out 0s;
   cursor: pointer;
 }
 
 .round-black-btn-2:hover {
-  background: white;
-  border: 1.5px solid #d3a972;
-  color: #d3a972;
+  background:  rgb(225, 225, 225);
+  border: 1.5px solid black;
+  color: #323232;
 }
 
 .pd-wrap {
@@ -304,7 +304,7 @@
 }
 .promoted {
   padding: 6px;
-  background: #deb887;
+  background:#a7a7a7;
   color: #000;
   margin: 2px 0 10px 0;
   display: inline-block;
@@ -426,6 +426,25 @@
     margin-bottom: 20px;
     border: 1px solid transparent;
     border-radius: 4px;
+}
+
+.sale_price {
+  margin: 8px 15px 15px 0px;
+  font-size: 22px;
+  color: green;
+} 
+
+.price {
+  margin: 15px 15px;
+  text-decoration: line-through;
+  font-size: 15px;
+  color: rgb(238, 53, 53);
+}
+
+.price_only {
+  margin: 8px 15px 15px 0px;
+  font-size: 22px;
+  color: black;
 }
 
 

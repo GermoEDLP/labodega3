@@ -4,6 +4,15 @@
     <div class="row" [hidden]="!view">
       <div class="col-lg-12">
         <div class="row">
+          <div class="col-md-12">
+            <ol class="breadcrumb">
+              <li><a [routerLink]="['/home']">Inicio</a></li>
+              <li *ngIf="(product.cat | cats: cats : 'breadcrumbs') as cat"><a [routerLink]="['/search','categorie'+ cat.id]">{{cat.name}}</a></li>
+              <li class="active">{{product.name}} - {{product.desc}}</li>
+            </ol>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-md-5">
             <div id="slider" class="owl-carousel product-slider">
               <div class="item">
@@ -32,8 +41,20 @@
                     >{{ comments | commentShow: true : true }} Comentarios</span
                   >
                 </div>
-                <div class="product-price-discount">
-                  <span>$ {{ product.price }}</span>
+                <div>
+                  <div class="oferta" *ngIf="ofertaProducto(product.sale); else noOferta">
+                    <span class="sale_price" title="Precio unitario con oferta">
+                      <b>${{ ofertaProducto(product.sale).off }}</b>
+                    </span>
+                    <span class="price" title="Precio unitario de lista"
+                      >${{ product.price }}</span
+                    >
+                  </div>
+                  <ng-template #noOferta>
+                    <span class="price_only" title="Precio unitario de lista"
+                      ><b>${{ product.price }}</b></span
+                    >
+                  </ng-template>
                 </div>
               </div>
               <p>{{ product.desc }}</p>

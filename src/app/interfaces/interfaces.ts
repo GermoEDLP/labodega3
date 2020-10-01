@@ -141,6 +141,7 @@ export interface Options {
     bussnessName: string;
     buyAdress: string;
     buyBankAcount: string;
+    bussnessPhone: string;
     buyCBU: string;
     buyCUIL: string;
     buyEmailCount: string;
@@ -148,5 +149,7 @@ export interface Options {
     buyRazonSocial: string;
     buySchedule: string;
     deliverySchedule: string;
+    whatsappLink: string;
+    afipLink: string;
   }
   

@@ -21,11 +21,11 @@ export class FooterComponent implements OnInit {
   }
 
   arranque(){
-    this.catSvc.getCats().pipe(take(1)).subscribe((cats: Category[])=>{
+    this.catSvc.getCats().pipe(take(1)).subscribe((cats: Category[])=>{      
       this.cats = cats;
     });
     this.optSvc.getOptions().pipe(take(1)).subscribe((opt: Options)=>{
-      this.opt = opt;
+      this.opt = opt;      
     })
   }
 

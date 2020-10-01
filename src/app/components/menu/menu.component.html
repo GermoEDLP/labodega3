@@ -1,4 +1,10 @@
 <ul id="jetmenu" class="jetmenu custom visible-sm visible-md visible-lg">
+  <li class="left"
+  style="display: block">
+    <a [routerLink]="['/contact']">
+      CONTACTO
+    </a>
+  </li>
   <li
     class="left"
     style="display: block"
@@ -78,7 +84,7 @@
           </ul>
         </div> -->
 
-        <div class="visible-lg visible-md">
+        <!-- <div class="visible-lg visible-md">
           <div class="col2">
             <div class="menu-product" *ngIf="productos && ((cat.id | prodMegaMenu: productos).length > 0)">
               <div class="row" *ngIf="(cat.id | prodMegaMenu: productos)[0] as prod">
@@ -131,8 +137,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </li>
+  
 </ul>

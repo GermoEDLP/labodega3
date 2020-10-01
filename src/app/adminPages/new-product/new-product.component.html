@@ -5,7 +5,10 @@
         Nuevo producto
       </header>
       <header class="panel-heading" *ngIf="!nuevo">
-        {{ producto.name }}
+        {{ producto.name }} <span class="pull-right" (click)="cambiarEstado(producto.id, producto.show)"><span
+          class="label" [ngClass]="{'label-danger': !producto.show, 'label-success': producto.show}"
+          >{{ (producto.show | productList: 'list') }}</span
+        ></span>
       </header>
       <div class="panel-body">
         <div class="form">
@@ -150,11 +153,11 @@
             <div class="form-group">
               <div class="col-md-12">
                 <label for="ccomment" class="control-label">Categorias</label>
-                <div class="btn-group dropup" id="catBtn">
-                  <a class="btn btn-default" title="Seleccione una categoria"
-                    >Categorias</a
+                  <a class="btn btn-default" title="Seleccione una categoria" (click)="viewCatMenu = true"
+                    ><b>+</b> Agregar</a
                   >
-                  <a
+                  <app-menu-cat-new-prod [catList]="cats" [view]="viewCatMenu" (close)="revisarAgregarCat($event); viewCatMenu=false" ></app-menu-cat-new-prod>
+                  <!-- <a
                     class="btn btn-default dropdown-toggle"
                     data-toggle="dropdown"
                     href=""
@@ -174,8 +177,7 @@
                         {{ sub }}
                       </p>
                     </li>
-                  </ul>
-                </div>
+                  </ul> -->
                 <div
                   id="tagsinput_tagsinput"
                   class="tagsinput"
@@ -223,7 +225,7 @@
                 </div>
                 <img
                   *ngIf="!producto && !imgPreview"
-                  src="assets/img/producto-sin-imagen.png"
+                  src="https://firebasestorage.googleapis.com/v0/b/labodegabebidas.appspot.com/o/images%2Fproducto-sin-imagen.png?alt=media&token=e65817b4-1d74-4f9b-80a5-3bb155a4a3f1"
                   class="img_prod"
                 />
                 <img

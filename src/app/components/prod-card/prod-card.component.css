@@ -7,7 +7,7 @@
   float: right;
   font-size: 22px;
   color: green;
-}
+} 
 
 .price {
   margin: 15px 15px;
@@ -294,9 +294,10 @@
 .promo-link {
   text-align: center;
 }
+
 .promoted {
   padding: 6px;
-  background: #deb887;
+  background: #a7a7a7;
   color: #000;
   margin: 2px 0 10px 0;
   display: inline-block;
@@ -353,7 +354,8 @@ p {
   text-align: center;
   display: inline-table;
   color: #fff;
-  background: #d3a972;
+  background: black;
+  border: 1px solid black;
   padding: 10px;
   font-weight: bold;
   font-size: 20px;
@@ -365,7 +367,9 @@ p {
 }
 
 .discount:hover {
-  background: #eac99c;
+  background: rgb(225, 225, 225);
+  color: black;
+  border: 1px solid black;
 }
 
 .sale-unit {

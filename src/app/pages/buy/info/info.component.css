@@ -1,18 +1,18 @@
 .round-black-btn-2 {
-    background: #d3a972;
+    background: black;
     color: #fff;
     padding: 7px 45px;
     display: inline-block;
-    border: 1.5px solid #d3a972;
+    border: 1.5px solid black;
     margin-top: 5px;
     transition: all 0.5s ease-in-out 0s;
     cursor: pointer;
   }
   
   .round-black-btn-2:hover {
-    background: white;
-    border: 1.5px solid #d3a972;
-    color: #d3a972;
+    background: rgb(225, 225, 225);
+    border: 1.5px solid black;
+    color: black;
   }
 
   .errorF{
@@ -80,7 +80,7 @@
 }
 
 .total{
-  background-color: tan;
+  background-color: #a7a7a7;
   color: black;
 }
 

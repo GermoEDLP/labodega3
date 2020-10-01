@@ -27,6 +27,16 @@
       </div>
       <div class="col-md-6">
         <label for="cname" class="control-label"
+          >Telefono<span class="required">*</span></label
+        >
+        <input
+          type="text"
+          class="form-control"
+          formControlName="bussnessPhone"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="cname" class="control-label"
           >Email<span class="required">*</span></label
         >
         <input
@@ -70,6 +80,32 @@
           id="cemail"
           type="text"
           formControlName="deliverySchedule"
+          required
+        />
+      </div>
+    </div>
+
+    <h4>Links</h4>
+    <div class="form-group">
+      <div class="col-md-6">
+        <label for="cname" class="control-label"
+          >WhatsApp<span class="required">*</span></label
+        >
+        <input
+          type="text"
+          class="form-control"
+          formControlName="whatsappLink"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="cemail" class="control-label"
+          >AFIP<span class="required">*</span></label
+        >
+        <input
+          class="form-control"
+          id="cemail"
+          type="text"
+          formControlName="afipLink"
           required
         />
       </div>

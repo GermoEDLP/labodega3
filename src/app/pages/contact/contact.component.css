@@ -1,0 +1,26 @@
+.wrapper{
+    margin-top: 115px;
+}
+
+@media(max-width: 768px){
+    .wrapper{
+        margin-top: 15px;
+    }
+}
+
+.contact{
+    border: 1px solid black;
+    padding: 10px 20px 30px 20px;
+    margin: 30px auto;
+    border-radius: 5px;
+    width: 70%;
+}
+
+.alert-danger{
+    margin: 10px;
+    border-radius: 5px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    text-align: left;
+}

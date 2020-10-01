@@ -59,58 +59,74 @@
     </div>
     <div class="envio">
       <h3>Información de la compra</h3>
-      <table
-        class="table table-striped table-advance table-hover"
-        *ngIf="total"
-      >
-        <tbody>
-          <tr>
-            <th *ngIf="scrWidth > 550"></th>
-            <th *ngIf="scrWidth > 550">Producto</th>
-            <th *ngIf="scrWidth < 550">Prod.</th>
-            <th *ngIf="scrWidth > 550">Descripcion</th>
-            <th *ngIf="scrWidth > 550">Precio Unitario</th>
-            <th *ngIf="scrWidth < 550">$ <small>x</small> un.</th>
-            <th *ngIf="scrWidth > 550">Cantidad</th>
-            <th *ngIf="scrWidth < 550">Cant.</th>
-            <th *ngIf="scrWidth > 550">Subtotal</th>
-            <th *ngIf="scrWidth < 550">Subtot.</th>
-            <th>Acciones</th>
-          </tr>
-          <tr *ngFor="let producto of cart; let i = index">
-            <td class="sizeMin">
-              <img [src]="producto.img" alt="" class="img_cart" />
-            </td>
-            <td>{{ producto.name }}</td>
-            <td class="sizeMin">{{ producto.desc }}</td>
-
-            <td *ngIf="producto">$ {{ producto.price | number: "1.2-2" }}</td>
-
-            <td>{{ producto.cant }}</td>
-            <td>
-              <span *ngIf="!total.promo[i].sale.show">
-                $ {{ producto.cant * producto.price | number: "1.2-2" }}
-              </span>
-              <span *ngIf="total.promo[i].sale.show" class="sale">
-                $ {{ total.promo[i].subtotal | number: "1.2-2" }}
-                <button
-                  class="btn btn-default btn-info-sale"
-                  (click)="mostrarInfoSale(total.promo[i], producto.cant)"
+      <div class="table-responsive">
+        <table
+          class="table table-striped table-advance table-hover"
+          *ngIf="total"
+        >
+          <tbody>
+            <tr>
+              <th>Producto</th>
+              <th>Descripcion</th>
+              <th>$ <small>x</small> un.</th>
+              <th>Cant.</th>
+              <th>Subtot.</th>
+              <th>Acciones</th>
+            </tr>
+            <tr *ngFor="let producto of cart; let i = index">
+              <td>{{ producto.name }}</td>
+              <td class="sizeMin">{{ producto.desc }}</td>
+  
+              <td *ngIf="producto">$ {{ producto.price | number: "1.2-2" }}</td>
+  
+              <td>{{ producto.cant }}</td>
+              <td>
+                <span *ngIf="!total.promo[i].sale.show">
+                  $ {{ producto.cant * producto.price | number: "1.2-2" }}
+                </span>
+                <span *ngIf="total.promo[i].sale.show" class="sale">
+                  $ {{ total.promo[i].subtotal | number: "1.2-2" }}
+                  <button
+                    class="btn btn-default btn-info-sale"
+                    (click)="mostrarInfoSale(total.promo[i], producto.cant)"
+                  >
+                    <i class="fa fa-info"></i>
+                  </button>
+                </span>
+              </td>
+              <td>
+                <div class="btn-group">
+                  <a class="btn btn-danger" (click)="eliminar(producto.id)"
+                    ><i class="icon_close_alt2"></i
+                  ></a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="container" *ngIf="total">
+        <div class="row">
+          <div class="col-lg-4 col-md-4 col-md-offset-5">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <b>Subtotal </b><small>sin descuentos</small>
+                <span class="pull-right">{{ total.total | number: '1.2-2'}}$</span>
+              </li>
+              <li class="list-group-item">
+                <b>Descuentos </b>
+                <span class="pull-right sale"
+                  >{{ total.total - total.subtotal | number: '1.2-2'}}$</span
                 >
-                  <i class="fa fa-info"></i>
-                </button>
-              </span>
-            </td>
-            <td>
-              <div class="btn-group">
-                <a class="btn btn-danger" (click)="eliminar(producto.id)"
-                  ><i class="icon_close_alt2"></i
-                ></a>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </li>
+              <li class="list-group-item total">
+                <b>Total </b><small>con descuentos</small>
+                <span class="pull-right">{{ total.subtotal | number: '1.2-2'}}$</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="text-center" style="margin-top: 15px;">
