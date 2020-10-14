@@ -14,9 +14,10 @@ export class SearchPipe implements PipeTransform {
       return false;
     }else{
       termino = termino.toLocaleLowerCase();
-      return value.filter((prod: Product)=>{
-        return prod.name.toLocaleLowerCase().includes(termino) || prod.desc.toLocaleLowerCase().includes(termino);
-      })
+      let array = value.filter((prod: Product)=>{
+        prod.name.toLocaleLowerCase().includes(termino) || prod.desc.toLocaleLowerCase().includes(termino);
+      });
+      return array;
     }
   }
 

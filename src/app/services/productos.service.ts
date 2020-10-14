@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product, Category } from '../interfaces/interfaces';
+import { Product, Category, Sale } from '../interfaces/interfaces';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -43,8 +43,8 @@ export class ProductosService {
     ).valueChanges();
   }
 
-  getProductsForRecomend(){
-      return this.db.collection('products', ref => ref.orderBy('name').limit(3)).valueChanges();
+  getProductsForRecomend(order: string, cant: number){
+      return this.db.collection('products', ref => ref.orderBy(order).limit(cant)).valueChanges();
   }
 
   creaProductoYSubeImagen(prod: Product, image: any, noFoto: boolean){
@@ -89,6 +89,45 @@ export class ProductosService {
     return this.collRef.doc(id).update({
       show: !state
     });
+  }
+
+  cargarLista(prod: any){
+    let cat: string[];
+    let sale: Sale[];
+    if(prod.subcat == ''){
+      cat = [prod.cat]
+    }else{
+      cat = [prod.cat, prod.subcat]
+    }
+    if(prod.price_box == ''){
+      sale = [];
+    }else{
+      sale = [        
+        {
+          cant: prod.cant,
+          off: parseFloat(prod.price_box),
+          show: true,
+          name: 'Precio',
+          desc: 'x caja'
+        }
+      ]
+    }
+
+    let prodSet: Product = {
+      id: this.db.createId(),
+      name: prod.name,
+      cat: cat,
+      date: new Date(),
+      desc: prod.desc,
+      image: 'https://firebasestorage.googleapis.com/v0/b/labodegabebidas.appspot.com/o/images%2Fproducto-sin-imagen.png?alt=media&token=e65817b4-1d74-4f9b-80a5-3bb155a4a3f1',
+      order: true,
+      price: parseFloat(prod.price),
+      show: true,
+      stock: 0,
+      sale: sale
+    }
+
+    return this.db.collection('products').doc(prodSet.id).set(prodSet);
   }
 
   actualizaProducto(prod: Product){    

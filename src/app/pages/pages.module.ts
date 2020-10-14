@@ -11,6 +11,7 @@ import { PipesModule } from '../pipes/pipes.module';
 
 //Modulos externos
 import { RecaptchaModule } from 'ng-recaptcha';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 //Componentes
 import { CartComponent } from './cart/cart.component';
@@ -47,7 +48,8 @@ const components = [
     ComponentsModule,
     BuyModule,
     PipesModule,
-    RecaptchaModule
+    RecaptchaModule,
+    Ng2SearchPipeModule
   ],
   exports: components
 })

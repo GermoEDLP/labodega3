@@ -40,10 +40,11 @@
           *ngIf="searchTerm.length > 2 && viewSearchPreview"
           (mouseenter)="onSearchPreview = true"
           (mouseleave)="onSearchPreview = false"
+          style="overflow: scroll;"
         >
           <p><b>PRODUCTOS</b></p>
           <ul>
-            <li *ngFor="let item of productos | search: searchTerm">
+            <li *ngFor="let item of productos | filter: searchTerm">
               <a
                 href=""
                 [routerLink]="['/product', item.id]"
@@ -56,18 +57,6 @@
                   >
                 </p>
                 <p class="searchDesc">{{ item.desc }}</p>
-              </a>
-            </li>
-          </ul>
-          <p><b>CATEGORIAS</b></p>
-          <ul>
-            <li *ngFor="let item of categorias | searchCat: searchTerm">
-              <a
-                href=""
-                [routerLink]="['/search', item.id]"
-                (click)="searchTerm = ''"
-              >
-                <p class="searchName">{{ item.cat }}</p>
               </a>
             </li>
           </ul>
@@ -396,7 +385,7 @@
       >
         <p><b>PRODUCTOS</b></p>
         <ul>
-          <li *ngFor="let item of productos | search: searchTerm">
+          <li *ngFor="let item of productos | filter: searchTerm">
             <a
               href=""
               [routerLink]="['/product', item.id]"

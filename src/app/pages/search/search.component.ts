@@ -57,12 +57,7 @@ export class SearchComponent implements OnInit {
     } else {
       this.termino = cod;
       this._prodService.getProducts().subscribe((lista: Product[]) => {
-        if(price){
-          this.porPrecio = Number(price);
-          this.lista = this.buscarProductosPorTermino(cod, lista).filter((prod: Product)=>prod.price>this.precios[price].min && prod.price<=this.precios[price].max);
-        }else{
-          this.lista = this.buscarProductosPorTermino(cod, lista);
-        }
+        this.lista = lista;
         
       });
     }

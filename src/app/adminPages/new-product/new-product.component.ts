@@ -9,6 +9,7 @@ import { Product, Category, Sale } from '../../interfaces/interfaces';
 // CK Editor
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
+import { listaCompleta } from 'src/app/temps/lista';
 
 @Component({
   selector: 'app-new-product',
@@ -412,4 +413,18 @@ export class NewProductComponent implements OnInit {
       this.agregarCategoria(event.name, event.id)
     }
   }
+
+  // lista = listaCompleta;
+
+  // cargarLista(){
+  //  this.lista.forEach((prod)=>{
+  //   this.prodService.cargarLista(prod).then((data)=>{
+  //     console.log(data);
+      
+  //   }).catch((err)=>{
+  //   console.log('Error: ', err);
+  //   });
+  //  })
+  // }
+
 }

@@ -11,6 +11,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NgpSortModule } from "ngp-sort-pipe";
 import { ChartsModule } from 'ng2-charts';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 //Componentes
 import { FooterComponent } from './footer/footer.component';
@@ -75,7 +76,8 @@ const componentes = [
     NgxPaginationModule,
     NgpSortModule,
     ChartsModule,
-    PipesModule
+    PipesModule,
+    Ng2SearchPipeModule
   ],
   exports: componentes
 })

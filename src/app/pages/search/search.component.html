@@ -70,7 +70,7 @@
           </a>
           <br />
           <h4 class="title-info"><b>PRODUCTOS</b></h4>
-          <app-prod-card [items]="lista"></app-prod-card>
+          <app-prod-card [items]="lista | filter: termino"></app-prod-card>
         </div>
         <div *ngIf="categoria && cats && !termino">
           <h4 class="title-info">
