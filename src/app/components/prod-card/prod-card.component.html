@@ -75,12 +75,12 @@
               <b>${{ ofertaProducto(item.sale).off }}</b>
             </span>
             <span class="price" title="Precio unitario de lista"
-              >${{ item.price }}</span
+              >${{ item.price | number: '1.2-2' }}</span
             >
           </div>
           <ng-template #noOferta>
             <span class="price_only" title="Precio unitario de lista"
-              ><b>${{ item.price }}</b></span
+              ><b>${{ item.price | number: '1.2-2' }}</b></span
             >
           </ng-template>
           <div class="discount btn-block" (click)="agregarACarrito(item)">

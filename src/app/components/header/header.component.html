@@ -299,12 +299,11 @@
         <li class="dropdown"></li>
         <li
           class="dropdown"
-          *ngIf="userComplete && user$ | async as user; else noSession"
+          *ngIf="userComplete && user$ | async as user; else noSessionCollapse"
         >
           <a
             data-toggle="dropdown"
             class="dropdown-toggle"
-            href="#"
             role="button"
             aria-haspopup="true"
             aria-expanded="false"
@@ -366,8 +365,8 @@
             >{{ menuItem.name | uppercase }}</a
           >
           <ul class="dropdown-menu animated flipInX">
-            <li *ngFor="let subItem of menuItem.subs">
-              <a (click)="colapsarMenu()" [routerLink]="['/admin', subItem]">{{
+            <li *ngFor="let subItem of menuItem.subs; let i = index">
+              <a (click)="colapsarMenu()" [routerLink]="['/search', 'categorie'+menuItem.id+'subs'+i]">{{
                 subItem | uppercase
               }}</a>
             </li>
@@ -415,6 +414,34 @@
         </ul>
       </div>
     </div>
+    <ng-template #noSessionCollapse>
+      <li class="dropdown">
+        <a data-toggle="dropdown"
+        class="dropdown-toggle"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false">
+          <span class="profile-ava">
+            <img id="img_avatar" src="assets/img/avatars/1.jpg" />
+          </span>
+          <span class="username">Anonimo</span>
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu animated flipInX"  (click)="colapsarMenu()">
+          <div class="log-arrow-up"></div>
+          <li>
+            <a href="#" routerLink="/cart"
+              ><i class="icon_cart_alt"></i> Carrito</a
+            >
+          </li>
+          <li>
+            <a (click)="loginModalDisplay = !loginModalDisplay"
+              ><i class="icon_key_alt"></i> Iniciar sesión</a
+            >
+          </li>
+        </ul>
+      </li>
+    </ng-template>
     <!-- /.navbar-collapse -->
   </div>
   <!-- /.container-fluid -->

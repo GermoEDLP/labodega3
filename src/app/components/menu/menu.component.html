@@ -84,60 +84,65 @@
           </ul>
         </div> -->
 
-        <!-- <div class="visible-lg visible-md">
+         <div class="visible-lg visible-md">
           <div class="col2">
             <div class="menu-product" *ngIf="productos && ((cat.id | prodMegaMenu: productos).length > 0)">
               <div class="row" *ngIf="(cat.id | prodMegaMenu: productos)[0] as prod">
-                <div class="col-md-6">
-                  <a [routerLink]="['/product', prod.id]" >
-                    <img [src]="prod.image" alt="" />
-                  </a>
-                </div>
-                <div class="col-md-6">
-                  <div class="name">
-                    <h3>
-                      <a [routerLink]="['/product', prod.id]" 
-                        >{{prod.name | uppercase}}</a
-                      >
-                    </h3>
-                  </div>
-
-                  <div class="small-buy">
-                    <div class="promo-link promoted text-center">
-                      <strong>
-                        COMPRÁ {{ ofertaCaja(prod.sale).cant }} Y PAGÁS
-                      </strong>
-
-                      <br />
-
-                      <span class="product-price">
-                        ${{ ofertaCaja(prod.sale).off }}
-                      </span>
-
-                      c/u.
-
-                      <span class="discount-arrow arrow-left">
-                        <p>
-                          %{{
-                            (1 - ofertaCaja(prod.sale).off / prod.price) * 100
-                              | number: "1.0-0"
-                          }}
-                          OFF
-                        </p>
-                      </span>
-
-                      <br />
-                    </div>
-
-                    <a class="discount btn-block" (click)="agregarACarrito(prod, ofertaCaja(prod.sale).cant )">
-                      <p>Comprar</p>
+                  <div class="col-md-6">
+                    <a [routerLink]="['/product', prod.id]" >
+                      <img [src]="prod.image" alt="" />
                     </a>
                   </div>
-                </div>
+                  <div class="col-md-6">
+                    <div class="name">
+                      <h3>
+                        <a [routerLink]="['/product', prod.id]" 
+                          >{{prod.name | uppercase}}</a
+                        >
+                      </h3>
+                    </div>
+  
+                    <div class="small-buy">
+                      <div class="promo-link promoted text-center"  *ngIf="prod.sale[0]; else noOferta">
+                        <strong>
+                          COMPRÁ {{ prod.sale[0].cant }} Y PAGÁS
+                        </strong>
+  
+                        <br />
+  
+                        <span class="product-price">
+                          ${{ prod.sale[0].off | number: '1.2-2' }}
+                        </span>
+  
+                        c/u.
+  
+                        <span class="discount-arrow arrow-left">
+                          <p>
+                            %{{
+                              (1 - ofertaCaja(prod.sale).off / prod.price) * 100
+                                | number: "1.0-0"
+                            }}
+                            OFF
+                          </p>
+                        </span>
+  
+                        <br />
+                      </div>
+                      <ng-template #noOferta style="text-align: center;">
+                        <span class="price_only" title="Precio unitario de lista"
+                          ><b>${{ prod.price | number: '1.2-2' }}</b></span
+                        >
+                      </ng-template>
+  
+                      <a class="discount btn-block" (click)="agregarACarrito(prod, ofertaCaja(prod.sale).cant )">
+                        <p>Comprar</p>
+                      </a>
+                    </div>
+                  </div>
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </li>

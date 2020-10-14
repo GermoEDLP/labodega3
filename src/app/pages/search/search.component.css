@@ -2,6 +2,12 @@
   margin-top: 115px;
 }
 
+@media(max-width: 768px){
+  .wrapper{
+      margin-top: 20px;
+  }
+}
+
 .slider-size {
   height: 200px !important;
 }

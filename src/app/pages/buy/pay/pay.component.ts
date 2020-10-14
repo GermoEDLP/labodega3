@@ -20,6 +20,7 @@ export class PayComponent implements OnInit {
   }
 
   arranque() {
+    window.scrollTo(0,0);
     if (localStorage.getItem('buyOrder')) {
       this.data = JSON.parse(localStorage.getItem('buyOrder'));
       this.charge = this.checkExpirancy();

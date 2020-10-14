@@ -41,6 +41,7 @@ export class ConfirmComponent implements OnInit {
   ngOnInit(): void {}
 
   arranque() {
+    window.scrollTo(0,0);
     if (localStorage.getItem('buyOrder')) {
       this.data = JSON.parse(localStorage.getItem('buyOrder'));
       if (this.checkExpirancy()) {

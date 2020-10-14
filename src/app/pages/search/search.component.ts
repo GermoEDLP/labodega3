@@ -36,6 +36,7 @@ export class SearchComponent implements OnInit {
   }
 
   async arranque() {
+    window.scrollTo(0,0);
     this.termino = null;
     this.categoria = [];
     let cod: string = this.route.snapshot.paramMap.get('cod');

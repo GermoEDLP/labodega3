@@ -18,6 +18,7 @@ export class InfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
     this.cargarFormulario();
     this.completarFormulario();
   }
