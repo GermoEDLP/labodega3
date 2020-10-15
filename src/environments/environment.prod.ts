@@ -24,7 +24,7 @@ export const environment = {
       ]
     }]
   },
-  mpUrl: "http://localhost:5000/labodegabebidas/us-central1/mail",
+  mpUrl: "https://us-central1-labodegabebidas.cloudfunctions.net/mail",
   price: [
     {
       min: '100',
