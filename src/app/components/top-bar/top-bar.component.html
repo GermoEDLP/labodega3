@@ -1,0 +1,16 @@
+<div class="top-bar text-center">
+    <div style="display: inline-flex;">
+        <div style="display: inline-flex;" *ngIf="options">
+            <span class="optText visible-md visible-lg visible-sm">{{options.buyEmailCount}}</span>
+            <span class="optText visible-md visible-lg visible-sm">|</span>
+            <span class="optText"><a [href]="options.whatsappLink" class="whats"><i class="fa fa-whatsapp whatsapp"></i>{{options.bussnessPhone}}</a></span>
+            <span class="optText visible-md visible-lg visible-sm">|</span>
+            <span class="optText visible-md visible-lg visible-sm">{{options.buySchedule}}</span>
+            
+        </div>
+        <div>
+            <span class="visible-xs" style="padding-left: 130px;" (click)="up()"><i class="fa fa-angle-up" aria-hidden="true"></i></span>
+        </div>
+    </div>
+    
+</div>
