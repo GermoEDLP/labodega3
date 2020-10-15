@@ -5,7 +5,7 @@
       data-toggle="collapse"
       data-target="#bs-example-navbar-collapse-1"
     >
-      <i class="icon_menu"></i>
+      <i class="fa fa-bars"></i>
     </div>
   </div>
 
@@ -70,7 +70,7 @@
     <ul class="nav pull-right top-menu">
       <li>
         <a [routerLink]="['/cart']">
-          <i class="icon_cart_alt"></i>
+          <i class="fa fa-shopping-cart"></i>
           <span class="badge bg-important">{{ cartCount }}</span>
         </a>
       </li>
@@ -83,7 +83,7 @@
       <!-- Cart start-->
       <li id="cart_notification" class="dropdown">
         <a data-toggle="dropdown" class="dropdown-toggle">
-          <i class="icon_cart_alt"></i>
+          <i class="fa fa-shopping-cart"></i>
           <span class="badge bg-important">{{ cartCount }}</span>
         </a>
         <ul class="dropdown-menu extended notification" *ngIf="total">
@@ -135,22 +135,22 @@
           <div class="log-arrow-up"></div>
           <li class="eborder-top">
             <a [routerLink]="['/profile']"
-              ><i class="icon_profile"></i> Mi cuenta</a
+              ><i class="fa fa-user-circle"></i> Mi cuenta</a
             >
           </li>
           <li>
             <a href="#" routerLink="/cart"
-              ><i class="icon_cart_alt"></i> Carrito</a
+              ><i class="fa fa-shopping-cart"></i> Carrito</a
             >
           </li>
           <li *ngIf="userComplete.role == 'ADMIN_ROLE'">
-            <a href="http://localhost:4200/#/admin"
+            <a [routerLink]="['/admin']"
               ><i class="fa fa-gears"></i> Opciones de ADMIN</a
             >
           </li>
           <li>
             <a (click)="logout()" href="#"
-              ><i class="icon_key_alt"></i> Cerrar sesión</a
+              ><i class="fa fa-times-circle"></i> Cerrar sesión</a
             >
           </li>
         </ul>
@@ -338,7 +338,7 @@
             </li>
             <li>
               <a (click)="logout(); colapsarMenu()" href="#"
-                ><i class="icon_key_alt"></i> Cerrar sesión</a
+                ><i class="fa fa-times-circle"></i> Cerrar sesión</a
               >
             </li>
           </ul>
@@ -431,12 +431,12 @@
           <div class="log-arrow-up"></div>
           <li>
             <a href="#" routerLink="/cart"
-              ><i class="icon_cart_alt"></i> Carrito</a
+              ><i class="fa fa-shopping-cart"></i> Carrito</a
             >
           </li>
           <li>
             <a (click)="loginModalDisplay = !loginModalDisplay"
-              ><i class="icon_key_alt"></i> Iniciar sesión</a
+              ><i class="fa fa-sign-in"></i> Iniciar sesión</a
             >
           </li>
         </ul>

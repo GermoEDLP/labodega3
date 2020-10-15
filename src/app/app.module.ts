@@ -22,11 +22,26 @@ import { MayoresComponent } from './mayores/mayores.component';
 import { AppComponent } from './app.component';
 
 // IndexDB
-import { NgxIndexedDBModule } from 'ngx-indexed-db';
+import { DBConfig, NgxIndexedDBModule } from 'ngx-indexed-db';
 
 // Otros
 import { environment } from '../environments/environment';
 
+const dbConfig: DBConfig =  {
+  name: 'LaBodega',
+  version: 1,
+  objectStoresMeta: [{
+    store: 'cart',
+    storeConfig: { keyPath: 'id', autoIncrement: true },
+    storeSchema: [
+      { name: 'name', keypath: 'name', options: { unique: false } },
+      { name: 'cant', keypath: 'cant', options: { unique: false } },
+      { name: 'price', keypath: 'price', options: { unique: false } },
+      { name: 'desc', keypath: 'desc', options: { unique: false } },
+      { name: 'sale', keypath: 'sale', options: { unique: false } }       
+    ]
+  }]
+}
 
 @NgModule({
   declarations: [
@@ -44,7 +59,7 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    NgxIndexedDBModule.forRoot(environment.dbConfig)
+    NgxIndexedDBModule.forRoot(dbConfig)
 
   ],
   providers: [],
