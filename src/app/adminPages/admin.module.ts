@@ -11,6 +11,7 @@ import { PipesModule } from '../pipes/pipes.module';
 
 //Modulos externos
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 //Componentes
 import { AdminComponent } from './admin.component';
@@ -57,7 +58,8 @@ const adminComponents = [
     FormsModule,
     ReactiveFormsModule,
     CKEditorModule,
-    PipesModule
+    PipesModule,
+    Ng2SearchPipeModule
   ],
   exports:adminComponents
 })

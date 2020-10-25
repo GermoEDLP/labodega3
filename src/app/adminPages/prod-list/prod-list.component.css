@@ -31,3 +31,25 @@ a.nombre:hover{
 .sinStock:hover{
     background: #ff63475c !important;
 }
+
+.order li{
+    cursor: pointer;
+}
+
+.order li a {
+color: black !important;
+}
+
+.selected{
+    text-decoration: underline;
+    color: midnightblue;
+}
+
+.select{
+cursor: pointer;
+}
+
+.select:hover{
+    color: black;
+    text-decoration: underline;
+}

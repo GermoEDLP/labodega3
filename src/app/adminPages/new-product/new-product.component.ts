@@ -170,7 +170,6 @@ export class NewProductComponent implements OnInit {
     let prodSave: Product = await {
       name: this.prodForm.controls['name'].value,
       desc: this.prodForm.controls['desc'].value,
-      longDesc: this.prodForm.controls['longDesc'].value,
       stock: this.prodForm.controls['stock'].value,
       price: this.prodForm.controls['price'].value,
       sale: this.sales,
@@ -178,6 +177,12 @@ export class NewProductComponent implements OnInit {
       cat: this.condensarCategorias(this.categoriasDelProd),
       show: true,
     };
+
+    if(this.prodForm.controls['longDesc'].value == undefined){
+      prodSave.longDesc = '';
+    }else{      
+      prodSave.longDesc = this.prodForm.controls['longDesc'].value
+    }
 
     if (this.code == 'nuevo') {
       let noFoto = false;
@@ -280,8 +285,17 @@ export class NewProductComponent implements OnInit {
   async agregarPromo() {
     const { value: formValues } = await Swal.fire({
       title: 'Nueva Promoción',
-      html: `<input type="text" name="nombre" id="nombre" class="swal2-input" placeholder="Nombre de la promo" maxlength="10" title="Este nombre debe ser corto e identificar correctamente la promoción. Ejemplo: 2x1, 3x2, 50% 2da u., etc">
-        <input type="text" name="desc" id="desc" class="swal2-input" placeholder="Descripcion de la promo" maxlength="15" title="Aqui se describe la promoción. Tambien debe ser corto. Ejemplo: Para 2x1, se puede colocar 'Llevas 2, pagas 1'">
+      html: //html
+      `<select class="form-control" name="nombre" id="nombre" class="swal2-input">
+      <option value="3x2">3x2</option>
+      <option value="4x3">4x3</option>
+      <option value="50%">50%</option>
+      <option value="40%">40%</option>
+      <option value="30%">30%</option>
+      <option value="20%">20%</option>
+      <option value="10%">10%</option>
+    </select>
+       <input type="text" name="desc" id="desc" class="swal2-input" placeholder="Descripcion de la promo" maxlength="15" title="Aqui se describe la promoción. Tambien debe ser corto. Ejemplo: Para 2x1, se puede colocar 'Llevas 2, pagas 1'">
         <input type="number" name="cant" id="cant" class="swal2-input" placeholder="Cantidad minima de producto" style="max-width: none !important;" title="Aqui especificaremos la cantidad de productos que debe adquirir el usuario para que aplique la promo. Por ejemplo: Para un 3x2, son necesarias un minimo de 3 unidades.">
         <input type="number" name="off" id="off" class="swal2-input" placeholder="Precio final pro producto" style="max-width: none !important;" title="Aqui colocaremos el precio final del producto afectado por la promocion. Por ejemplo: En un 2x1, el precio seria la mitad (50% off)">
         <br>

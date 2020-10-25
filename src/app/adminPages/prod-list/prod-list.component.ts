@@ -14,6 +14,7 @@ export class ProdListComponent implements OnInit {
   charge = false;
   categorias: Category[];
   searchList: string = 'name';
+  search: string;
 
   constructor(private prodService: ProductosService, private cats: CatsService) {}
 
