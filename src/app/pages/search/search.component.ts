@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductosService } from '../../services/productos.service';
 import { Product, Category, FilterCat } from '../../interfaces/interfaces';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { CatsService } from '../../services/cats.service';
 import { environment } from '../../../environments/environment.prod';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   lista: Product[] = [];
   cats: Category[];
   termino: string;
@@ -20,6 +22,7 @@ export class SearchComponent implements OnInit {
   prodsCat: Product[];
   porPrecio: any = null
   precios = environment.price;
+  stop$: Subject<void> = new Subject<void>();
 
   constructor(
     private _prodService: ProductosService,
@@ -46,7 +49,7 @@ export class SearchComponent implements OnInit {
       cod = cod.slice(9);
       this.categoria[0] = cod;
       this._prodService
-        .getProductByCat(this.categoria[0])
+        .getProductByCat(this.categoria[0]).pipe(takeUntil(this.stop$))
         .subscribe((prodsCat: Product[]) => {
           if(price){
             this.porPrecio = Number(price);
@@ -55,14 +58,21 @@ export class SearchComponent implements OnInit {
             this.prodsCat = prodsCat;
           }
         });
+    }else if(cod.includes('promo')){
+      cod = cod.slice(5);
+      this.termino = cod;
+      this._prodService.getProducts().pipe(takeUntil(this.stop$)).subscribe((lista: Product[]) => {
+        this.lista = lista;
+        
+      });
     } else {
       this.termino = cod;
-      this._prodService.getProducts().subscribe((lista: Product[]) => {
+      this._prodService.getProducts().pipe(takeUntil(this.stop$)).subscribe((lista: Product[]) => {
         this.lista = lista;
         
       });
     }
-    this.catsSvc.getCats().subscribe(async (cats: Category[]) => {
+    this.catsSvc.getCats().pipe(takeUntil(this.stop$)).subscribe(async (cats: Category[]) => {
       this.cats = await cats;
       this.categoriasFiltradas = this.buscarCategoriasPorTermino(cod, cats);
     });
@@ -102,4 +112,10 @@ export class SearchComponent implements OnInit {
     });
     return filtrado;
   }
+
+  ngOnDestroy(){
+    this.stop$.next();
+    this.stop$.complete();
+  }
+
 }

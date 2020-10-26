@@ -34,6 +34,7 @@ import { MenuComponent } from './menu/menu.component';
 import { RecomendComponent } from './recomend/recomend.component';
 import { MenuCatNewProdComponent } from './menu-cat-new-prod/menu-cat-new-prod.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
+import { PromoInlineComponent } from './promo-inline/promo-inline.component';
 
 //Directivas
 import { ShowMegaMenuDirective } from './directives/show-mega-menu.directive';
@@ -65,7 +66,8 @@ const componentes = [
   HideMegaMenuDirective,
   AvatarDirective,
   MenuCatNewProdComponent,
-  TopBarComponent
+  TopBarComponent,
+  PromoInlineComponent
 ]
 
 @NgModule({

@@ -19,6 +19,9 @@ import { ConfirmComponent } from './buy/confirm/confirm.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ContactComponent } from './contact/contact.component';
 
+// Guards
+import { BuyGuard } from '../guards/buy.guard';
+
 //Otros
 
 
@@ -36,7 +39,7 @@ const pagesRoutes: Routes = [
             { path: 'home', component: HomeComponent, data: { titulo: 'Inicio' } },
             { path: 'cart', component: CartComponent, data: { titulo: 'Carrito' } },
             { path: 'profile', component: ProfileComponent, data: { titulo: 'Perfil' } },
-            { path: 'buy', component: BuyComponent, 
+            { path: 'buy', component: BuyComponent, canActivate: [BuyGuard],
             children: [
                 { path: 'info', component: InfoComponent, data: { titulo: 'Información del cliente' } },
                 { path: 'shipp', component: ShippComponent, data: { titulo: 'Información del Envio' } },

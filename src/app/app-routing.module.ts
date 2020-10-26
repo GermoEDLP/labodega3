@@ -13,12 +13,14 @@ import { SalesComponent } from './adminPages/sales/sales.component';
 import { SaleComponent } from './adminPages/sale/sale.component';
 import { ConfSaleComponent } from './adminPages/conf-sale/conf-sale.component';
 import { HistoryComponent } from './adminPages/history/history.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: 'mayores', component: MayoresComponent },
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate: [AdminGuard],
     children: [
       {path: 'list', component: ProdListComponent},
       {path: 'stadistics', component: StadisticsComponent},
