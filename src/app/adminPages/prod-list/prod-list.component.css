@@ -53,3 +53,15 @@ cursor: pointer;
     color: black;
     text-decoration: underline;
 }
+
+.catName{
+    margin: 0px 15px;
+}
+.row{
+    margin-bottom: 15px;
+}
+
+.catClose{
+    padding: 3px;
+    cursor: pointer;
+}

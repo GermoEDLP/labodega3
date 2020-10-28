@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../../components/components.module';
 import { StepsComponent } from './steps/steps.component';
 
+import { RecaptchaModule } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { StepsComponent } from './steps/steps.component';
     CommonModule,
     PAGES_ROUTES,
     ReactiveFormsModule,
-    ComponentsModule
+    ComponentsModule,
+    RecaptchaModule
   ],
   exports: [
     BuyComponent,

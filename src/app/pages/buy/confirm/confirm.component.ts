@@ -27,6 +27,9 @@ export class ConfirmComponent implements OnInit {
   data: Venta;
   charge: boolean = false;
   cart: cartProduct[];
+  
+  recaptchaResponse: string;
+  catpcha: boolean = false;
 
   constructor(
     private router: Router,
@@ -50,6 +53,12 @@ export class ConfirmComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/home');
     }
+  }
+
+  resolved(captchaResponse: string) {
+    console.log(captchaResponse);
+
+    this.recaptchaResponse = captchaResponse;
   }
 
   checkExpirancy(): boolean{
@@ -150,32 +159,36 @@ export class ConfirmComponent implements OnInit {
       return;
     }
     this.data.products = this.total;
-    console.log(this.data);
-    Swal.fire({
-      icon: 'info',
-      title: 'Aguarde un momento por favor, estamos procesando su solicitud',
-      showConfirmButton: false
-    })
-    this.paySvc.newVenta(this.data).then((data: Observable<any>)=>{
-      data.subscribe((data)=>{
-        console.log(data);
-        
-        Swal.close();
-        this.data.products.promo.forEach((promo: Promo)=>{
-          this.prodSvc.variarStock(promo.prod.idF, promo.prod.cant, false);
-        })
-        let mensaje = this.mensajePorMetodoDePago(this.data, data);
-        if(this.data.payMethod.includes('mp')){
-          window.open(data.url.init_point);
-        }
-        Swal.fire(mensaje).then(()=>{
-          this.shareService.emitChange('cargar');
-          this.cartSvc.deleteAll();
-          localStorage.removeItem('buyOrder');
-          this.router.navigateByUrl('/home');
-        });
+    if (this.recaptchaResponse) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Aguarde un momento por favor, estamos procesando su solicitud',
+        showConfirmButton: false
       })
-    })
+      this.paySvc.newVenta(this.data).then((data: Observable<any>)=>{
+        data.subscribe((data)=>{
+          console.log(data);
+          
+          Swal.close();
+          this.data.products.promo.forEach((promo: Promo)=>{
+            this.prodSvc.variarStock(promo.prod.idF, promo.prod.cant, false);
+          })
+          let mensaje = this.mensajePorMetodoDePago(this.data, data);
+          if(this.data.payMethod.includes('mp')){
+            window.open(data.url.init_point);
+          }
+          Swal.fire(mensaje).then(()=>{
+            this.shareService.emitChange('cargar');
+            this.cartSvc.deleteAll();
+            localStorage.removeItem('buyOrder');
+            this.router.navigateByUrl('/home');
+          });
+        })
+      })
+    } else {
+      this.catpcha = true;
+    }
+    
   }
 
   mensajePorMetodoDePago(venta: Venta, data: any){

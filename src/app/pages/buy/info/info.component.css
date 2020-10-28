@@ -102,3 +102,12 @@
   }
 
 }
+
+.recaptcha-container{
+  text-align: center;
+}
+
+.recaptcha{
+  display: inline-block;
+  margin-top: 15px;
+}

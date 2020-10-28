@@ -6,6 +6,18 @@
     .wrapper{
         margin-top: 45px;
     }
+    .contact{
+        border: 1px solid black;
+    padding: 0px !important;
+    margin: 0px !important;
+    border-radius: 5px;
+    width: 100% !important;
+    }
+    .recaptcha{
+        margin-left: -20px !important;
+        margin-top: -7px !important;
+        transform: scale(0.8) !important;
+      }
 }
 
 .contact{
@@ -16,6 +28,8 @@
     width: 70%;
 }
 
+
+
 .alert-danger{
     margin: 10px;
     border-radius: 5px;
@@ -24,3 +38,12 @@
     border-color: #ebccd1;
     text-align: left;
 }
+
+.recaptcha-container{
+    text-align: center;
+  }
+  
+  .recaptcha{
+    display: inline-block;
+    margin-top: 15px;
+  }

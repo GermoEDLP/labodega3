@@ -1,7 +1,5 @@
 <app-steps [step]="4"></app-steps>
-<h3>
-  Confirma toda la información y procede con la compra
-</h3>
+<h3>Confirma toda la información y procede con la compra</h3>
 
 <div *ngIf="charge; else loading">
   <div class="envio">
@@ -39,8 +37,14 @@
     <div class="envio">
       <div *ngIf="data.payMethod == 'cash'">
         <h3>Metodo de Pago: Efectivo</h3>
-        <p *ngIf="!data.shipp">Se abonará el monto total al momento de retirar el producto por la sucursal.</p>
-        <p *ngIf="data.shipp">Se le abonará el monto total al repartidor al momento que se entregue el pedido.</p>
+        <p *ngIf="!data.shipp">
+          Se abonará el monto total al momento de retirar el producto por la
+          sucursal.
+        </p>
+        <p *ngIf="data.shipp">
+          Se le abonará el monto total al repartidor al momento que se entregue
+          el pedido.
+        </p>
       </div>
       <div *ngIf="data.payMethod == 'bank'">
         <h3>Metodo de Pago: Transferencia bancaria</h3>
@@ -53,9 +57,11 @@
       </div>
       <div *ngIf="data.payMethod == 'mp'">
         <h3>Metodo de Pago: Mercado Pago</h3>
-        <p>Cuando confirme la compra se le redirigirá a la pagina de MercadoPago para que abone el total.</p>
+        <p>
+          Cuando confirme la compra se le redirigirá a la pagina de MercadoPago
+          para que abone el total.
+        </p>
       </div>
-
     </div>
     <div class="envio">
       <h3>Información de la compra</h3>
@@ -76,9 +82,9 @@
             <tr *ngFor="let producto of cart; let i = index">
               <td>{{ producto.name }}</td>
               <td class="sizeMin">{{ producto.desc }}</td>
-  
+
               <td *ngIf="producto">$ {{ producto.price | number: "1.2-2" }}</td>
-  
+
               <td>{{ producto.cant }}</td>
               <td>
                 <span *ngIf="!total.promo[i].sale.show">
@@ -111,17 +117,21 @@
             <ul class="list-group">
               <li class="list-group-item">
                 <b>Subtotal </b><small>sin descuentos</small>
-                <span class="pull-right">{{ total.total | number: '1.2-2'}}$</span>
+                <span class="pull-right"
+                  >{{ total.total | number: "1.2-2" }}$</span
+                >
               </li>
               <li class="list-group-item">
                 <b>Descuentos </b>
                 <span class="pull-right sale"
-                  >{{ total.total - total.subtotal | number: '1.2-2'}}$</span
+                  >{{ total.total - total.subtotal | number: "1.2-2" }}$</span
                 >
               </li>
               <li class="list-group-item total">
                 <b>Total </b><small>con descuentos</small>
-                <span class="pull-right">{{ total.subtotal | number: '1.2-2'}}$</span>
+                <span class="pull-right"
+                  >{{ total.subtotal | number: "1.2-2" }}$</span
+                >
               </li>
             </ul>
           </div>
@@ -129,8 +139,19 @@
       </div>
     </div>
 
-    <div class="text-center" style="margin-top: 15px;">
-        <a class="round-black-btn-2" (click)="confirm()">Confirmar</a>
+    <div class="recaptcha-container">
+      <re-captcha
+        class="recaptcha"
+        (resolved)="resolved($event)"
+        siteKey="6LeykNwZAAAAABag3m6UlYcTPYKBgDFrzW93pjOR"
+      ></re-captcha>
+    </div>
+    <div class="alert alert-danger" *ngIf="catpcha">
+      <b>Upssss...</b> Parece que no verificaste que no seas un robot...
+    </div>
+
+    <div class="text-center" style="margin-top: 15px">
+      <a class="round-black-btn-2" (click)="confirm()">Confirmar</a>
     </div>
   </div>
 </div>

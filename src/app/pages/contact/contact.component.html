@@ -26,8 +26,8 @@
                         <textarea class="form-control" name="message" formControlName="message" cols="30" rows="10" formControlName="message"></textarea>
                         <span *ngIf="checkNombre" class="help-block">Verifique que haya escrito al menos 10 caracteres</span>
                     </div>
-                    <div class="recaptcha">
-                        <re-captcha (resolved)="resolved($event)" siteKey="6LcGS_4UAAAAANIeLh3hft8K9SshK-BD38WDcbCr"></re-captcha>
+                    <div class="recaptcha-container">
+                        <re-captcha class="recaptcha" (resolved)="resolved($event)" siteKey="6LeykNwZAAAAABag3m6UlYcTPYKBgDFrzW93pjOR"></re-captcha>
                     </div>
                     <div class="alert alert-danger" *ngIf="catpcha">
                         <b>Upssss...</b> Parece que no verificaste que no seas un robot...

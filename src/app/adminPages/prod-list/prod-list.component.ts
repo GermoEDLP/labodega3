@@ -15,28 +15,36 @@ export class ProdListComponent implements OnInit {
   categorias: Category[];
   searchList: string = 'name';
   search: string;
+  viewCatMenu: boolean = false;
+  searchCatName: string = 'Todas';
+  searchCatId: string = '';
 
-  constructor(private prodService: ProductosService, private cats: CatsService) {}
+  constructor(
+    private prodService: ProductosService,
+    private cats: CatsService
+  ) {}
 
   async ngOnInit() {
-    this.cats.getCats().subscribe(async(cats: Category[]) => {
+    this.cats.getCats().subscribe(async (cats: Category[]) => {
       this.categorias = await cats;
-    })
-    this.prodService.getProducts().subscribe((prods:Product[]) => {
+    });
+    this.prodService.getProducts().subscribe((prods: Product[]) => {
       this.productos = prods;
       this.charge = true;
     });
   }
 
-  cambiarEstado(id: string, show: boolean){
+  cambiarEstado(id: string, show: boolean) {
     let title: string;
     let text: string;
-    if(show){
-      title = '¿Estas seguro de desabilitar este producto?'
-      text = 'Si desabilita este producto, nadie podra verlo, ni ponerlo en su carrito, ni aparecerá en las busquedas'
-    }else{
+    if (show) {
+      title = '¿Estas seguro de desabilitar este producto?';
+      text =
+        'Si desabilita este producto, nadie podra verlo, ni ponerlo en su carrito, ni aparecerá en las busquedas';
+    } else {
       title = '¿Estas seguro de habilitar este producto?';
-      text = 'Si habilita este producto, todos podran verlo, ponerlo en su carrito y aparecerá en las busquedas'
+      text =
+        'Si habilita este producto, todos podran verlo, ponerlo en su carrito y aparecerá en las busquedas';
     }
 
     Swal.fire({
@@ -47,42 +55,43 @@ export class ProdListComponent implements OnInit {
       confirmButtonColor: '#d33',
       cancelButtonColor: '#ccc',
       confirmButtonText: 'Actualizar',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.value) {
-        this.prodService.cambiarEstadoVisual(id, show).then(()=>{
+        this.prodService.cambiarEstadoVisual(id, show).then(() => {
           const Toast = Swal.mixin({
             toast: true,
             position: 'top',
             showConfirmButton: false,
-            timer: 3000
-          })
+            timer: 3000,
+          });
 
           Toast.fire({
             title: 'Actualizado!',
-            text: 'El producto ha sido correctamente actualizado de la base de datos.',
-            icon: 'success'
-          })
-        })
+            text:
+              'El producto ha sido correctamente actualizado de la base de datos.',
+            icon: 'success',
+          });
+        });
       }
-    })
+    });
   }
 
-  async variarStock(prod: Product){
+  async variarStock(prod: Product) {
     const { value: stock } = await Swal.fire({
       title: 'Cambiar valor de Stock',
       input: 'number',
       inputValue: String(prod.stock),
       inputPlaceholder: 'Ingrese el valor total de Stock',
-      allowOutsideClick: false
-    })
-    
+      allowOutsideClick: false,
+    });
+
     if (stock !== prod.stock && Number(stock) !== NaN) {
-      this.prodService.variarStock(prod.id, Number(stock)-prod.stock, true);
+      this.prodService.variarStock(prod.id, Number(stock) - prod.stock, true);
     }
   }
 
-  borrarProducto(prod: Product){
+  borrarProducto(prod: Product) {
     Swal.fire({
       title: '¿Estas seguro de borrar este producto?',
       text: prod.name,
@@ -91,24 +100,36 @@ export class ProdListComponent implements OnInit {
       confirmButtonColor: '#d33',
       cancelButtonColor: '#ccc',
       confirmButtonText: 'Borrar',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.value) {
-        this.prodService.borrarProductoPorId(prod.id).then(()=>{
+        this.prodService.borrarProductoPorId(prod.id).then(() => {
           const Toast = Swal.mixin({
             toast: true,
             position: 'top',
             showConfirmButton: false,
-            timer: 3000
-          })
+            timer: 3000,
+          });
 
           Toast.fire({
             title: 'Borrado!',
-            text: 'El producto ha sido correctamente borrado de la base de datos.',
-            icon: 'success'
-          })
-        })
+            text:
+              'El producto ha sido correctamente borrado de la base de datos.',
+            icon: 'success',
+          });
+        });
       }
-    })
+    });
+  }
+
+  todas() {
+    this.searchCatName = 'Todas';
+    this.searchCatId = '';
+  }
+
+  close(event) {
+    this.searchCatName = event.name;
+    this.searchCatId = event.id;
+    this.viewCatMenu = false;
   }
 }
