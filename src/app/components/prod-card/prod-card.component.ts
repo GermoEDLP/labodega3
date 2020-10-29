@@ -1,17 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Product, cartProduct, Sale } from '../../interfaces/interfaces';
 import Swal from 'sweetalert2';
 import { CartService } from '../../services/cart.service';
 import { ShareInfoService } from '../../services/share-info.service';
-import { element } from 'protractor';
 import { Router } from '@angular/router';
+import Swiper from 'swiper/bundle';
 
 @Component({
   selector: 'app-prod-card',
   templateUrl: './prod-card.component.html',
   styleUrls: ['prod-card.component.css'],
 })
-export class ProdCardComponent implements OnInit {
+export class ProdCardComponent implements OnInit, AfterViewInit {
   carga = false;
   p: any;
   itemPerPage: number = 12
@@ -115,5 +115,18 @@ export class ProdCardComponent implements OnInit {
       top: top
     })
   }
+
+  ngAfterViewInit(){
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+  }
+
+  
 
 }
