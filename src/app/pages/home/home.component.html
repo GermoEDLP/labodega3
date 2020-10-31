@@ -12,7 +12,7 @@
               
               <h3 class="page-header">Ofertas Semanales</h3>
 
-              <app-prod-card [items]='lista'></app-prod-card>
+              <app-prod-card-inline [items]='lista'></app-prod-card-inline>
 
             </div>
           </div>
@@ -30,7 +30,7 @@
               
               <h3 class="page-header">Nuevos Ingresos</h3>
 
-              <app-recomend [order]="'date'"></app-recomend>
+              <app-prod-card-inline [items]='lista' [cant]='10' [termino]="'date'"></app-prod-card-inline>
 
             </div>
           </div>

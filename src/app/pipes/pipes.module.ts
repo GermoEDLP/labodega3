@@ -14,6 +14,7 @@ import { SliderShowPipe } from './pipes/slider-show.pipe';
 import { VentasPipe } from './pipes/ventas.pipe';
 import { ProductPipe } from './pipes/product.pipe';
 import { ProductListPipe } from './pipes/product-list.pipe';
+import { CutProdPipe } from './pipes/cut-prod.pipe';
 
 const pipes = [
   CatListaProdPipe,
@@ -27,7 +28,8 @@ const pipes = [
   SliderShowPipe,
   VentasPipe,
   ProductPipe,
-  ProductListPipe
+  ProductListPipe,
+  CutProdPipe
 ]
 
 @NgModule({

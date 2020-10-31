@@ -31,6 +31,8 @@ export class ProductPipe implements PipeTransform {
             return products.sort((a, b) => a.price - b.price);
           case 'stock':
             return products.sort((a, b) => a.stock - b.stock);
+          case 'date':
+            return products.sort((a, b) => a.date - b.date);
           case 'show':
             return products.sort((a, b) =>
               String(a.show).localeCompare(String(b.show))

@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 
 //Modulos propios
 import { PipesModule } from '../pipes/pipes.module';
+import { SwiperModule } from 'ngx-swiper-wrapper';
+import { SWIPER_CONFIG } from 'ngx-swiper-wrapper';
+import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 
 //Modulos externos
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -35,6 +38,8 @@ import { RecomendComponent } from './recomend/recomend.component';
 import { MenuCatNewProdComponent } from './menu-cat-new-prod/menu-cat-new-prod.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { PromoInlineComponent } from './promo-inline/promo-inline.component';
+import { CardComponent } from './card/card.component';
+import { ProdCardInlineComponent } from './prod-card-inline/prod-card-inline.component';
 
 //Directivas
 import { ShowMegaMenuDirective } from './directives/show-mega-menu.directive';
@@ -42,6 +47,12 @@ import { HideMegaMenuDirective } from './directives/hide-mega-menu.directive';
 import { AvatarDirective } from '../directives/avatar.directive';
 
 //Otros
+
+
+const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
+  direction: 'horizontal',
+  slidesPerView: 'auto'
+};
 
 const componentes = [
   FooterComponent,
@@ -67,7 +78,9 @@ const componentes = [
   AvatarDirective,
   MenuCatNewProdComponent,
   TopBarComponent,
-  PromoInlineComponent
+  PromoInlineComponent,
+  CardComponent,
+  ProdCardInlineComponent
 ]
 
 @NgModule({
@@ -81,7 +94,14 @@ const componentes = [
     NgpSortModule,
     ChartsModule,
     PipesModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    SwiperModule
+  ],
+  providers: [
+    {
+      provide: SWIPER_CONFIG,
+      useValue: DEFAULT_SWIPER_CONFIG
+    }
   ],
   exports: componentes
 })

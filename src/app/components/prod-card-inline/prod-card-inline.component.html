@@ -1,0 +1,28 @@
+<div class="container">
+    <div *ngIf="items; else loading">
+      <div class="row row-cols-1 row-cols-md-3">
+        <swiper [config]="config">
+        <div
+        class="col-md-4 col-lg-4 col-sm-6 col-6 mb-4 cardContainer"
+        style="max-width: 400px;"
+        *ngFor="let item of items | product: true: 'order': termino  | slice: 0: cant"
+      >
+        <app-card [item]="item"></app-card>
+      </div>
+    </swiper>
+      </div>
+  
+      <div
+        class="alert alert-danger fade in"
+        role="alert"
+        *ngIf="items && items.length == 0"
+      >
+        <b>Lo sentimos</b>, pero su busqueda no arroja resultados.
+        <a href="" routerLink="/home">Volver al inicio</a>
+      </div>
+    </div>
+    <ng-template #loading>
+      <app-loading></app-loading>
+    </ng-template>
+  </div>
+  

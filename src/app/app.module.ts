@@ -43,6 +43,7 @@ const dbConfig: DBConfig =  {
   }]
 }
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,10 +60,11 @@ const dbConfig: DBConfig =  {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    NgxIndexedDBModule.forRoot(dbConfig)
+    NgxIndexedDBModule.forRoot(dbConfig),
 
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,11 @@
+.swiper-container {
+  width: 100%;
+}
+
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev{
+  color: black
+}
+
 .cardContainer {
   margin-bottom: 25px;
 }
